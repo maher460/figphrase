@@ -23,12 +23,10 @@ numpy
 
 (2) Prepare your training data.
 
-Your corpus should be one single text file with one sentence per line
-
-Run the corpus_by_sent_length.py to generate the preprocessed training data. 
-
+Your corpus should be one single text file with one sentence per line. Run the corpus_by_sent_length.py to generate the preprocessed training data. 
+```
 python ./train/corpus_by_sent_length.py CORPUS_FILE [max-sentence-length]
-
+```
 In PyCharm, you can configure the parameter in "Run->Edit Configuration->Parameters". An example parameter is "bnc_corpus 50", where "bnc_corpus" is the text file
 and "50" is the frequency trim parameter. 
 
@@ -41,18 +39,17 @@ data.
 (3） Train the semantic compatibility model 
 
 You can run the train_semcomp.py to start the training process. An example command line is:
-
+```
 python ./train/train_semcomp.py -i .\bnc_corpus.DIR  -w  bs -m bs  -c lstm --deep no -t 50 --dropout 0.0 -u 200 -e 10 -p 0.75 -b 400 -g 0
-
-All the parameters can be configuted in PyCharm similar to step 2.
-
-The progam will save the trained model each epoch. 
+```
+All the parameters can be configuted in PyCharm similar to step 2. The progam will save the trained model each epoch. 
 
 (4) Explore the trained semantic compatibility model 
 
 We provide an interactiv mode for you to explore the model. Just run:
+```
 python ./evalation/explore.py -c ..\\train\\bnc_corpus.DIR  -m ..\\train\model-save\semcomp.meta -t 50 -u 200
-
+```
 Wait the model to be loaded and then you can input some sentences to evaluate your trained model. 
 
 When you input
@@ -66,7 +63,7 @@ When you input
 ```
 >> c1 c2 [target] c3 c4 ...
 ```
-It will calculate a semantic compatibility score between the target and the context.
+It will calculate a semantic compatibility score between the target and the context. The score has been normalized to range of 0~1
 
 When your target is a phrase, please use "_" to concatenate the words in the phrase. For example:
 ```
