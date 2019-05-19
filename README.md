@@ -33,8 +33,8 @@ and "50" is the frequency trim parameter.
 This will create a directory CORPUS_FILE.DIR. You can explore this folder to have an idea of the processed training data. 
 
 Note that in this repo we have already prepared a processed training data in the folder "bnc_corpus.DIR" for you so you can quickly explore the project. 
-This data is a portion of the BNC corpus  and its size is fairly small. To achive a better performance, it is highly recommend you use large corpus to as the training 
-data. 
+This data is a portion of the BNC corpus  and its size is fairly small. To achive a better performance, **it is highly recommend you use large corpus to as the training 
+data**. 
 
 (3） Train the semantic compatibility model 
 
@@ -69,5 +69,9 @@ When your target is a phrase, please use "_" to concatenate the words in the phr
 ```
 >> I have learned how to [break_the_ice] with strangers . 
 ```
+
+# Contact
+
+Please send me an email if you have questions: liucs1986 at gmail.com  
 
 
