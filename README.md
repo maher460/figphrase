@@ -1,5 +1,5 @@
 # Description
-This project is related to the paper <<A Generalized Idiom Usage Recognition Model based on Semantic Compatibility>> published AAAI 2019. Please read this
+This project is related to the paper **A Generalized Idiom Usage Recognition Model based on Semantic Compatibility** published AAAI 2019. Please read this
 paper first to have more context of this project. The preprocessed part is from context2vet (https://github.com/orenmel/context2vec)
 
 The main idea is to train a model which can tell whether a sense (of a word) is compatibile with a given context. Negative sampling is used in the training process,
@@ -15,9 +15,6 @@ cuda v9
 sklearn
 
 numpy
-
-run train command
--i C:\changsheng\idiom_dl\train\bnc_corpusv2.DIR  -w  bs -m bs  -c lstm --deep no -t 50 --dropout 0.0 -u 300 -e 30 -p 0.75 -b 400 -g 0
 
 
 # Usage 
@@ -59,20 +56,21 @@ python ./evalation/explore.py -c ..\\train\\bnc_corpus.DIR  -m ..\\train\model-s
 Wait the model to be loaded and then you can input some sentences to evaluate your trained model. 
 
 When you input
-
+```
 >> c1 c2 [] c3 c4 ...
+```
 
 It will find the most compatible words with the context
 
 When you input
-
+```
 >> c1 c2 [target] c3 c4 ...
-
+```
 It will calculate a semantic compatibility score between the target and the context.
 
 When your target is a phrase, please use "_" to concatenate the words in the phrase. For example:
-
+```
 >> I have learned how to [break_the_ice] with strangers . 
-
+```
 
 
