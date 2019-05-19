@@ -1,17 +1,24 @@
-# figphrase
+# Description
+This project is related to the paper <A Generalized Idiom Usage Recognition Model based on Semantic Compatibility> published AAAI 2019. Please read this
+paper first to have more context of this project. 
 
-= dd
-== 55
+The main idea is to train a model which can tell whether a sense (of a word) is compatibile with a given context. Negative sampling is used in the training process,
+similar to word2vec. 
 
-python 3.6.4
+# Enviorment
+python 3.6
 
-tensorflow 1.5
+tensorflow 1.8
 
-CUDA_PATH  C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v9.0
+sklearn
+
+numpy
 
 run train command
 -i C:\changsheng\idiom_dl\train\bnc_corpusv2.DIR  -w  bs -m bs  -c lstm --deep no -t 50 --dropout 0.0 -u 300 -e 30 -p 0.75 -b 400 -g 0
 
+
+# Usage 
 
 1 prepare your training data
 one single text file, each sentence per line
