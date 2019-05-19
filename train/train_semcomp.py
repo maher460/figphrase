@@ -164,7 +164,7 @@ with tf.Session() as sess:
         reader.close()
 
 
-        if epoch >-1:
+        if epoch >3:
             saver.save(sess, "./model-save/semcomp")
 
 
