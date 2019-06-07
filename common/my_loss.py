@@ -19,7 +19,7 @@ from __future__ import division
 from __future__ import print_function
 
 import math
-from common.defs import  NEGATIVE_SAMPLING_NUM
+from defs import  NEGATIVE_SAMPLING_NUM
 from tensorflow.python.framework import constant_op
 from tensorflow.python.framework import dtypes
 from tensorflow.python.framework import function
