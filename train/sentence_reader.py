@@ -2,7 +2,7 @@ import math
 import collections
 import numpy as np
 
-from ..common.defs import Toks, SENT_COUNTS_FILENAME, WORD_COUNTS_FILENAME
+from common.defs import Toks, SENT_COUNTS_FILENAME, WORD_COUNTS_FILENAME
 
 
 def read_batch(f, batchsize, word2index):        

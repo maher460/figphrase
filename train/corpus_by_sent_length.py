@@ -5,7 +5,7 @@ Converts a single large corpus file into a directory, in which for every sentenc
 import sys
 import os
 from collections import Counter
-from ..common.defs import SENT_COUNTS_FILENAME, WORD_COUNTS_FILENAME, TOTAL_COUNTS_FILENAME
+from common.defs import SENT_COUNTS_FILENAME, WORD_COUNTS_FILENAME, TOTAL_COUNTS_FILENAME
 
 
 def get_file(sub_files, corpus_dir, num_filename):

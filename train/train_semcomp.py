@@ -6,8 +6,8 @@ import time
 import sys
 
 
-from sentence_reader import SentenceReaderDir
-from ..model.sem_comp import BiLSTMContext
+from train.sentence_reader import SentenceReaderDir
+from model.sem_comp import BiLSTMContext
 
 
 def parse_arguments():
