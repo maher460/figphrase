@@ -6,7 +6,7 @@ import time
 import sys
 
 
-from .sentence_reader import SentenceReaderDir
+from sentence_reader import SentenceReaderDir
 from ..model.sem_comp import BiLSTMContext
 
 
