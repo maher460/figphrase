@@ -152,11 +152,11 @@ with tf.Session() as sess:
 
                 predict =  bilstm.context2vec(sess, test_input_vector,4)
                 logits,fit_predict = bilstm.most_fit(sess, predict, 20)
-                print([reader.index2word[index] for index in fit_predict[0]])
+                print([reader.index2word[index].encode("utf-8") for index in fit_predict[0]])
 
                 predict =  bilstm.context2vec(sess, test_input_vector2,3)
                 logits,fit_predict = bilstm.most_fit(sess, predict, 20)
-                print([reader.index2word[index] for index in fit_predict[0]])
+                print([reader.index2word[index].encode("utf-8") for index in fit_predict[0]])
 
 
 
