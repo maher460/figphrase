@@ -6,8 +6,8 @@ import time
 import sys
 
 
-from figphrase.train.sentence_reader import SentenceReaderDir
-from model.sem_comp import BiLSTMContext
+from .sentence_reader import SentenceReaderDir
+from ..model.sem_comp import BiLSTMContext
 
 
 def parse_arguments():
