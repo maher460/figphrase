@@ -1,6 +1,6 @@
 __author__ = 'changsheng'
 import tensorflow as tf
-from train.sentence_reader import SentenceReaderDir
+from figpro.train.sentence_reader import SentenceReaderDir
 import numpy as np
 
 class ModelReader:

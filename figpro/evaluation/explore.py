@@ -6,7 +6,7 @@ import re
 import argparse
 
 from sklearn import preprocessing
-from evaluation.model_reader import ModelReader
+from figpro.evaluation.model_reader import ModelReader
 import warnings
 
 warnings.filterwarnings("ignore", category=DeprecationWarning)

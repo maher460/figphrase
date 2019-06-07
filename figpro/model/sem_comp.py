@@ -2,10 +2,10 @@ __author__ = 'changsheng'
 import tensorflow as tf
 from tensorflow.contrib import rnn
 import numpy as np
-import common.defs
-from common.defs import  NEGATIVE_SAMPLING_NUM
+import figpro.common.defs
+from figpro.common.defs import  NEGATIVE_SAMPLING_NUM
 from tensorflow.python.ops import variable_scope as vs
-from common.my_loss import nce_loss
+from figpro.common.my_loss import nce_loss
 class BiLSTMContext:
 
     def __init__(self,n_vocab,hidden_unit,num_layers,input_dim,output_dim,deep,batch_size,max_length):
