@@ -6,7 +6,7 @@ import time
 import sys
 
 
-from train.sentence_reader import SentenceReaderDir
+from figpro.train.sentence_reader import SentenceReaderDir
 from model.sem_comp import BiLSTMContext
 
 
