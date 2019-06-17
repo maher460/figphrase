@@ -9,6 +9,7 @@ def read_batch(f, batchsize, word2index):
     batch = []
     while len(batch) < batchsize:
         line = f.readline()
+        print(line)
         if not line: break
         sent_words = line.strip().lower().split()
         assert(len(sent_words) > 1)
