@@ -44,16 +44,20 @@ with open(TRAIN_PATH) as csv_file:
             sent_file_num += 1
             sent_file = open(OUTPUT_PATH + "sent." + str(sent_file_num), 'w')
 
-        s_counts += 1
-        curr_s_counts += 1
-        for label in item[1]:
-            if label in w_counts.keys():
-                w_counts[label] += 1
-            else:
-                w_counts[label] = 1
-        sent_file.write("%s\n" % " ".join(item[1]))
-        if s_counts % 10000 == 0:
-            print(f'Processed {s_counts} lines.')
+        if(len(item[1]) > 1):
+            s_counts += 1
+            curr_s_counts += 1
+            for label in item[1]:
+                if label in w_counts.keys():
+                    w_counts[label] += 1
+                else:
+                    w_counts[label] = 1
+            sent_file.write("%s\n" % " ".join(item[1]))
+            if s_counts % 10000 == 0:
+                print(f'Processed {s_counts} lines.')
+
+        # if(len(item[1]) <= 1):
+        #     print("\n\n\t\tERROR: NUM LABELS IN IMAGE: " + str(len(item[1])) + "\n\n")
 
     print(f'Processed {s_counts} lines.')
 
