@@ -132,7 +132,7 @@ with tf.Session() as sess:
             d = sent
 
             print("\n\tBLABLA1")
-            print(d.encode("utf-8"))
+            print(d)
             print(loss)
             print(train_op)
 
