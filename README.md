@@ -75,3 +75,7 @@ When your target is a phrase, please use "_" to concatenate the words in the phr
 Please send me an email if you have questions: liucs1986 at gmail.com  
 
 
+
+OBJ2VEC
+python evaluation/explore.py -c ../obj2vec/open_images_corpus.DIR -m ./model-save/semcomp.meta -t 50 -u 200
+
