@@ -102,6 +102,7 @@ class BiLSTMContext:
     # please explore from this type of context representation
     def _contexts_rep(self, sent_arr):
 
+        return self._contexts_rep_awe_localatt(sent_arr) #TODO: using this to change context rep
 
         #add begining of sentence
         inputs1 = tf.concat([tf.fill([tf.shape(self.inputs)[0],1],self.n_vocab-2),self.inputs],1)
