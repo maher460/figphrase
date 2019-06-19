@@ -45,7 +45,7 @@ with open(TRAIN_PATH) as csv_file:
         #     sent_file_num += 1
         #     sent_file = open(OUTPUT_PATH + "sent." + str(sent_file_num), 'w')
 
-        if(len(item[1]) > 1):
+        if(len(item[1]) >= 4 and len(item[1]) <= 39):
 
             s_counts += 1
             # curr_s_counts += 1
