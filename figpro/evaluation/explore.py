@@ -81,13 +81,13 @@ def usage_rec(context_v, lit_v):
     # use local attention, -0.11 ~ -0.15 all are ok
     return lit_sim
 
-saved_model_path = '..\\train\model-save\semcomp.meta'
-corpus_patch = "..\\train\\bnc_corpus.DIR"
+saved_model_path = '../model-save/semcomp.meta'
+corpus_patch = "../../obj2vec/open_images_corpus.DIR"
 
 def parse_arguments():
     parser = argparse.ArgumentParser()
     parser.add_argument('--corpuspath', '-c',
-                        default="..\\train\\bnc_corpus.DIR",
+                        default="../../obj2vec/open_images_corpus.DIR",
                         help='input corpus directory')
     parser.add_argument('--modelfile', '-m',
                         default=None,
