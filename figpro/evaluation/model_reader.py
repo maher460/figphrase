@@ -8,7 +8,7 @@ class ModelReader:
         print("Start to load the model.......")
         self.sess = tf.Session()
         self.new_saver = tf.train.import_meta_graph(saved_model_path)
-        self.new_saver.restore(self.sess, tf.train.latest_checkpoint('../model-save/'))
+        self.new_saver.restore(self.sess, tf.train.latest_checkpoint('./model-save/'))
         self.graph = tf.get_default_graph()
         print("Model loaded.")
         self.input = self.graph.get_tensor_by_name("inp:0")
