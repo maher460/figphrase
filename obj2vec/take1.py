@@ -28,31 +28,39 @@ with open(TRAIN_PATH) as csv_file:
     print("\n\n\n\t\tDONE READING CSV FILE!\n\n\n")
     
     s_counts = 0
-    curr_s_counts = 0
-    curr_s_counts_list = []
+    # curr_s_counts = 0
+    # curr_s_counts_list = []
     w_counts = {}
-    sent_file_num = 1
+    # sent_file_num = 1
+    sents = {}
 
-    sent_file = open(OUTPUT_PATH + "sent." + str(sent_file_num), 'w')
+    # sent_file = open(OUTPUT_PATH + "sent." + str(sent_file_num), 'w')
 
     for item in results.items():
 
-        if curr_s_counts >= 150000:
-            curr_s_counts_list.append(curr_s_counts)
-            curr_s_counts = 0
-            sent_file.close()
-            sent_file_num += 1
-            sent_file = open(OUTPUT_PATH + "sent." + str(sent_file_num), 'w')
+        # if curr_s_counts >= 150000:
+        #     curr_s_counts_list.append(curr_s_counts)
+        #     curr_s_counts = 0
+        #     sent_file.close()
+        #     sent_file_num += 1
+        #     sent_file = open(OUTPUT_PATH + "sent." + str(sent_file_num), 'w')
 
         if(len(item[1]) > 1):
+
             s_counts += 1
-            curr_s_counts += 1
+            # curr_s_counts += 1
+
             for label in item[1]:
                 if label in w_counts.keys():
                     w_counts[label] += 1
                 else:
                     w_counts[label] = 1
-            sent_file.write("%s\n" % " ".join(item[1]))
+
+            if(len(item[1]) in sents.keys()):
+                sents[len(item[1])].append(" ".join(item[1]))
+            else:
+                sents[len(item[1])] = [" ".join(item[1])]
+
             if s_counts % 10000 == 0:
                 print(f'Processed {s_counts} lines.')
 
@@ -61,17 +69,34 @@ with open(TRAIN_PATH) as csv_file:
 
     print(f'Processed {s_counts} lines.')
 
-    curr_s_counts_list.append(curr_s_counts)
-    sent_file.close()
+    print("\n\n\n\t\tDONE PROCESSING SENTENCES!\n\n\n")
+
+    # curr_s_counts_list.append(curr_s_counts)
+    # sent_file.close()
+    
+    sent_meta_file = open(OUTPUT_PATH + "s_counts", 'w')
+
+    for item in sents.items():
+
+        print(f'Writing sent.{item[0]} lines...')
+        
+        sent_file = open(OUTPUT_PATH + "sent." + str(item[0]), 'w')
+        for s in item[1]:
+            sent_file.write("%s\n" % s)
+        sent_file.close()
+
+        sent_meta_file.write("sent.%d\t%d\n" % (item[0], len(item[1])))
+
+    sent_meta_file.close()
 
     print("\n\n\n\t\tDONE WRITING SENTENCES!\n\n\n")
 
 
-    sent_meta_file = open(OUTPUT_PATH + "s_counts", 'w')
-    # sent_meta_file.write("sent.1\t%d\n" % s_counts)
-    for idx in range(len(curr_s_counts_list)):
-        sent_meta_file.write("sent.%d\t%d\n" % (idx+1, curr_s_counts_list[idx]))
-    sent_meta_file.close()
+    # sent_meta_file = open(OUTPUT_PATH + "s_counts", 'w')
+    # # sent_meta_file.write("sent.1\t%d\n" % s_counts)
+    # for idx in range(len(curr_s_counts_list)):
+    #     sent_meta_file.write("sent.%d\t%d\n" % (idx+1, curr_s_counts_list[idx]))
+    # sent_meta_file.close()
 
     words_meta_file = open(OUTPUT_PATH + "w_counts", 'w')
     for item in w_counts.items():
