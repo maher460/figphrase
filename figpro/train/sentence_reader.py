@@ -9,7 +9,7 @@ def read_batch(f, batchsize, word2index):
     batch = []
     while len(batch) < batchsize:
         line = f.readline()
-        print(line.encode("utf-8"))
+        # print(line.encode("utf-8"))
         if not line: break
         sent_words = line.strip().lower().split()
         assert(len(sent_words) > 1)

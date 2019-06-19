@@ -131,10 +131,10 @@ with tf.Session() as sess:
 
             d = sent
 
-            print("\n\tBLABLA1")
-            print(d)
-            print(loss)
-            print(train_op)
+            # print("\n\tBLABLA1")
+            # print(d)
+            # print(loss)
+            # print(train_op)
 
             lossz,tran = sess.run([loss,train_op], {inputs:d,drop_out:0.8})
 
