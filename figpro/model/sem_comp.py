@@ -102,7 +102,7 @@ class BiLSTMContext:
     # please explore from this type of context representation
     def _contexts_rep(self, sent_arr):
 
-        return self._contexts_rep_bilstm_globalatt(sent_arr) #TODO: using this to change context rep
+        return self._contexts_rep_awe_globalatt(sent_arr) #TODO: using this to change context rep
 
         #add begining of sentence
         inputs1 = tf.concat([tf.fill([tf.shape(self.inputs)[0],1],self.n_vocab-2),self.inputs],1)
@@ -141,7 +141,7 @@ class BiLSTMContext:
 
             else:
                 cc = tf.concat([fw,bw],2)
-                cc_re = tf.reshape(cc,[-1,2*self.hidden_unit])
+                cc_re = tf.reshape(cc,[-1,self.hidden_unit])
                 ccd1 = tf.matmul(cc_re,self.deep_w1) + self.deep_b1
                 ccd1_re = tf.nn.relu(ccd1)
                 ccd2 = tf.matmul(ccd1_re,self.deep_w2) + self.deep_b2
