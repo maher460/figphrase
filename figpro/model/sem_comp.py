@@ -47,13 +47,27 @@ class BiLSTMContext:
 
         self.keep_prob = tf.placeholder(tf.float32,name="prob")
 
-        self.deep_w1 = tf.Variable(tf.random_normal([ 2*self.hidden_unit, 2 * self.hidden_unit], stddev=0.35),
+        #TODO: FOr bi-lstm
+        # self.deep_w1 = tf.Variable(tf.random_normal([ 2*self.hidden_unit, 2 * self.hidden_unit], stddev=0.35),
+        #                                          name="deepw1-weights")
+
+        # self.deep_w2 = tf.Variable(tf.random_normal([2 * self.hidden_unit,self.output_dim], stddev=0.35),
+        #                                          name="deepw2-weights")
+
+        # self.deep_b1 = tf.Variable(tf.random_normal([int(2 * self.hidden_unit)], stddev=0.35), name="deep-b1")
+
+
+        # self.deep_b2 = tf.Variable(tf.random_normal([self.output_dim], stddev=0.35), name="deep-b2")
+
+
+        #TODO: for NOT bi-lstm
+        self.deep_w1 = tf.Variable(tf.random_normal([self.hidden_unit, self.hidden_unit], stddev=0.35),
                                                  name="deepw1-weights")
 
-        self.deep_w2 = tf.Variable(tf.random_normal([2 * self.hidden_unit,self.output_dim], stddev=0.35),
+        self.deep_w2 = tf.Variable(tf.random_normal([self.hidden_unit, self.output_dim], stddev=0.35),
                                                  name="deepw2-weights")
 
-        self.deep_b1 = tf.Variable(tf.random_normal([int(2 * self.hidden_unit)], stddev=0.35), name="deep-b1")
+        self.deep_b1 = tf.Variable(tf.random_normal([int(self.hidden_unit)], stddev=0.35), name="deep-b1")
 
 
         self.deep_b2 = tf.Variable(tf.random_normal([self.output_dim], stddev=0.35), name="deep-b2")
@@ -185,7 +199,7 @@ class BiLSTMContext:
         #return cc
 
         # add mlp layer here
-        cc_re = tf.reshape(cc,[-1,2*self.hidden_unit])
+        cc_re = tf.reshape(cc,[-1,self.input_dim])
         ccd1 = tf.matmul(cc_re,self.deep_w1) + self.deep_b1
         ccd1_re = tf.nn.relu(ccd1)
         ccd2 = tf.matmul(ccd1_re,self.deep_w2) + self.deep_b2
