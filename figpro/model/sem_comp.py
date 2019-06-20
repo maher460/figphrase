@@ -185,7 +185,7 @@ class BiLSTMContext:
         #return cc
 
         # add mlp layer here
-        cc_re = tf.reshape(cc,[-1,self.input_dim])
+        cc_re = tf.reshape(cc,[-1,2*self.input_dim])
         ccd1 = tf.matmul(cc_re,self.deep_w1) + self.deep_b1
         ccd1_re = tf.nn.relu(ccd1)
         ccd2 = tf.matmul(ccd1_re,self.deep_w2) + self.deep_b2
