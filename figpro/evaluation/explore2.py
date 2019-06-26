@@ -133,50 +133,51 @@ res4 = res_bla[4]
 print(res_bla)
 
 for k in res3.keys():
-    
-    temp1 = "_".join(res3[k])
-    print(temp1)
-    temp2 = " ".join(res1[k])
-    print(temp2)
-    temp3 = temp2 + " [" + temp1 + "]"
-    print(temp3)
-    line = temp3
+    if k in res1.keys():
+        temp1 = "_".join(res3[k])
+        print("temp1: "+temp1)
+        temp2 = " ".join(res1[k])
+        print("temp2: "+temp2)
+        temp3 = temp2 + " [" + temp1 + "]"
+        print("temp3: "+temp3)
+        line = temp3
 
-    try:
-        # line = six.moves.input('>> ')
-        sent, target_pos = parse_input(line)
-        if target_pos == None:
-            raise ParseException("Can't find the target position.")
+        try:
+            # line = six.moves.input('>> ')
+            sent, target_pos = parse_input(line)
+            if target_pos == None:
+                raise ParseException("Can't find the target position.")
 
-        context_v = None
-        if len(sent) > 1:
-            context_v = model.context_rep(sent, target_pos)
-            context_v = context_v / np.sqrt((context_v * context_v).sum())
+            context_v = None
+            if len(sent) > 1:
+                context_v = model.context_rep(sent, target_pos)
+                context_v = context_v / np.sqrt((context_v * context_v).sum())
 
-        if sent[target_pos] == None:
-            if context_v is not None:
-                m = model.most_fit_context2(context_v)
-            else:
-                raise ParseException("Can't find a context.")
-        else:
-            if sent[target_pos].find("_") < 0:
-                if sent[target_pos] not in word2index:
-                    raise ParseException("Target word is out of vocabulary.")
+            if sent[target_pos] == None:
+                if context_v is not None:
+                    m = model.most_fit_context2(context_v)
                 else:
-                    target_v = generate_vector_word(sent[target_pos])
+                    raise ParseException("Can't find a context.")
             else:
-                target_v = generate_vector_phrase(sent[target_pos])
-            if target_v is not None and context_v is not None:
-                compatibility = (usage_rec(target_v, context_v)+1)/2
-                print("Compatibility score: " + str(compatibility))
-    except EOFError:
-        break
-    except ParseException as e:
-        print("ParseException: {}".format(e))
-    except Exception:
-        exc_type, exc_value, exc_traceback = sys.exc_info()
-        print("*** print_tb:")
-        traceback.print_tb(exc_traceback, limit=1, file=sys.stdout)
-        print("*** print_exception:")
-        traceback.print_exception(exc_type, exc_value, exc_traceback, limit=2, file=sys.stdout)
+                if sent[target_pos].find("_") < 0:
+                    if sent[target_pos] not in word2index:
+                        raise ParseException("Target word is out of vocabulary.")
+                    else:
+                        target_v = generate_vector_word(sent[target_pos])
+                else:
+                    target_v = generate_vector_phrase(sent[target_pos])
+                if target_v is not None and context_v is not None:
+                    compatibility = (usage_rec(target_v, context_v)+1)/2
+                    print("Compatibility score: " + str(compatibility))
+                    print("Truth: " + res4[k])
+        except EOFError:
+            break
+        except ParseException as e:
+            print("ParseException: {}".format(e))
+        except Exception:
+            exc_type, exc_value, exc_traceback = sys.exc_info()
+            print("*** print_tb:")
+            traceback.print_tb(exc_traceback, limit=1, file=sys.stdout)
+            print("*** print_exception:")
+            traceback.print_exception(exc_type, exc_value, exc_traceback, limit=2, file=sys.stdout)
 
