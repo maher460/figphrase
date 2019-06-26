@@ -130,10 +130,14 @@ res2 = res_bla[2]
 res3 = res_bla[3]
 res4 = res_bla[4]
 
-print(res_bla)
-
+# print(res_bla)
+total = 0
+sum_p = {'parallel':0, 'non_parallel':0}
 for k in res3.keys():
     if k in res1.keys():
+
+        total += 1
+
         temp1 = "_".join(res3[k])
         print("temp1: "+temp1)
         temp2 = " ".join(res1[k])
@@ -170,6 +174,8 @@ for k in res3.keys():
                     compatibility = (usage_rec(target_v, context_v)+1)/2
                     print("Compatibility score: " + str(compatibility))
                     print("Truth: " + res4[k])
+                    sum_p[res4[k]] += compatibility
+
         except EOFError:
             break
         except ParseException as e:
@@ -180,4 +186,7 @@ for k in res3.keys():
             traceback.print_tb(exc_traceback, limit=1, file=sys.stdout)
             print("*** print_exception:")
             traceback.print_exception(exc_type, exc_value, exc_traceback, limit=2, file=sys.stdout)
+
+print(total)
+print(sum_p)
 
