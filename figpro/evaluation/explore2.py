@@ -132,9 +132,18 @@ res4 = res_bla[4]
 
 print(res_bla)
 
-while True:
+for k in res3.keys():
+    
+    temp1 = "_".join(res3[k])
+    print(temp1)
+    temp2 = " ".join(res1[k])
+    print(temp2)
+    temp3 = temp2 + " [" + temp1 + "]"
+    print(temp3)
+    line = temp3
+
     try:
-        line = six.moves.input('>> ')
+        # line = six.moves.input('>> ')
         sent, target_pos = parse_input(line)
         if target_pos == None:
             raise ParseException("Can't find the target position.")
