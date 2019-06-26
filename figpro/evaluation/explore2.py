@@ -215,7 +215,7 @@ while temp_thres < 100:
 
     if temp_loss > cur_max:
         cur_thres = temp_thres
-        cur_max = cur_loss
+        cur_max = temp_loss
 
     # total_c = 0
     # total_w = 0
