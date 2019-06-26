@@ -198,7 +198,7 @@ print("sum_p: " + str(sum_p))
 print("count_p: " + str(count_p))
 
 temp_thres = 0
-cur_thres
+cur_thres = -1
 cur_max = -1
 min_thres = -1
 max_thres = -1
