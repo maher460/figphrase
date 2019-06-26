@@ -140,7 +140,7 @@ for k in res1.keys():
     total += 1
 
     if total % 10000 == 0:
-        print("Total: " str(total))
+        print("Total: " + str(total))
 
     random.shuffle(res1[k])
 
