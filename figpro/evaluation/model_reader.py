@@ -8,7 +8,7 @@ class ModelReader:
         print("Start to load the model.......")
         self.sess = tf.Session()
         self.new_saver = tf.train.import_meta_graph(saved_model_path)
-        self.new_saver.restore(self.sess, tf.train.latest_checkpoint('./model-save/'))
+        self.new_saver.restore(self.sess, tf.train.latest_checkpoint('./model-save-awe-la/'))
         self.graph = tf.get_default_graph()
         print("Model loaded.")
         self.input = self.graph.get_tensor_by_name("inp:0")
@@ -65,13 +65,16 @@ class ModelReader:
         similarity = similarity.reshape(([1,-1]))
         n_result = 10
         count = 0
+        res = []
         for i in (-similarity[0]).argsort():
             if not i:
                 continue
             print('{0}: {1}'.format(self.reader.index2word[i], similarity[0][i]))
+            res.append(self.reader.index2word[i])
             count += 1
             if count == n_result:
                 break
+        return res
 
     def fit_score(self, context, vec):
         context = context / np.sqrt((context * context).sum())
