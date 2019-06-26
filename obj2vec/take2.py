@@ -2,7 +2,7 @@ import csv
 
 TEST_PATH = "../../test-annotations-bbox.csv"
 LABELS_PATH = "../../class-descriptions-boxable.csv"
-OUTPUT_PATH = "./open_images_test_unique.pkl"
+OUTPUT_PATH = "./open_images_test.pkl"
 
 results = {}
 labels = {}
@@ -25,8 +25,8 @@ with open(TEST_PATH) as csv_file:
             # print(row)
             line_count += 1
             if row[0] in results.keys():
-                if row[2] not in results[row[0]]:  #TODO: For unique/duplicates
-                    results[row[0]].append(row[2])
+                # if row[2] not in results[row[0]]:  #TODO: For unique/duplicates
+                results[row[0]].append(row[2])
             else:
                 results[row[0]] = [row[2]]
         if line_count % 100000 == 0:
@@ -39,8 +39,14 @@ with open(TEST_PATH) as csv_file:
 
 import pickle
 
+res2 = {}
+
+for k in results.keys():
+    if len(results[k]) > 1:
+        res2[k] = results[k]
+
 with open(OUTPUT_PATH, 'wb') as f:
-    pickle.dump([labels, results], f, pickle.HIGHEST_PROTOCOL)
+    pickle.dump([labels, res2], f, pickle.HIGHEST_PROTOCOL)
 
     
 # s_counts = 0

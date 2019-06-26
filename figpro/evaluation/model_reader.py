@@ -69,7 +69,7 @@ class ModelReader:
         for i in (-similarity[0]).argsort():
             if not i:
                 continue
-            print('{0}: {1}'.format(self.reader.index2word[i], similarity[0][i]))
+            # print('{0}: {1}'.format(self.reader.index2word[i], similarity[0][i]))
             res.append(self.reader.index2word[i])
             count += 1
             if count == n_result:

@@ -139,6 +139,9 @@ for k in res1.keys():
 
     total += 1
 
+    if total % 10000 == 0:
+        print("Total: " str(total))
+
     random.shuffle(res1[k])
 
 
@@ -146,9 +149,9 @@ for k in res1.keys():
     # temp1 = "_".join(res3[k])
     # print("temp1: "+temp1)
     temp2 = " ".join(res1[k][:-1])
-    print("temp2: "+temp2)
+    # print("temp2: "+temp2)
     temp3 = temp2 + " []" #+ res1[k][-1] + "]"
-    print("temp3: "+temp3)
+    # print("temp3: "+temp3)
     line = temp3
 
     try:
