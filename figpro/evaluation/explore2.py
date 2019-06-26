@@ -133,6 +133,10 @@ res4 = res_bla[4]
 # print(res_bla)
 total = 0
 sum_p = {'parallel':0, 'non_parallel':0}
+count_p = {'parallel':0, 'non_parallel':0}
+
+blabla = []
+
 for k in res3.keys():
     if k in res1.keys():
 
@@ -175,6 +179,8 @@ for k in res3.keys():
                     print("Compatibility score: " + str(compatibility))
                     print("Truth: " + res4[k])
                     sum_p[res4[k]] += compatibility
+                    count_p[res4[k]] += 1
+                    blabla.append((compatibility, res4[k]))
 
         except EOFError:
             break
@@ -187,6 +193,62 @@ for k in res3.keys():
             print("*** print_exception:")
             traceback.print_exception(exc_type, exc_value, exc_traceback, limit=2, file=sys.stdout)
 
-print(total)
-print(sum_p)
+print("total: " + str(total))
+print("sum_p: " + str(sum_p))
+print("count_p: " + str(count_p))
+
+temp_thres = 0
+cur_thres
+cur_max = -1
+min_thres = -1
+max_thres = -1
+
+temp_loss = 0
+
+while temp_thres < 100:
+
+    for b in blabla:
+        if b[1] == 'parallel':
+            temp_loss += (b[0] - temp_thres)
+        if b[1] == 'non_parallel':
+            temp_loss += (temp_thres - b[0])
+
+    if temp_loss > cur_max:
+        cur_thres = temp_thres
+        cur_max = cur_loss
+
+    # total_c = 0
+    # total_w = 0
+
+    # for b in blabla:
+    #     if b[1] == 'parallel' and b[0] > temp_thres:
+    #         total_c += 1
+    #     elif b[1] == 'non_parallel' and b[0] < temp_thres:
+    #         total_c += 1
+    #     else:
+    #         total_w += 1
+
+    # if total_c == cur_max:
+    #     if min_thres > -1:
+    #         max_thres
+
+    temp_thres += 0.001
+
+print("cur_thres: " + str(cur_thres))
+
+total_c = 0
+total_w = 0
+
+for b in blabla:
+    if b[1] == 'parallel' and b[0] >= cur_thres:
+        total_c += 1
+    elif b[1] == 'non_parallel' and b[0] < cur_thres:
+        total_c += 1
+    else:
+        total_w += 1
+
+print("total_c: " + str(total_c))
+print("total_w: " + str(total_w))
+
+
 
