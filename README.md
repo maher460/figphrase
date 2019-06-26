@@ -78,4 +78,17 @@ Please send me an email if you have questions: liucs1986 at gmail.com
 
 OBJ2VEC
 python evaluation/explore.py -c ../obj2vec/open_images_corpus.DIR -m ./model-save/semcomp.meta -t 50 -u 200
+python ./train/train_semcomp.py -i ../obj2vec/open_images_corpus.DIR  -w  bs -m bs  -c lstm --deep yes -t 50 --dropout 0.0 -u 200 -e 10 -p 0.75 -b 400 -g 0
+python ./train/train_semcomp.py -i ../obj2vec/open_images_corpus_unique.DIR  -w  bs -m bs  -c lstm --deep yes -t 50 --dropout 0.0 -u 200 -e 25 -p 0.75 -b 400 -g 0
 
+/m/01lynh /m/032b3c /m/03bt1vf /m/07mhn /m/0d5gx
+/m/01lynh /m/032b3c [] /m/07mhn /m/0d5gx
+
+
+/m/03q5c7 /m/050gv4 /m/099ssp /m/0cmx8 /m/0dt3t
+Saucer Plate Platter Spoon Fork
+
+/m/03q5c7 /m/050gv4 [] /m/0cmx8 /m/0dt3t
+
+/m/03q5c7 /m/050gv4 [/m/02rgn06] /m/0cmx8 /m/0dt3t
+[Volleyball]
