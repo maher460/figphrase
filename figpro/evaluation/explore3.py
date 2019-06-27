@@ -87,13 +87,17 @@ def usage_rec(context_v, lit_v):
 def parse_arguments():
     parser = argparse.ArgumentParser()
     parser.add_argument('--corpuspath', '-c',
-                        default="../../obj2vec/open_images_corpus.DIR",
+                        default=None,
                         help='input corpus directory')
     parser.add_argument('--modelfile', '-m',
                         default=None,
                         help='saved model file')
 
-    parser.add_argument('--trimfreq', '-t', default=0, type=int,
+    parser.add_argument('--testpath', '-t',
+                        default=None,
+                        help='input test file')
+
+    parser.add_argument('--trimfreq', '-f', default=0, type=int,
                         help='minimum frequency for word in training')
 
     parser.add_argument('--unit', '-u', default=200, type=int,
@@ -118,11 +122,15 @@ model = ModelReader(saved_model_path, corpus_patch, trim_freq)
 word2index = model.word2index
 index2word = model.index2word
 
+print("Corpus: " + corpus_patch)
+print("Model: " + saved_model_path)
+print("Test: " + args.testpath)
+
 
 import pickle
 import random
 
-with open('../obj2vec/open_images_test.pkl', 'rb') as f:
+with open(args.testpath) #'../obj2vec/open_images_test.pkl', 'rb') as f:
     res_bla = pickle.load(f)
 
 labels = res_bla[0]
@@ -173,6 +181,9 @@ for k in res1.keys():
                     idx = m.index(res1[k][-1])
                     val = float(len(m) - idx) / float(len(m))
                     temp_sum += val
+                    blabla.append(val)
+                else:
+                    blabla.append(0)
 
             else:
                 raise ParseException("Can't find a context.")
@@ -205,8 +216,20 @@ for k in res1.keys():
         traceback.print_exception(exc_type, exc_value, exc_traceback, limit=2, file=sys.stdout)
 
 
-print("total: " + str(total))
-print("temp_sum: " + str(temp_sum))
+Q1 = np.percentile(blabla, 25)
+Q2 = np.percentile(blabla, 50)
+Q3 = np.percentile(blabla, 75)
+
+print("total_instances: " + str(total))
+print("total_instances_scoring_in_top_10: "len(list(filter(lambda x: x != 0, blabla)))
+print("total_score: " + str(temp_sum))
+print("median_score: " + str(Q2))
+print("mean_score: " + str(temp_sum / float(total)))
+print("Q1_score: " + str(Q1))
+print("Q3_score: " + str(Q3))
+print("score_range(Q3-Q1): " + str(Q3-Q1))
+
+
 # print("count_p: " + str(count_p))
 
 # temp_thres = 0
