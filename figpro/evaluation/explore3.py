@@ -221,7 +221,7 @@ Q2 = np.percentile(blabla, 50)
 Q3 = np.percentile(blabla, 75)
 
 print("total_instances: " + str(total))
-print("total_instances_scoring_in_top_10: "+ str(len(list(filter(lambda x: x != 0, blabla))))
+print("total_instances_scoring_in_top_10: " + str(len(list(filter(lambda x: x != 0, blabla)))))
 print("total_score: " + str(temp_sum))
 print("median_score: " + str(Q2))
 print("mean_score: " + str(temp_sum / float(total)))
