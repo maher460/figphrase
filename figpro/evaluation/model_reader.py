@@ -72,8 +72,8 @@ class ModelReader:
             # print('{0}: {1}'.format(self.reader.index2word[i], similarity[0][i]))
             res.append(self.reader.index2word[i])
             count += 1
-            if count == n_result:
-                break
+            # if count == n_result:
+            #     break
         return res
 
     def fit_score(self, context, vec):
