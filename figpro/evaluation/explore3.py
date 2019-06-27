@@ -130,7 +130,7 @@ print("Test: " + args.testpath)
 import pickle
 import random
 
-with open(args.testpath) as f: #'../obj2vec/open_images_test.pkl', 'rb') as f:
+with open(args.testpath, 'rb') as f: #'../obj2vec/open_images_test.pkl', 'rb') as f:
     res_bla = pickle.load(f)
 
 labels = res_bla[0]
