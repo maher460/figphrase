@@ -92,3 +92,8 @@ Saucer Plate Platter Spoon Fork
 
 /m/03q5c7 /m/050gv4 [/m/02rgn06] /m/0cmx8 /m/0dt3t
 [Volleyball]
+
+/m/03q5c7 /m/050gv4 /m/0cmx8 /m/0dt3t [/m/02rgn06]
+
+
+python evaluation/explore3.py -c ../obj2vec/open_images_corpus.DIR -m ./model-save-awe-ga-duplicates/semcomp.meta -t ../obj2vec/open_images_test.pkl -f 50 -u 200
