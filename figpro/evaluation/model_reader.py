@@ -74,7 +74,7 @@ class ModelReader:
             count += 1
             if count == n_result:
                 break
-        return res
+        # return res
 
     def fit_score(self, context, vec):
         context = context / np.sqrt((context * context).sum())
