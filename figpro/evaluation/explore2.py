@@ -240,6 +240,7 @@ print("cur_thres: " + str(cur_thres))
 total_c = 0
 total_w = 0
 
+import csv 
 with open('explore2.csv', "wb") as csv_file:
     writer = csv.writer(csv_file, delimiter=',')
     # for line in data:
