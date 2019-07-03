@@ -241,7 +241,7 @@ total_c = 0
 total_w = 0
 
 import csv 
-with open('explore2.csv') as csv_file:
+with open('explore2.csv', 'w') as csv_file:
     writer = csv.writer(csv_file, delimiter=',')
     # for line in data:
     writer.writerow(['img_id', 'correct/wrong', 'prediction', 'score(threshold:'+str(cur_thres)+')', 'image_objects', 'transcription_objects'])
