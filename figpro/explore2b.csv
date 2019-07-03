@@ -1,0 +1,90 @@
+img_id,correct/wrong,prediction,score(threshold:0.4190000000000003),image_objects,transcription_objects
+41478,wrong,parallel,0.3281552633022425,Human arm	Human nose	Human face	Girl	Human head	Human hand	Woman	Human eye	Man	Human mouth	Human hair,Woman	Girl	Man
+68416,wrong,parallel,0.41361354291439056,Mobile phone	Book,Hat
+171709,correct,parallel,0.4889920066010623,Peach	Bagel	Candy	Egg	Doughnut,Coffee	Doughnut
+130442,correct,parallel,0.49518488347530365,Human arm	Human face	Swimwear	Girl	Sandal	Woman	Human foot	High heels	Boot,Girl
+77530,correct,parallel,0.42576996982097626,Poster,Drink
+45971,wrong,parallel,0.3735247254371643,Human face	Human head	Woman	Human eye	Bronze sculpture	Monkey,Wardrobe
+110518,correct,parallel,0.4493512436747551,Man	Bronze sculpture	Book	Poster,Hat
+173710,wrong,parallel,0.36064669787049924,Woman	Coat	Dress	Girl,Ant
+140172,correct,parallel,0.4614798294253969,Cake	Juice	Ice cream	Cocktail,Ant
+176012,wrong,parallel,0.40171127766370773,Bottle	Wine	Cocktail	Beer,Pen
+171332,correct,parallel,0.4611484401834989,Apple	Tomato,Vegetable	Table
+93301,correct,non_parallel,0.3035198301076889,Poster	Human face	Book	Bat	Dog	Dinosaur,Car
+173084,wrong,non_parallel,0.46359532326459885,Book	Poster	Skull,Man
+31410,wrong,non_parallel,0.446736853569746,Bronze sculpture	Dinosaur	Bat	Skull,Hat
+17158,wrong,parallel,0.3944912850856781,Sandal	Television	Laptop	Billboard,Hat
+145338,correct,non_parallel,0.374623512511707,Poster	Billboard,Helicopter
+71002,correct,parallel,0.5771494645091304,Mobile phone,Ant
+4836,correct,parallel,0.4533378817141056,Hamburger,Food
+51157,wrong,parallel,0.34864936769008636,Poster	Human nose	Human face	Girl	Woman	Human eye	Human mouth	Man,Man
+97756,correct,parallel,0.47002211958169937,Juice	Human face	Tin can	Human head	Crown	Doll	Vase	Cocktail,Drink
+1355,correct,non_parallel,0.38378842920064926,Vehicle registration plate	Tire	Wheel	Van,Sheep
+171104,wrong,parallel,0.33449750283154694,Human hand	Human foot	Maple	Houseplant,Car	Tree
+149683,correct,non_parallel,0.3833983913064003,Television,Bee
+170992,correct,parallel,0.43133625101933226,Cake	Bat	Poster,Candy	Cookie
+97312,wrong,parallel,0.3800497427582741,Mobile phone	Tablet computer	Laptop	Computer keyboard,Hat
+90393,wrong,parallel,0.4040485769510269,Poster	Human face,Hat
+19772,wrong,parallel,0.4178221467333116,Chair	Human face	Toilet paper	Box	Girl	Woman	Man	Paper towel	Boy,Ant
+52951,correct,parallel,0.44941505044698715,Poster	Human face	Mobile phone	Girl	Human head	Woman	Human hair,Hat
+72090,wrong,non_parallel,0.45852845162153244,Poster,Man
+177135,wrong,parallel,0.3295999616384506,Poster	Human face	Rabbit	Girl	Woman	Man	Mouse	Human hair	Hamster,Poster
+94911,wrong,parallel,0.3703739047050476,Poster	Human nose	Human face	Human head	Bust	Human eye	Woman	Man	Human mouth	Billboard,Coat
+120332,correct,non_parallel,0.28350481697256164,Wheel	Motorcycle	Billiard table	Tire	Helicopter	Suitcase	Bow and arrow,Bust	Bus
+172411,correct,parallel,0.48410184495151043,Bowl	Plate,Egg
+90737,wrong,parallel,0.40986893079951925,Poster,Tea	Fish
+32452,correct,non_parallel,0.38803988695144653,Poster,Hat
+152882,wrong,parallel,0.30826329743110814,Woman,Woman	Man
+126706,correct,parallel,0.4781421422958374,Cake	Poster	Strawberry	Candy,Fruit
+145459,wrong,parallel,0.333017036318779,Poster	Computer monitor	Book	Tablet computer	Television	Laptop,Tie
+108816,wrong,non_parallel,0.5146016124635935,Envelope	Poster,Tree
+177583,wrong,non_parallel,0.5347037874162197,Vehicle registration plate	Tire	Wheel,Car
+177245,correct,non_parallel,0.3773293047682761,Poster	Human nose	Human face	Human head	Hamburger	Human hand	Human eye	Man	Human hair	Boy,Ant
+174777,correct,parallel,0.4888924565166235,Poster	Human face	Jacket	Human head	Man,Hat
+134109,correct,parallel,0.4321809079683522,Cattle	Horse	Knife	Bull	Dog,Ant
+57479,wrong,parallel,0.3355194330215454,Human face	Football	Man	Human hair	Boy,Man
+121682,wrong,parallel,0.3516102731227875,Jeans	Poster	Human face	Shorts	Girl	Woman	Man	Human hair	Boy,Tart
+104172,wrong,parallel,0.39618995040655136,Apple	Grape	Peach	Tomato	Orange	Lemon	Grapefruit	Egg	Radish	Mango,Hat
+67117,correct,parallel,0.5299370568245649,Pomegranate	Tomato	Butterfly	Bell pepper,Tomato
+175783,wrong,parallel,0.3404485732316971,Human face	Girl	Human head	Woman	Human hair,Bull
+71726,wrong,parallel,0.3808252885937691,Suit	Tie	Human face	Human head	Human hand	Man,Man
+131969,wrong,parallel,0.36872953827756233,Headphones	Human face	Punching bag	Human head	Girl	Woman	Man	Camera	Handgun	Glasses	Sunglasses,Owl
+56844,wrong,parallel,0.31523212790489197,Jeans	Dress	Football helmet	Poster	Human face	Human head	Girl	Woman	Man	Human hair,Car
+149644,wrong,parallel,0.3942008689045906,Bronze sculpture	Poster,Hat
+35108,correct,non_parallel,0.27884174301359915,Human hair	Human face	Book	Musical keyboard	Girl	Human head	Woman	Man	Sun hat	Boy	Laptop,Book	Hat	Bus
+87591,correct,parallel,0.4220269736274215,Scarf	Sock,Jeans	Boy
+51122,wrong,parallel,0.3711342215538025,Headphones	Poster	Cowboy hat	Pig	Dog	Sun hat	Skull	Backpack,Tart
+132724,wrong,non_parallel,0.5365586988627911,Box,Food
+171486,correct,parallel,0.450983215123415,Brassiere,Ball
+2842,wrong,parallel,0.31195063239967025,Wine	Human nose	Human face	Girl	Human head	Woman	Human eye	Man	Human mouth	Human hair	Bottle	Human ear,Woman	Man
+52099,wrong,non_parallel,0.5266237506712347,Box	Printer,Ant
+161590,wrong,parallel,0.39603064954280853,Poster,Bee
+118783,correct,non_parallel,0.382202610373497,Mobile phone	Poster,Tie
+177371,correct,parallel,0.5252763889729977,Tire	Wheel,Car
+93398,wrong,parallel,0.3751564770936966,Headphones	Poster	Human arm	Human face	Human nose	Coin	Human head	Human hand	Human mouth	Human eye	Man	Human hair	Cookie,Candy
+129171,correct,non_parallel,0.35683510978983113,Dress	Poster	Human face	Shorts	Girl	Woman	Miniskirt,Refrigerator
+82378,wrong,parallel,0.3612028956413269,Poster	Human face	Book	Human head	Man	Bottle,Ski
+70789,wrong,non_parallel,0.4861326301470399,Pen	Knife,Pen
+5126,correct,parallel,0.46744831651449203,Suit	Human face	Jacket	Glasses	Human head	Man	Human hair	Backpack,Hat
+31575,correct,non_parallel,0.3771521887634752,Musical keyboard	Sandal	Tablet computer	Dog	High heels	Laptop	Backpack	Boot,Hat	Laptop
+69965,correct,parallel,0.48840545861218143,Computer keyboard	Corded phone	Pen	Mobile phone,Calculator	Person
+12181,correct,parallel,0.4393123760819435,Mobile phone,Hat
+130239,correct,non_parallel,0.3050356445732588,Jeans	Dress	Human face	Girl	Human head	Woman,Ant	Bee	Beer
+11674,correct,parallel,0.4492471511957563,Chair	Punching bag	Tin can	Barrel	Flute	Wok	Frying pan	Bottle	Lamp,Container	Hat
+164559,correct,parallel,0.4562377445399761,Egg	Oyster,Food
+105700,correct,non_parallel,0.3309856206178665,Bottle,Ski
+143720,correct,parallel,0.4623582400381565,Skull,Skull
+171350,correct,parallel,0.46195002645254135,Human face	Human leg	Girl	Woman	Human foot,Hat
+130355,wrong,parallel,0.25220633331341663,Poster	Billboard,Girl	Suit	Bat
+108182,correct,parallel,0.4273408613164604,Poster	Human nose	Human face	Man	Bronze sculpture	Bottle,Ant	Hat
+172147,wrong,parallel,0.4076225385069847,Cake	Poster,Cheese
+113005,wrong,non_parallel,0.5080222319811583,Bicycle	Wheel	Motorcycle	Cart	Tire	Bicycle wheel,Man
+69912,wrong,parallel,0.37435101116440406,Poster	Truck	Wheel	Tire	Van	Bow and arrow,Ant
+54507,correct,parallel,0.44182364642620087,Chair	Kitchen & dining room table	Coffee table,Door
+173265,correct,parallel,0.48637733762005436,Tin can,Bee	Beer
+117563,correct,non_parallel,0.34866241237160345,Poster,Car	Hat
+136780,wrong,parallel,0.31021826163582555,Human face	Accordion	Musical keyboard	Man	Piano,Man	Table
+164480,correct,non_parallel,0.38978850096464157,Human nose	Human face	Human head	Bust	Scarf	Human mouth	Woman	Man	Human eye	Human beard,Horn
+53939,correct,non_parallel,0.3916640505194664,Corded phone	Headphones	Camera	Watch,Hat
+62884,wrong,non_parallel,0.4641094543039799,Man	Human face	Swim cap	Human head,Hat
+176413,correct,parallel,0.5930345207452774,Bottle	Earrings,Drink
