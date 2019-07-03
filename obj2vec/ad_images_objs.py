@@ -1,6 +1,7 @@
 import csv
 
-AD_IMGS_OBJS_PATH = "../../Keras-RetinaNet-for-Open-Images-Challenge-2018/subm/retinanet_level_1_all_levels.csv"
+# AD_IMGS_OBJS_PATH = "../../Keras-RetinaNet-for-Open-Images-Challenge-2018/subm/retinanet_level_1_all_levels.csv"
+AD_IMGS_OBJS_PATH = "../../Keras-RetinaNet-for-Open-Images-Challenge-2018/subm/retinanet_training_level_1.csv"
 AD_IMGS_ANNS_PATH = "../../ads_parallelity_dataset.csv"
 LABELS_PATH = "../../class-descriptions-boxable.csv"
 
@@ -29,7 +30,13 @@ with open(AD_IMGS_OBJS_PATH) as csv_file:
             line_count += 1
             
             temp1 = row[1].split(" ")
-            temp2 = list(filter(lambda x: '/m/' in x, temp1))
+            composite_list = [temp1[x:x+6] for x in range(0, len(temp1),6)]
+
+            temp1b = list(filter(lambda x: len(x)==6, composite_list))
+
+            temp1c = list(filter(lambda x: float(x[1]) >= 0.25, temp1b))
+
+            temp2 = list(map(lambda x: x[0], temp1c))
 
             res1[row[0]] = temp2
 
@@ -104,7 +111,7 @@ for k in res2.keys():
             
 import pickle
 
-with open("bla.pkl", 'wb') as f:
+with open("bla2.pkl", 'wb') as f:
 	pickle.dump([labels, res1, res2, res3, res4], f, pickle.HIGHEST_PROTOCOL)
 
 # def save_obj(obj, name ):
