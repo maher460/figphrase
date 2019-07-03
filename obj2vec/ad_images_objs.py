@@ -15,7 +15,7 @@ with open(LABELS_PATH) as csv_file:
     print("\n\n\n\t\tDONE READING LABELS FILE!\n\n\n")
 
 
-res1 = {}
+res1 = {} # {img_id: [object_labels]}
 
 with open(AD_IMGS_OBJS_PATH) as csv_file:
     csv_reader = csv.reader(csv_file, delimiter=',')
@@ -44,7 +44,7 @@ with open(AD_IMGS_OBJS_PATH) as csv_file:
 
 # print(res1)
 
-res2 = {}
+res2 = {}  #{img_id: ([transcriptions],[parallelities])}
 
 with open(AD_IMGS_ANNS_PATH) as csv_file:
     csv_reader = csv.reader(csv_file, delimiter=',')
@@ -70,7 +70,7 @@ with open(AD_IMGS_ANNS_PATH) as csv_file:
     # print(res2)
 
 
-res3 = {}
+res3 = {} # {img_id: [object_labels in transcriptions]}
 
 for k in res2.keys():
 	for c in labels.keys():
@@ -85,7 +85,7 @@ for k in res2.keys():
 # print(len(res3.keys()))
 
 
-res4 = {}
+res4 = {}  # {img_id: parallel/non-parallel}
 
 for k in res2.keys():
 	p_c = 0

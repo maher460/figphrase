@@ -90,6 +90,8 @@ Saucer Plate Platter Spoon Fork
 
 /m/03q5c7 /m/050gv4 [] /m/0cmx8 /m/0dt3t
 
+/m/03q5c7 /m/050gv4 [/m/099ssp] /m/0cmx8 /m/0dt3t
+
 /m/03q5c7 /m/050gv4 [/m/02rgn06] /m/0cmx8 /m/0dt3t
 [Volleyball]
 
@@ -97,3 +99,24 @@ Saucer Plate Platter Spoon Fork
 
 
 python evaluation/explore3.py -c ../obj2vec/open_images_corpus.DIR -m ./model-save-awe-ga-duplicates/semcomp.meta -t ../obj2vec/open_images_test.pkl -f 50 -u 200
+
+
+/m/03k3r /m/04yx4 /m/09j2d /m/0cnyhnx /m/0jbk
+Horse Man Clothing Bull Animal
+
+/m/03k3r /m/04yx4 [/m/09j2d] /m/0cnyhnx /m/0jbk
+
+/m/03k3r /m/04yx4 [] /m/0cnyhnx /m/0jbk
+
+/m/03k3r /m/04yx4 /m/0cnyhnx /m/0jbk []
+
+
+/m/03k3r /m/04yx4 [/m/02p5f1q] /m/0cnyhnx /m/0jbk
+
+/m/03k3r /m/04yx4 /m/0cnyhnx /m/0jbk [/m/09j2d]
+
+
+3641:
+/m/02rdsp /m/02rdsp /m/07cx4 /m/083kb /m/083kb /m/083kb
+/m/02rdsp /m/07cx4 [/m/083kb]
+Office supplies Office supplies Telephone Weapon

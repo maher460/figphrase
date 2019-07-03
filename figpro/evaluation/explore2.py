@@ -124,11 +124,12 @@ import pickle
 with open('../obj2vec/bla.pkl', 'rb') as f:
     res_bla = pickle.load(f)
 
-labels = res_bla[0]
-res1 = res_bla[1]
-res2 = res_bla[2]
-res3 = res_bla[3]
-res4 = res_bla[4]
+labels = res_bla[0] # {obj_label_id: obj_label_name}
+res1 = res_bla[1] # {img_id: [object_labels]}
+res2 = res_bla[2] # {img_id: ([transcriptions],[parallelities])}
+res3 = res_bla[3] # {img_id: [object_labels in transcriptions]}
+res4 = res_bla[4] # {img_id: parallel/non-parallel}
+
 
 # print(res_bla)
 total = 0
@@ -180,7 +181,7 @@ for k in res3.keys():
                     print("Truth: " + res4[k])
                     sum_p[res4[k]] += compatibility
                     count_p[res4[k]] += 1
-                    blabla.append((compatibility, res4[k]))
+                    blabla.append((compatibility, res4[k], k))
 
         except EOFError:
             break
@@ -239,13 +240,20 @@ print("cur_thres: " + str(cur_thres))
 total_c = 0
 total_w = 0
 
-for b in blabla:
-    if b[1] == 'parallel' and b[0] >= cur_thres:
-        total_c += 1
-    elif b[1] == 'non_parallel' and b[0] < cur_thres:
-        total_c += 1
-    else:
-        total_w += 1
+with open('explore2.csv', "wb") as csv_file:
+    writer = csv.writer(csv_file, delimiter=',')
+    # for line in data:
+    writer.writerow(['img_id', 'correct/wrong', 'prediction', 'score(threshold:'+str(cur_thres)+')', 'image_objects', 'transcription_objects'])
+
+    for b in blabla:
+        img_obj_labels = list(map(lambda x: labels[x], res1[b[2]]))
+        t_obj_labels = list(map(lambda x: labels[x], res3[b[2]]))
+        if (b[1] == 'parallel' and b[0] >= cur_thres) or (b[1] == 'non_parallel' and b[0] < cur_thres):
+            total_c += 1
+            writer.writerow([b[2], 'correct', b[1], str(b[0]), "\t".join(img_obj_labels), "\t".join(t_obj_labels)])
+        else:
+            total_w += 1
+            writer.writerow([b[2], 'wrong', b[1], str(b[0]), "\t".join(img_obj_labels), "\t".join(t_obj_labels)])
 
 print("total_c: " + str(total_c))
 print("total_w: " + str(total_w))
