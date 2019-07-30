@@ -72,11 +72,11 @@ with open(AD_IMGS_ANNS_PATH) as csv_file:
             # print(key)
             
             if key in res2.keys():
-            	#bla
-            	res2[key][0].append(row[1])
-            	res2[key][1].append(row[6])
+                #bla
+                res2[key][0].append(row[1])
+                res2[key][1].append(row[6])
             else:
-            	res2[key] = ([row[1]], [row[6]])
+                res2[key] = ([row[1]], [row[6]])
 
     # print(res2)
 
@@ -84,7 +84,7 @@ with open(AD_IMGS_ANNS_PATH) as csv_file:
 res3 = {} # {img_id: [object_labels in transcriptions]}
 
 for k in res2.keys():
-	for c in labels.keys():
+    for c in labels.keys():
         c_label = labels[c].lower()
         c_label_joined = c_label.replace(" ", "_")
         if c_label_joined in model:
@@ -93,14 +93,14 @@ for k in res2.keys():
             similar_labels.append(c_label)
         else:
             similar_labels = [c_label] 
-		for t in res2[k][0]:
+        for t in res2[k][0]:
             for s in similar_labels:
                 if s in t:
-			# if labels[c].lower() in t:
-    				if k in res3.keys():
-    					res3[k].add(c)
-    				else:
-    					res3[k] = {c}
+            # if labels[c].lower() in t:
+                    if k in res3.keys():
+                        res3[k].add(c)
+                    else:
+                        res3[k] = {c}
 
 # print(res3)
 # print(len(res3.keys()))
@@ -109,24 +109,24 @@ for k in res2.keys():
 res4 = {}  # {img_id: parallel/non-parallel}
 
 for k in res2.keys():
-	p_c = 0
-	np_c = 0
-	for p in res2[k][1]:
-		if p == 'parallel':
-			p_c += 1
-		else:
-			np_c += 1
-	if p_c > np_c:
-		res4[k] = 'parallel'
-	else:
-		res4[k] = 'non_parallel'
+    p_c = 0
+    np_c = 0
+    for p in res2[k][1]:
+        if p == 'parallel':
+            p_c += 1
+        else:
+            np_c += 1
+    if p_c > np_c:
+        res4[k] = 'parallel'
+    else:
+        res4[k] = 'non_parallel'
 
 # print(res4)
             
 import pickle
 
 with open("bla3.pkl", 'wb') as f:
-	pickle.dump([labels, res1, res2, res3, res4], f, pickle.HIGHEST_PROTOCOL)
+    pickle.dump([labels, res1, res2, res3, res4], f, pickle.HIGHEST_PROTOCOL)
 
 # def save_obj(obj, name ):
 #     with open('obj/'+ name + '.pkl', 'wb') as f:
