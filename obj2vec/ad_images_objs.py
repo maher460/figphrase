@@ -1,10 +1,13 @@
 import csv
+import gensim
 
 # AD_IMGS_OBJS_PATH = "../../Keras-RetinaNet-for-Open-Images-Challenge-2018/subm/retinanet_level_1_all_levels.csv"
 AD_IMGS_OBJS_PATH = "../../Keras-RetinaNet-for-Open-Images-Challenge-2018/subm/retinanet_training_level_1.csv"
 AD_IMGS_ANNS_PATH = "../../ads_parallelity_dataset.csv"
 LABELS_PATH = "../../class-descriptions-boxable.csv"
+GOOGLENEWSMODEL_PATH = "../../GoogleNews-vectors-negative300.bin"
 
+model = gensim.models.KeyedVectors.load_word2vec_format(GOOGLENEWSMODEL_PATH, binary=True)
 
 labels = {}
 
@@ -82,12 +85,22 @@ res3 = {} # {img_id: [object_labels in transcriptions]}
 
 for k in res2.keys():
 	for c in labels.keys():
+        c_label = labels[c].lower()
+        c_label_joined = c_label.replace(" ", "_")
+        if c_label_joined in model:
+            similar_labels_tuples = model.most_similar(positive=[c_label_joined])
+            similar_labels = list(map(lambda x: x[0].replace("_", " "), similar_labels_tuples))
+            similar_labels.append(c_label)
+        else:
+            similar_labels = [c_label] 
 		for t in res2[k][0]:
-			if labels[c].lower() in t:
-				if k in res3.keys():
-					res3[k].add(c)
-				else:
-					res3[k] = {c}
+            for s in similar_labels:
+                if s in t:
+			# if labels[c].lower() in t:
+    				if k in res3.keys():
+    					res3[k].add(c)
+    				else:
+    					res3[k] = {c}
 
 # print(res3)
 # print(len(res3.keys()))
@@ -112,7 +125,7 @@ for k in res2.keys():
             
 import pickle
 
-with open("bla2.pkl", 'wb') as f:
+with open("bla3.pkl", 'wb') as f:
 	pickle.dump([labels, res1, res2, res3, res4], f, pickle.HIGHEST_PROTOCOL)
 
 # def save_obj(obj, name ):
