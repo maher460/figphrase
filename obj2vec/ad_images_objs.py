@@ -82,8 +82,10 @@ with open(AD_IMGS_ANNS_PATH) as csv_file:
 
 labels_new = {}
 
-
+count_123 = 0
 for c in labels.keys():
+    count_123 += 1
+    print("Synonyms: " + str(count_123))
     c_label = labels[c].lower()
     c_label_joined = c_label.replace(" ", "_")
     if c_label_joined in model:
@@ -96,11 +98,11 @@ for c in labels.keys():
 
 
 res3 = {} # {img_id: [object_labels in transcriptions]}
-count = 0
+count_321 = 0
 for k in res2.keys():
     for c in labels_new.keys():
-        count += 1
-        print("Searching: " + str(count))
+        count_321 += 1
+        print("Searching: " + str(count_321))
         # c_label = labels[c].lower()
         # c_label_joined = c_label.replace(" ", "_")
         # if c_label_joined in model:
