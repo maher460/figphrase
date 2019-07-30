@@ -80,21 +80,37 @@ with open(AD_IMGS_ANNS_PATH) as csv_file:
 
     # print(res2)
 
+labels_new = {}
+
+
+for c in labels.keys():
+    c_label = labels[c].lower()
+    c_label_joined = c_label.replace(" ", "_")
+    if c_label_joined in model:
+        similar_labels_tuples = model.most_similar(positive=[c_label_joined])
+        similar_labels = list(map(lambda x: x[0].replace("_", " "), similar_labels_tuples))
+        similar_labels.append(c_label)
+    else:
+        similar_labels = [c_label]
+    labels_new[c] = similar_labels 
+
 
 res3 = {} # {img_id: [object_labels in transcriptions]}
-
+count = 0
 for k in res2.keys():
-    for c in labels.keys():
-        c_label = labels[c].lower()
-        c_label_joined = c_label.replace(" ", "_")
-        if c_label_joined in model:
-            similar_labels_tuples = model.most_similar(positive=[c_label_joined])
-            similar_labels = list(map(lambda x: x[0].replace("_", " "), similar_labels_tuples))
-            similar_labels.append(c_label)
-        else:
-            similar_labels = [c_label] 
+    for c in labels_new.keys():
+        count += 1
+        print("Searching: " + str(count))
+        # c_label = labels[c].lower()
+        # c_label_joined = c_label.replace(" ", "_")
+        # if c_label_joined in model:
+        #     similar_labels_tuples = model.most_similar(positive=[c_label_joined])
+        #     similar_labels = list(map(lambda x: x[0].replace("_", " "), similar_labels_tuples))
+        #     similar_labels.append(c_label)
+        # else:
+        #     similar_labels = [c_label] 
         for t in res2[k][0]:
-            for s in similar_labels:
+            for s in labels_new[c]:
                 if s in t:
             # if labels[c].lower() in t:
                     if k in res3.keys():
