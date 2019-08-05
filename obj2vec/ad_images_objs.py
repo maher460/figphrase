@@ -1,5 +1,7 @@
 import csv
 import gensim
+import numpy
+from gensim import matutils
 
 # AD_IMGS_OBJS_PATH = "../../Keras-RetinaNet-for-Open-Images-Challenge-2018/subm/retinanet_level_1_all_levels.csv"
 AD_IMGS_OBJS_PATH = "../../Keras-RetinaNet-for-Open-Images-Challenge-2018/subm/retinanet_training_level_1.csv"
@@ -81,6 +83,7 @@ with open(AD_IMGS_ANNS_PATH) as csv_file:
     # print(res2)
 
 labels_new = {}
+labels_model = {} #classes which are in model
 
 count_123 = 0
 for c in labels.keys():
@@ -89,6 +92,7 @@ for c in labels.keys():
     c_label = labels[c].lower()
     c_label_joined = c_label.replace(" ", "_")
     if c_label_joined in model:
+        labels_model[c_label_joined] = c
         similar_labels_tuples = model.most_similar(positive=[c_label_joined])
         similar_labels = list(map(lambda x: x[0].replace("_", " "), similar_labels_tuples))
         similar_labels.append(c_label)
@@ -100,25 +104,51 @@ for c in labels.keys():
 res3 = {} # {img_id: [object_labels in transcriptions]}
 count_321 = 0
 for k in res2.keys():
-    for c in labels_new.keys():
-        count_321 += 1
-        print("Searching: " + str(count_321))
-        # c_label = labels[c].lower()
-        # c_label_joined = c_label.replace(" ", "_")
-        # if c_label_joined in model:
-        #     similar_labels_tuples = model.most_similar(positive=[c_label_joined])
-        #     similar_labels = list(map(lambda x: x[0].replace("_", " "), similar_labels_tuples))
-        #     similar_labels.append(c_label)
-        # else:
-        #     similar_labels = [c_label] 
-        for t in res2[k][0]:
-            for s in labels_new[c]:
-                if s in t:
-            # if labels[c].lower() in t:
-                    if k in res3.keys():
-                        res3[k].add(c)
-                    else:
-                        res3[k] = {c}
+    ## Method A 
+    # for c in labels_new.keys():
+    #     count_321 += 1
+    #     print("Searching: " + str(count_321))
+    #     # c_label = labels[c].lower()
+    #     # c_label_joined = c_label.replace(" ", "_")
+    #     # if c_label_joined in model:55
+    #     #     similar_labels_tuples = model.most_similar(positive=[c_label_joined])
+    #     #     similar_labels = list(map(lambda x: x[0].replace("_", " "), similar_labels_tuples))
+    #     #     similar_labels.append(c_label)
+    #     # else:
+    #     #     similar_labels = [c_label]
+        
+    #     for t in res2[k][0]:
+    #         for s in labels_new[c]:
+    #             if s in t:
+    #         # if labels[c].lower() in t:
+    #                 if k in res3.keys():
+    #                     res3[k].add(c)
+    #                 else:
+    #                     res3[k] = {c}
+    
+    ## Method B
+    
+    count_321 += 1
+    print("Searching: " + str(count_321))
+    mean = []
+    for t in res2[k][0]:
+        temp_bla = t.split()
+        for b in temp_bla:
+            if b not in mean and b in model:
+                mean.append(b)
+
+    mean = list(map(lambda m: model.word_vec(m, use_norm=True), mean))
+
+    mean = matutils.unitvec(np.array(mean).mean(axis=0)).astype(REAL)
+
+    dists = model.distances(mean, labels_model.keys())
+
+    smallest_idx = np.argmin(dists)
+
+    res3[k] = {labels_model[labels_model.keys()[smallest_idx]]}
+
+
+
 
 # print(res3)
 # print(len(res3.keys()))
@@ -143,7 +173,7 @@ for k in res2.keys():
             
 import pickle
 
-with open("bla3.pkl", 'wb') as f:
+with open("bla3_method_b.pkl", 'wb') as f:
     pickle.dump([labels, res1, res2, res3, res4], f, pickle.HIGHEST_PROTOCOL)
 
 # def save_obj(obj, name ):
