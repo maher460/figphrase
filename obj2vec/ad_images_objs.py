@@ -146,7 +146,7 @@ for k in res2.keys():
 
     smallest_idx = np.argmin(dists)
 
-    res3[k] = {labels_model[labels_model[smallest_idx]]}
+    res3[k] = {labels_model[list(labels_model.keys())[smallest_idx]]}
 
 
 
