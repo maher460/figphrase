@@ -1,6 +1,6 @@
 import csv
 import gensim
-from numpy import float32
+from numpy import float64
 import numpy as np
 from gensim import matutils
 
@@ -140,7 +140,7 @@ for k in res2.keys():
 
     mean = list(map(lambda m: model.word_vec(m, use_norm=True), mean))
 
-    mean = matutils.unitvec(np.array(mean).mean(axis=0)).astype(float32)
+    mean = matutils.unitvec(np.array(mean).mean(axis=0)).astype(float64)
 
     dists = model.distances(mean, labels_model.keys())
 
