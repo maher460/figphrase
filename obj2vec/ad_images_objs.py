@@ -1,6 +1,6 @@
 import csv
 import gensim
-import numpy as np
+import numpy as np, float32
 from gensim import matutils
 
 # AD_IMGS_OBJS_PATH = "../../Keras-RetinaNet-for-Open-Images-Challenge-2018/subm/retinanet_level_1_all_levels.csv"
@@ -139,7 +139,7 @@ for k in res2.keys():
 
     mean = list(map(lambda m: model.word_vec(m, use_norm=True), mean))
 
-    mean = matutils.unitvec(np.array(mean).mean(axis=0)).astype(REAL)
+    mean = matutils.unitvec(np.array(mean).mean(axis=0)).astype(float32)
 
     dists = model.distances(mean, labels_model.keys())
 
