@@ -137,16 +137,17 @@ for k in res2.keys():
         for b in temp_bla:
             if b not in mean and b in model:
                 mean.append(b)
+                
+    if len(mean) > 0:
+        mean = list(map(lambda m: model.word_vec(m, use_norm=True), mean))
 
-    mean = list(map(lambda m: model.word_vec(m, use_norm=True), mean))
+        mean = matutils.unitvec(np.array(mean).mean(axis=0)).astype(float64)
 
-    mean = matutils.unitvec(np.array(mean).mean(axis=0)).astype(float64)
+        dists = model.distances(mean, labels_model.keys())
 
-    dists = model.distances(mean, labels_model.keys())
+        smallest_idx = np.argmin(dists)
 
-    smallest_idx = np.argmin(dists)
-
-    res3[k] = {labels_model[list(labels_model.keys())[smallest_idx]]}
+        res3[k] = {labels_model[list(labels_model.keys())[smallest_idx]]}
 
 
 
