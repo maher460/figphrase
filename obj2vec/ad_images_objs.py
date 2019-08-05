@@ -1,6 +1,6 @@
 import csv
 import gensim
-import numpy
+import numpy as np
 from gensim import matutils
 
 # AD_IMGS_OBJS_PATH = "../../Keras-RetinaNet-for-Open-Images-Challenge-2018/subm/retinanet_level_1_all_levels.csv"
