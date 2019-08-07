@@ -203,7 +203,7 @@ for k in res2.keys():
             
 import pickle
 
-with open("bla3_method_b.pkl", 'wb') as f:
+with open("bla3_method_c.pkl", 'wb') as f:
     pickle.dump([labels, res1, res2, res3, res4], f, pickle.HIGHEST_PROTOCOL)
 
 # def save_obj(obj, name ):

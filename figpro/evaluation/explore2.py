@@ -121,7 +121,7 @@ index2word = model.index2word
 
 import pickle
 
-with open('../obj2vec/bla3_method_b.pkl', 'rb') as f:
+with open('../obj2vec/bla3_method_c.pkl', 'rb') as f:
     res_bla = pickle.load(f)
 
 labels = res_bla[0] # {obj_label_id: obj_label_name}
@@ -241,7 +241,7 @@ total_c = 0
 total_w = 0
 
 import csv 
-with open('explore2b3_method_b.csv', 'w') as csv_file:
+with open('explore2b3_method_c.csv', 'w') as csv_file:
     writer = csv.writer(csv_file, delimiter=',')
     # for line in data:
     writer.writerow(['img_id', 'correct/wrong', 'prediction', 'score(threshold:'+str(cur_thres)+')', 'image_objects', 'transcription_objects'])
