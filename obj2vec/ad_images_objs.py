@@ -167,7 +167,7 @@ for k in res2.keys():
 
         dists = model.distances(mean, labels_model.keys())
 
-        smallest_idxs = np.asarray(np.argsort(dists)[5])
+        smallest_idxs = list(np.argsort(dists)[5])
 
         # res3[k] = {labels_model[list(labels_model.keys())[smallest_idx]]}
 
