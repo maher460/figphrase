@@ -145,7 +145,7 @@ for k in res3.keys():
 
         print("Num: " + str(total))
 
-        min_score = 0
+        min_score = float("inf")
 
         for i in range(len(res1[k])):
             new_str = ""
