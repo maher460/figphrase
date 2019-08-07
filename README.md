@@ -102,6 +102,7 @@ python evaluation/explore3.py -c ../obj2vec/open_images_corpus.DIR -m ./model-sa
 
 python evaluation/explore2.py -c ../obj2vec/open_images_corpus_unique.DIR -m ./model-save-awe-la/semcomp.meta -t 50 -u 200
 
+python evaluation/explore_parallel_detection_just_images.py -c ../obj2vec/open_images_corpus_unique.DIR -m ./model-save-awe-la/semcomp.meta -t 50 -u 200
 
 /m/03k3r /m/04yx4 /m/09j2d /m/0cnyhnx /m/0jbk
 Horse Man Clothing Bull Animal
