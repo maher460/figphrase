@@ -167,7 +167,7 @@ for k in res2.keys():
 
         dists = model.distances(mean, labels_model.keys())
 
-        smallest_idxs = list(np.argsort(dists)[:2])
+        smallest_idxs = list(np.argsort(dists)[:10])
 
         # res3[k] = {labels_model[list(labels_model.keys())[smallest_idx]]}
 
@@ -203,7 +203,7 @@ for k in res2.keys():
             
 import pickle
 
-with open("bla3_method_c_2.pkl", 'wb') as f:
+with open("bla3_method_c_10.pkl", 'wb') as f:
     pickle.dump([labels, res1, res2, res3, res4], f, pickle.HIGHEST_PROTOCOL)
 
 # def save_obj(obj, name ):
