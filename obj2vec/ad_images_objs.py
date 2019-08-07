@@ -129,6 +129,28 @@ for k in res2.keys():
     
     ## Method B
     
+    # count_321 += 1
+    # print("Searching: " + str(count_321))
+    # mean = []
+    # for t in res2[k][0]:
+    #     temp_bla = t.split()
+    #     for b in temp_bla:
+    #         if b not in mean and b in model:
+    #             mean.append(b)
+
+    # if len(mean) > 0:
+    #     mean = list(map(lambda m: model.word_vec(m, use_norm=True), mean))
+
+    #     mean = matutils.unitvec(np.array(mean).mean(axis=0)).astype(float64)
+
+    #     dists = model.distances(mean, labels_model.keys())
+
+    #     smallest_idx = np.argmin(dists)
+
+    #     res3[k] = {labels_model[list(labels_model.keys())[smallest_idx]]}
+
+    ## Method C
+
     count_321 += 1
     print("Searching: " + str(count_321))
     mean = []
@@ -145,9 +167,15 @@ for k in res2.keys():
 
         dists = model.distances(mean, labels_model.keys())
 
-        smallest_idx = np.argmin(dists)
+        smallest_idxs = np.argsort(dists)[5]
 
-        res3[k] = {labels_model[list(labels_model.keys())[smallest_idx]]}
+        # res3[k] = {labels_model[list(labels_model.keys())[smallest_idx]]}
+
+        lm_keys = list(labels_model.keys())
+
+        resultz = list(map(lambda x: labels_model[lm_keys[x]], smallest_idxs))
+
+        res3[k] = set(resultz)
 
 
 
