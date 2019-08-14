@@ -232,7 +232,7 @@ for k in res2.keys():
 blabla = []
 for key in res1_b_means.keys():
     if key in res3.keys():
-        similarity = dot(matutils.unitvec(res1_b_means[key]), matutils.unitvec(res3[key]))
+        similarity = np.dot(matutils.unitvec(res1_b_means[key]), matutils.unitvec(res3[key]))
         blabla.append((similarity, res4[key], key))
 
 temp_thres = 0
