@@ -229,9 +229,12 @@ for k in res2.keys():
     else:
         res4[k] = 'non_parallel'
 
+with open('ids_match.pkl', 'rb') as f:
+    ids_match = pickle.load(f)
+
 blabla = []
 for key in res1_b_means.keys():
-    if key in res3.keys():
+    if key in ids_match and key in res3.keys():
         similarity = np.dot(matutils.unitvec(res1_b_means[key]), matutils.unitvec(res3[key]))
         blabla.append((similarity, res4[key], key))
 
@@ -277,6 +280,8 @@ print("cur_thres: " + str(cur_thres))
 total_c = 0
 total_w = 0
 
+ids_match3 = []
+
 import csv 
 with open('ad_images_objs_2.csv', 'w') as csv_file:
     writer = csv.writer(csv_file, delimiter=',')
@@ -284,6 +289,7 @@ with open('ad_images_objs_2.csv', 'w') as csv_file:
     writer.writerow(['img_id', 'correct/wrong', 'prediction', 'score(threshold:'+str(cur_thres)+')', 'image_w2v_objects', 'transcription_w2v_objects'])
 
     for b in blabla:
+        ids_match3.append(b[2])
         img_obj_labels = res1_b[b[2]] #list(map(lambda x: labels[x], res1[b[2]]))
         t_obj_labels = res3_b[b[2]] #list(map(lambda x: labels[x], res3[b[2]]))
         if (b[1] == 'parallel' and b[0] >= cur_thres) or (b[1] == 'non_parallel' and b[0] < cur_thres):
@@ -292,6 +298,9 @@ with open('ad_images_objs_2.csv', 'w') as csv_file:
         else:
             total_w += 1
             writer.writerow([b[2], 'wrong', b[1], str(b[0]), "\t".join(img_obj_labels), "\t".join(t_obj_labels)])
+
+with open("ids_match3.pkl", 'wb') as f:
+    pickle.dump(ids_match3, f, pickle.HIGHEST_PROTOCOL)
 
 print("total_c: " + str(total_c))
 print("total_w: " + str(total_w))

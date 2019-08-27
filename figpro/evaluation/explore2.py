@@ -130,8 +130,8 @@ res2 = res_bla[2] # {img_id: ([transcriptions],[parallelities])}
 res3 = res_bla[3] # {img_id: [object_labels in transcriptions]}
 res4 = res_bla[4] # {img_id: parallel/non-parallel}
 
-with open('ids_match2.pkl', 'rb') as f:
-    ids_match2 = pickle.load(f)
+with open('ids_match3.pkl', 'rb') as f:
+    ids_match3 = pickle.load(f)
 
 # print(res_bla)
 total = 0
