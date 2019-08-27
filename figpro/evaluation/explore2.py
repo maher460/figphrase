@@ -239,6 +239,7 @@ print("cur_thres: " + str(cur_thres))
 
 total_c = 0
 total_w = 0
+ids_match = []
 
 import csv 
 with open('explore2b3_method_c_12.csv', 'w') as csv_file:
@@ -247,6 +248,7 @@ with open('explore2b3_method_c_12.csv', 'w') as csv_file:
     writer.writerow(['img_id', 'correct/wrong', 'prediction', 'score(threshold:'+str(cur_thres)+')', 'image_objects', 'transcription_objects'])
 
     for b in blabla:
+        ids_match.append(b[2])
         img_obj_labels = list(map(lambda x: labels[x], res1[b[2]]))
         t_obj_labels = list(map(lambda x: labels[x], res3[b[2]]))
         if (b[1] == 'parallel' and b[0] >= cur_thres) or (b[1] == 'non_parallel' and b[0] < cur_thres):
@@ -255,6 +257,9 @@ with open('explore2b3_method_c_12.csv', 'w') as csv_file:
         else:
             total_w += 1
             writer.writerow([b[2], 'wrong', b[1], str(b[0]), "\t".join(img_obj_labels), "\t".join(t_obj_labels)])
+
+with open("ids_match.pkl", 'wb') as f:
+    pickle.dump(ids_match, f, pickle.HIGHEST_PROTOCOL)
 
 print("total_c: " + str(total_c))
 print("total_w: " + str(total_w))
