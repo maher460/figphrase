@@ -141,7 +141,7 @@ count_p = {'parallel':0, 'non_parallel':0}
 blabla = []
 
 for k in res3.keys():
-    if k in ids_match2 and k in res1.keys():
+    if k in ids_match3 and k in res1.keys():
 
         total += 1
 
@@ -261,8 +261,8 @@ with open('explore2b3_method_c_10.csv', 'w') as csv_file:
             total_w += 1
             writer.writerow([b[2], 'wrong', b[1], str(b[0]), "\t".join(img_obj_labels), "\t".join(t_obj_labels)])
 
-with open("ids_match.pkl", 'wb') as f:
-    pickle.dump(ids_match, f, pickle.HIGHEST_PROTOCOL)
+# with open("ids_match.pkl", 'wb') as f:
+#     pickle.dump(ids_match, f, pickle.HIGHEST_PROTOCOL)
 
 print("total_c: " + str(total_c))
 print("total_w: " + str(total_w))
