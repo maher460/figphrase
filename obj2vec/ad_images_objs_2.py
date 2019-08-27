@@ -299,6 +299,7 @@ with open('ad_images_objs_2.csv', 'w') as csv_file:
             total_w += 1
             writer.writerow([b[2], 'wrong', b[1], str(b[0]), "\t".join(img_obj_labels), "\t".join(t_obj_labels)])
 
+import pickle
 with open("ids_match3.pkl", 'wb') as f:
     pickle.dump(ids_match3, f, pickle.HIGHEST_PROTOCOL)
 
