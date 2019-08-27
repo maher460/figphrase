@@ -130,8 +130,6 @@ res2 = res_bla[2] # {img_id: ([transcriptions],[parallelities])}
 res3 = res_bla[3] # {img_id: [object_labels in transcriptions]}
 res4 = res_bla[4] # {img_id: parallel/non-parallel}
 
-with open('ids_match.pkl', 'rb') as f:
-    ids_match = pickle.load(f)
 
 # print(res_bla)
 total = 0
@@ -267,7 +265,6 @@ print("cur_thres: " + str(cur_thres))
 total_c = 0
 total_w = 0
 
-ids_match2 = []
 
 import csv 
 with open('explore_parallel_detection_just_images.csv', 'w') as csv_file:
@@ -276,7 +273,6 @@ with open('explore_parallel_detection_just_images.csv', 'w') as csv_file:
     writer.writerow(['img_id', 'correct/wrong', 'prediction', 'score(threshold:'+str(cur_thres)+')', 'image_objects'])
 
     for b in blabla:
-        ids_match2.append(b[2])
         img_obj_labels = list(map(lambda x: labels[x], res1[b[2]]))
         t_obj_labels = list(map(lambda x: labels[x], res3[b[2]]))
         if (b[1] == 'parallel' and b[0] >= cur_thres) or (b[1] == 'non_parallel' and b[0] < cur_thres):
@@ -286,8 +282,6 @@ with open('explore_parallel_detection_just_images.csv', 'w') as csv_file:
             total_w += 1
             writer.writerow([b[2], 'wrong', b[1], str(b[0]), "\t".join(img_obj_labels)])
 
-with open("ids_match2.pkl", 'wb') as f:
-    pickle.dump(ids_match2, f, pickle.HIGHEST_PROTOCOL)
 
 print("total_c: " + str(total_c))
 print("total_w: " + str(total_w))
