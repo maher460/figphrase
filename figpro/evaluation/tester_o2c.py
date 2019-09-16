@@ -121,7 +121,7 @@ index2word = model.index2word
 
 import pickle
 
-with open('../obj2vec/bla3_method_c_10.pkl', 'rb') as f:
+with open('../obj2vec/tester_all.pkl', 'rb') as f:
     res_bla = pickle.load(f)
 
 labels = res_bla[0] # {obj_label_id: obj_label_name}

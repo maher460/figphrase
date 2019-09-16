@@ -212,6 +212,9 @@ with open("tester_w2c.pkl", 'wb') as f:
 with open("tester_labels.pkl", 'wb') as f:
     pickle.dump(res4, f, pickle.HIGHEST_PROTOCOL)
 
+with open("tester_all.pkl", 'wb') as f:
+    pickle.dump([labels, res1, res2, res3, res4], f, pickle.HIGHEST_PROTOCOL)
+
 # def save_obj(obj, name ):
 #     with open('obj/'+ name + '.pkl', 'wb') as f:
 #         pickle.dump(obj, f, pickle.HIGHEST_PROTOCOL)
