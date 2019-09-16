@@ -81,7 +81,7 @@ with tf.Session() as sess:
 
     hist = model.fit(data_X[0:551], data_Y[0:551], class_weight=cw, validation_split=0.1, epochs=25, callbacks=[tensorboard_callback])
 
-    plot_model(model)
+    plot_model(model, to_file='model.png')
     print(hist)
 
 
