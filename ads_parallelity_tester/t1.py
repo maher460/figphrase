@@ -49,8 +49,6 @@ model.compile(optimizer='adam',
               metrics=['accuracy'])
 
 class custom_callback(keras.callbacks.TensorBoard):
-  def __init__(self, *args, **kwargs):
-    super().__init__(self, *args, **kwargs)
 
   def on_train_batch_begin(self, *args, **kwargs):
     pass
