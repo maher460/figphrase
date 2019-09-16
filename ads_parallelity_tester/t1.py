@@ -83,10 +83,10 @@ with tf.Session() as sess:
 
     test_loss, test_acc = model.evaluate(data_X[551:], data_Y[551:])
 
-print('Test accuracy:', test_acc)
+    print('Test accuracy:', test_acc)
 
-predictions = model.predict(data_X[551:])
-print(predictions)
+    predictions = model.predict(data_X[551:])
+    print(predictions)
 
 
 # np.argmax(predictions[0])
