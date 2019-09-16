@@ -5,6 +5,7 @@ from tensorflow import keras
 
 from keras.models import Sequential
 from keras.layers.core import Dense
+from keras.utils import plot_model
 
 # Helper libraries
 import numpy as np
@@ -80,6 +81,7 @@ with tf.Session() as sess:
 
     hist = model.fit(data_X[0:551], data_Y[0:551], class_weight=cw, validation_split=0.1, epochs=25, callbacks=[tensorboard_callback])
 
+    plot_model(model)
     print(hist)
 
 
