@@ -147,11 +147,11 @@ for k in res1.keys():
 
         total += 1
 
-        temp1 = "_".join(res3[k])
-        print("temp1: "+temp1)
+        # temp1 = "_".join(res3[k])
+        # print("temp1: "+temp1)
         temp2 = " ".join(res1[k])
         print("temp2: "+temp2)
-        temp3 = temp2 + " [" + temp1 + "]"
+        temp3 = temp2 + " [" + "]"
         print("temp3: "+temp3)
         line = temp3
 
