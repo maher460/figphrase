@@ -143,7 +143,7 @@ blabla = []
 tester_o2c = {}
 
 for k in res3.keys():
-    if k in ids_match3 and k in res1.keys():
+    if k in res1.keys():
 
         total += 1
 
@@ -199,6 +199,9 @@ for k in res3.keys():
             traceback.print_tb(exc_traceback, limit=1, file=sys.stdout)
             print("*** print_exception:")
             traceback.print_exception(exc_type, exc_value, exc_traceback, limit=2, file=sys.stdout)
+
+with open("tester_o2c.pkl", 'wb') as f:
+    pickle.dump(tester_o2c, f, pickle.HIGHEST_PROTOCOL)
 
 print("total: " + str(total))
 print("sum_p: " + str(sum_p))

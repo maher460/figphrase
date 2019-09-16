@@ -1,5 +1,3 @@
-# Testing just using w2v for both images and texts
-
 import csv
 import gensim
 from numpy import float64
@@ -25,7 +23,6 @@ with open(LABELS_PATH) as csv_file:
 
 
 res1 = {} # {img_id: [object_labels]}
-# res1_b = {}
 
 with open(AD_IMGS_OBJS_PATH) as csv_file:
     csv_reader = csv.reader(csv_file, delimiter=',')
@@ -49,12 +46,6 @@ with open(AD_IMGS_OBJS_PATH) as csv_file:
             temp2 = list(set(temp1d))
 
             res1[row[0]] = temp2
-
-            # w2v_labels = []
-            # for obj_label in temp2:
-            #     if labels[obj_label] not in w2v_labels and labels[obj_label] in model:
-            #         w2v_labels.append(model[labels[obj_label]])
-            # res1_b[row[0]] = w2v_labels
 
 
             # if row[0] in results.keys():
@@ -94,7 +85,6 @@ with open(AD_IMGS_ANNS_PATH) as csv_file:
 
 labels_new = {}
 labels_model = {} #classes which are in model
-labels_model_flipped = {}
 
 count_123 = 0
 for c in labels.keys():
@@ -104,7 +94,6 @@ for c in labels.keys():
     c_label_joined = c_label.replace(" ", "_")
     if c_label_joined in model:
         labels_model[c_label_joined] = c
-        labels_model_flipped[c] = c_label_joined
         similar_labels_tuples = model.most_similar(positive=[c_label_joined])
         similar_labels = list(map(lambda x: x[0].replace("_", " "), similar_labels_tuples))
         similar_labels.append(c_label)
@@ -112,25 +101,9 @@ for c in labels.keys():
         similar_labels = [c_label]
     labels_new[c] = similar_labels 
 
-res1_b = {}
-for key in res1.keys():
-    for obj in res1[key]:
-        if obj in labels_model_flipped:
-            if key in res1_b.keys():
-                res1_b[key].append(labels_model_flipped[obj])
-            else:
-                res1_b[key] = [labels_model_flipped[obj]]
-
-res1_b_means = {}
-for key in res1_b.keys():
-    mean = list(map(lambda m: model.word_vec(m, use_norm=True), res1_b[key]))
-    mean = matutils.unitvec(np.array(mean).mean(axis=0)).astype(float64)
-    res1_b_means[key] = mean
-
-
 
 res3 = {} # {img_id: [object_labels in transcriptions]}
-res3_b = {}
+tester_w2c = {}
 count_321 = 0
 for k in res2.keys():
     ## Method A 
@@ -187,27 +160,25 @@ for k in res2.keys():
         for b in temp_bla:
             if b not in mean and b in model:
                 mean.append(b)
-    
-    res3_b[k] = mean
-
+                
     if len(mean) > 0:
         mean = list(map(lambda m: model.word_vec(m, use_norm=True), mean))
 
+        tester_w2c[k] = mean
+
         mean = matutils.unitvec(np.array(mean).mean(axis=0)).astype(float64)
 
-        res3[k] = mean
+        dists = model.distances(mean, labels_model.keys())
 
-        # dists = model.distances(mean, labels_model.keys())
+        smallest_idxs = list(np.argsort(dists)[:10])
 
-        # smallest_idxs = list(np.argsort(dists)[:10])
+        # res3[k] = {labels_model[list(labels_model.keys())[smallest_idx]]}
 
-        # # res3[k] = {labels_model[list(labels_model.keys())[smallest_idx]]}
+        lm_keys = list(labels_model.keys())
 
-        # lm_keys = list(labels_model.keys())
+        resultz = list(map(lambda x: labels_model[lm_keys[x]], smallest_idxs))
 
-        # resultz = list(map(lambda x: labels_model[lm_keys[x]], smallest_idxs))
-
-        # res3[k] = set(resultz)
+        res3[k] = set(resultz)
 
 
 
@@ -231,94 +202,15 @@ for k in res2.keys():
     else:
         res4[k] = 'non_parallel'
 
-import pickle
-
-with open('ids_match.pkl', 'rb') as f:
-    ids_match = pickle.load(f)
-
-blabla = []
-for key in res1_b_means.keys():
-    if key in ids_match and key in res3.keys():
-        similarity = np.dot(matutils.unitvec(res1_b_means[key]), matutils.unitvec(res3[key]))
-        blabla.append((similarity, res4[key], key))
-
-temp_thres = 0
-cur_thres = -1
-cur_max = -1
-min_thres = -1
-max_thres = -1
-
-temp_loss = 0
-
-while temp_thres < 100:
-
-    for b in blabla:
-        if b[1] == 'parallel':
-            temp_loss += (b[0] - temp_thres)
-        if b[1] == 'non_parallel':
-            temp_loss += (temp_thres - b[0])
-
-    if temp_loss > cur_max:
-        cur_thres = temp_thres
-        cur_max = temp_loss
-
-    # total_c = 0
-    # total_w = 0
-
-    # for b in blabla:
-    #     if b[1] == 'parallel' and b[0] > temp_thres:
-    #         total_c += 1
-    #     elif b[1] == 'non_parallel' and b[0] < temp_thres:
-    #         total_c += 1
-    #     else:
-    #         total_w += 1
-
-    # if total_c == cur_max:
-    #     if min_thres > -1:
-    #         max_thres
-
-    temp_thres += 0.001
-
-print("cur_thres: " + str(cur_thres))
-
-total_c = 0
-total_w = 0
-
-ids_match3 = []
-
-import csv 
-with open('ad_images_objs_2.csv', 'w') as csv_file:
-    writer = csv.writer(csv_file, delimiter=',')
-    # for line in data:
-    writer.writerow(['img_id', 'correct/wrong', 'prediction', 'score(threshold:'+str(cur_thres)+')', 'image_w2v_objects', 'transcription_w2v_objects'])
-
-    for b in blabla:
-        ids_match3.append(b[2])
-        img_obj_labels = res1_b[b[2]] #list(map(lambda x: labels[x], res1[b[2]]))
-        t_obj_labels = res3_b[b[2]] #list(map(lambda x: labels[x], res3[b[2]]))
-        if (b[1] == 'parallel' and b[0] >= cur_thres) or (b[1] == 'non_parallel' and b[0] < cur_thres):
-            total_c += 1
-            writer.writerow([b[2], 'correct', b[1], str(b[0]), "\t".join(img_obj_labels), "\t".join(t_obj_labels)])
-        else:
-            total_w += 1
-            writer.writerow([b[2], 'wrong', b[1], str(b[0]), "\t".join(img_obj_labels), "\t".join(t_obj_labels)])
-
-
-with open("ids_match3.pkl", 'wb') as f:
-    pickle.dump(ids_match3, f, pickle.HIGHEST_PROTOCOL)
-
-print("total_c: " + str(total_c))
-print("total_w: " + str(total_w))
-print("total_c_w: " + str(total_c+total_w))
-print("accuracy: " + str(total_c / (total_c+total_w)))
-print("negative_accuracy: " + str(total_w / (total_c+total_w)))
-
 # print(res4)
             
-# import pickle
+import pickle
 
-# with open("bla3_method_c_10.pkl", 'wb') as f:
-#     pickle.dump([labels, res1, res2, res3, res4], f, pickle.HIGHEST_PROTOCOL)
+with open("tester_w2c.pkl", 'wb') as f:
+    pickle.dump(tester_w2c, f, pickle.HIGHEST_PROTOCOL)
+
+with open("tester_labels.pkl", 'wb') as f:
+    pickle.dump(res4, f, pickle.HIGHEST_PROTOCOL)
 
 # def save_obj(obj, name ):
 #     with open('obj/'+ name + '.pkl', 'wb') as f:
