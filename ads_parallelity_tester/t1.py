@@ -11,6 +11,7 @@ from keras.utils import plot_model
 import numpy as np
 import pickle
 import datetime
+import matplotlib.pyplot as plt
 
 print(tf.__version__)
 
@@ -79,10 +80,28 @@ with tf.Session() as sess:
     sess.run(tf.global_variables_initializer())
     sess.run(tf.local_variables_initializer())
 
-    hist = model.fit(data_X[0:551], data_Y[0:551], class_weight=cw, validation_split=0.1, epochs=25, callbacks=[tensorboard_callback])
+    history = model.fit(data_X[0:551], data_Y[0:551], class_weight=cw, validation_split=0.1, epochs=25, callbacks=[tensorboard_callback])
+
+    # Plot training & validation accuracy values
+    plt.plot(history.history['acc'])
+    plt.plot(history.history['val_acc'])
+    plt.title('Model accuracy')
+    plt.ylabel('Accuracy')
+    plt.xlabel('Epoch')
+    plt.legend(['Train', 'Test'], loc='upper left')
+    plt.savefig("acc.png")
+
+    # Plot training & validation loss values
+    plt.plot(history.history['loss'])
+    plt.plot(history.history['val_loss'])
+    plt.title('Model loss')
+    plt.ylabel('Loss')
+    plt.xlabel('Epoch')
+    plt.legend(['Train', 'Test'], loc='upper left')
+    plt.savefig("loss.png")
 
     plot_model(model, to_file='model.png')
-    print(hist)
+    # print(history)
 
 
     test_loss, test_acc = model.evaluate(data_X[551:], data_Y[551:])
