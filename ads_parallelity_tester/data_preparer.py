@@ -33,14 +33,19 @@ for k in keys:
 		print(data_X[-1].shape)
 
 data_Y = []
+count_p = 0
+count_np = 0
 for k in keys:
 	if labels[k] == "parallel":
+		count_p += 1
 		data_Y.append(1)
 	else:
+		count_np += 1
 		data_Y.append(0)
 
 print(data_Y)
-
+print(count_p)
+print(count_np)
 print("len(keys): " + str(len(keys)))
 print("len(w2c_data.keys()): " + str(len(w2c_data.keys())))
 print("len(tester_o2c.keys()): " + str(len(tester_o2c.keys())))
