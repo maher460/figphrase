@@ -1,6 +1,7 @@
 from numpy import float64
 import numpy as np
 from gensim import matutils
+import pickle
 
 with open('tester_w2c.pkl', 'rb') as f:
     tester_w2c = pickle.load(f)
