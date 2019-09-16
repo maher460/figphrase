@@ -66,10 +66,10 @@ with tf.Session() as sess:
     sess.run(tf.global_variables_initializer())
     sess.run(tf.local_variables_initializer())
 
-	hist = model.fit(data_X[0:551], data_Y[0:551], class_weight=cw, validation_split=0.1, epochs=25, callbacks=[tensorboard_callback])
+    hist = model.fit(data_X[0:551], data_Y[0:551], class_weight=cw, validation_split=0.1, epochs=25, callbacks=[tensorboard_callback])
 
 
-	test_loss, test_acc = model.evaluate(data_X[551:], data_Y[551:])
+    test_loss, test_acc = model.evaluate(data_X[551:], data_Y[551:])
 
 print('Test accuracy:', test_acc)
 
