@@ -142,7 +142,7 @@ blabla = []
 
 tester_o2c = {}
 
-for k in res3.keys():
+for k in res1.keys():
     if k in res1.keys():
 
         total += 1
