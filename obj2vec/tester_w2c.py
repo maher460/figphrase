@@ -40,7 +40,7 @@ with open(AD_IMGS_OBJS_PATH) as csv_file:
 
             temp1b = list(filter(lambda x: len(x)==6, composite_list))
 
-            temp1c = list(filter(lambda x: float(x[1]) >= 0.25, temp1b))
+            temp1c = list(filter(lambda x: float(x[1]) >= 0.2, temp1b))
 
             temp1d = list(map(lambda x: x[0], temp1c))
             temp2 = list(set(temp1d))
