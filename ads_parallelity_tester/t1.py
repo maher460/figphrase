@@ -59,12 +59,12 @@ class custom_callback(keras.callbacks.TensorBoard):
     pass
 
 log_dir="logs/fit/" + datetime.datetime.now().strftime("%Y%m%d-%H%M%S")
-tensorboard_callback = keras.callbacks.TensorBoard(log_dir=log_dir, histogram_freq=0, write_graph=True, write_images=True)
+tensorboard_callback = custom_callback(log_dir=log_dir, histogram_freq=0, write_graph=True, write_images=True)
 # tensorboard_callback.set_model(model)
 
 cw = {1:1.0, 0:2.577}
 
-model.fit(data_X[0:551], data_Y[0:551], class_weight=cw, validation_split=0.1, epochs=25, callbacks=[custom_callback(tensorboard_callback)])
+model.fit(data_X[0:551], data_Y[0:551], class_weight=cw, validation_split=0.1, epochs=25, callbacks=[tensorboard_callback])
 
 
 test_loss, test_acc = model.evaluate(data_X[551:], data_Y[551:])
