@@ -43,7 +43,7 @@ model.add(Dense(1, activation='sigmoid'))
 #               metrics=['accuracy'])
 
 model.compile(optimizer='adam',
-              loss=' binary_crossentropy',
+              loss='binary_crossentropy',
               metrics=['accuracy'])
 
 model.fit(data_X[0:600], data_Y[0:600], epochs=5)
