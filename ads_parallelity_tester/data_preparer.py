@@ -2,7 +2,7 @@ from numpy import float64
 import numpy as np
 from gensim import matutils
 
-with open('../obj2vec/tester_w2c.pkl', 'rb') as f:
+with open('tester_w2c.pkl', 'rb') as f:
     tester_w2c = pickle.load(f)
 
 w2c_data = {}
@@ -11,10 +11,10 @@ for k in tester_w2c.keys():
 	mean = matutils.unitvec(np.array(mean).mean(axis=0)).astype(float64)
 	w2c_data[k] = mean
 
-with open('../obj2vec/tester_o2c.pkl', 'rb') as f:
+with open('tester_o2c.pkl', 'rb') as f:
     tester_o2c = pickle.load(f)
 
-with open('../obj2vec/tester_labels.pkl', 'rb') as f:
+with open('tester_labels.pkl', 'rb') as f:
     labels = pickle.load(f)
 
 new = {}
