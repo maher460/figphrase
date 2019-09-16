@@ -34,7 +34,10 @@ for k in keys:
 
 data_Y = []
 for k in keys:
-	data_Y.append(labels[k])
+	if labels[k] == "parallel":
+		data_Y.append(1)
+	else:
+		data_Y.append(0)
 
 
 print("len(keys): " + str(len(keys)))
