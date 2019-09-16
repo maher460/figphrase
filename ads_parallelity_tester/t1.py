@@ -27,14 +27,14 @@ data_Y = np.array(temp[1])
 # ])
 
 model = Sequential()
-model.add(Dense(500, input_dim=500, activation='relu'))
-model.add(Dense(256, activation='relu'))
-model.add(Dense(128, activation='relu'))
-model.add(Dense(64, activation='relu'))
+model.add(Dense(128, input_dim=500, activation='relu'))
+# model.add(Dense(256, activation='relu'))
+# model.add(Dense(128, activation='relu'))
+# model.add(Dense(64, activation='relu'))
 model.add(Dense(32, activation='relu'))
-model.add(Dense(16, activation='relu'))
+# model.add(Dense(16, activation='relu'))
 model.add(Dense(8, activation='relu'))
-model.add(Dense(4, activation='relu'))
+# model.add(Dense(4, activation='relu'))
 model.add(Dense(2, activation='relu'))
 model.add(Dense(1, activation='sigmoid'))
 
@@ -49,7 +49,7 @@ model.compile(optimizer='adam',
 
 cw = {1:1.0, 0:2.577}
 
-model.fit(data_X[0:600], data_Y[0:600], class_weight=cw, validation_split=0.1, epochs=5)
+model.fit(data_X[0:600], data_Y[0:600], class_weight=cw, validation_split=0.1, epochs=100)
 
 
 test_loss, test_acc = model.evaluate(data_X[600:], data_Y[600:])
