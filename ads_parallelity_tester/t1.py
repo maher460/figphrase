@@ -49,7 +49,7 @@ model.compile(optimizer='adam',
 
 cw = {1:1.0, 0:2.577}
 
-model.fit(data_X[0:600], data_Y[0:600], class_weight=cw, validation_split=0.1, epochs=100)
+model.fit(data_X[0:600], data_Y[0:600], class_weight=cw, validation_split=0.1, epochs=10)
 
 
 test_loss, test_acc = model.evaluate(data_X[600:], data_Y[600:])
