@@ -55,7 +55,13 @@ class custom_callback(keras.callbacks.TensorBoard):
 
   def on_train_batch_end(self, *args, **kwargs):
     pass
-  
+
+  def on_test_batch_begin(self, *args, **kwargs):
+    pass
+
+  def on_test_batch_end(self, *args, **kwargs):
+    pass
+
   def on_test_begin(self, *args, **kwargs):
     pass
 
