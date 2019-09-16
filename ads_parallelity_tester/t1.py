@@ -80,6 +80,8 @@ with tf.Session() as sess:
 
     hist = model.fit(data_X[0:551], data_Y[0:551], class_weight=cw, validation_split=0.1, epochs=25, callbacks=[tensorboard_callback])
 
+    print(hist)
+
 
     test_loss, test_acc = model.evaluate(data_X[551:], data_Y[551:])
 
