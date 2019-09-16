@@ -39,6 +39,7 @@ for k in keys:
 	else:
 		data_Y.append(0)
 
+print(data_Y)
 
 print("len(keys): " + str(len(keys)))
 print("len(w2c_data.keys()): " + str(len(w2c_data.keys())))
