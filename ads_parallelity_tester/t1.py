@@ -16,8 +16,8 @@ print(tf.__version__)
 with open('tester_data_ready.pkl', 'rb') as f:
     temp = pickle.load(f)
 
-data_X = temp[0]
-data_Y = temp[1]
+data_X = np.array(temp[0])
+data_Y = np.array(temp[1])
 
 
 # model = keras.Sequential([
