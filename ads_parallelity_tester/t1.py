@@ -3,7 +3,7 @@ import tensorflow as tf
 from tensorflow import keras
 
 from keras.models import Sequential
-from keras.models import Dense
+from keras.layers.core import Dense
 
 # Helper libraries
 import numpy as np
