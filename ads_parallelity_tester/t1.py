@@ -50,6 +50,7 @@ model.compile(optimizer='adam',
 
 log_dir="logs/fit/" + datetime.datetime.now().strftime("%Y%m%d-%H%M%S")
 tensorboard_callback = keras.callbacks.TensorBoard(log_dir=log_dir, histogram_freq=0, write_graph=True, write_images=True)
+tensorboard_callback.set_model(model)
 
 cw = {1:1.0, 0:2.577}
 
