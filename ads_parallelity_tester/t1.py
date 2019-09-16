@@ -8,6 +8,7 @@ from keras.layers.core import Dense
 # Helper libraries
 import numpy as np
 import pickle
+import datetime
 
 print(tf.__version__)
 
