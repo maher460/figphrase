@@ -26,9 +26,9 @@ keys.sort()
 data_X = []
 for k in keys:
 	if k in tester_o2c:
-		print("\n")
-		print(tester_o2c[k].shape)
-		print(w2c_data[k].shape)
+		# print("\n")
+		# print(tester_o2c[k].shape)
+		# print(w2c_data[k].shape)
 		data_X.append(np.concatenate((tester_o2c[k], w2c_data[k])))
 		print(data_X[-1].shape)
 
@@ -43,3 +43,6 @@ print("len(tester_o2c.keys()): " + str(len(tester_o2c.keys())))
 print("len(data_X): " + str(len(data_X)))
 print("len(data_X): " + str(len(data_X)))
 print("len(data_Y): " + str(len(data_Y)))
+
+with open("tester_data_ready.pkl", 'wb') as f:
+    pickle.dump([data_X, data_Y], f, pickle.HIGHEST_PROTOCOL)
