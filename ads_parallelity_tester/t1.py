@@ -55,6 +55,12 @@ class custom_callback(keras.callbacks.TensorBoard):
 
   def on_train_batch_end(self, *args, **kwargs):
     pass
+  
+  def on_test_begin(self, *args, **kwargs):
+    pass
+
+  def on_test_end(self, *args, **kwargs):
+    pass
 
 log_dir="logs/fit/" + datetime.datetime.now().strftime("%Y%m%d-%H%M%S")
 tensorboard_callback = custom_callback(log_dir=log_dir, histogram_freq=1)
