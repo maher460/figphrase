@@ -1,6 +1,7 @@
 # TensorFlow and tf.keras
 import tensorflow as tf
 from tensorflow import keras
+import livelossplot
 
 from keras.models import Sequential
 from keras.layers.core import Dense
@@ -50,7 +51,7 @@ model.compile(optimizer='adam',
 class PlotLossesCallback(livelossplot.keras.PlotLossesCallback):
     def on_train_batch_begin(self, a, b): pass
     def on_train_batch_end(self, a, b): pass
-    
+
 log_dir="logs/fit/" + datetime.datetime.now().strftime("%Y%m%d-%H%M%S")
 tensorboard_callback = keras.callbacks.TensorBoard(log_dir=log_dir, histogram_freq=0, write_graph=True, write_images=True)
 # tensorboard_callback.set_model(model)
