@@ -55,7 +55,8 @@ print('Test accuracy:', test_acc)
 
 
 
-# predictions = model.predict(test_images)
+predictions = model.predict(data_X[600:])
+print(predictions)
 
 
 # np.argmax(predictions[0])
