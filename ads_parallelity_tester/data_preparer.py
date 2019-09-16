@@ -32,7 +32,10 @@ data_Y = []
 for k in keys:
 	data_Y.append(labels[k])
 
-print(data_X)
-print(data_Y)
-print(len(data_X))
-print(len(data_Y))
+
+print("len(keys): " + str(len(keys)))
+print("len(w2c_data.keys()): " + str(len(w2c_data.keys())))
+print("len(tester_o2c.keys()): " + str(len(tester_o2c.keys())))
+print("len(data_X): " + str(len(data_X)))
+print("len(data_X): " + str(len(data_X)))
+print("len(data_Y): " + str(len(data_Y)))
