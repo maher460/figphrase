@@ -26,7 +26,11 @@ keys.sort()
 data_X = []
 for k in keys:
 	if k in tester_o2c:
+		print("\n")
+		print(tester_o2c[k].shape)
+		print(w2c_data[k].shape)
 		data_X.append(np.concatenate((tester_o2c[k], w2c_data[k])))
+		print(data_X[-1].shape)
 
 data_Y = []
 for k in keys:
