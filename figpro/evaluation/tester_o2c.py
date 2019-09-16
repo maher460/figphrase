@@ -162,7 +162,7 @@ for k in res1.keys():
                 raise ParseException("Can't find the target position.")
 
             context_v = None
-            if len(sent) > 1:
+            if len(sent) >= 1:
                 context_v = model.context_rep(sent, target_pos)
                 context_v = context_v / np.sqrt((context_v * context_v).sum())
 
