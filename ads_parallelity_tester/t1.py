@@ -35,15 +35,15 @@ model.add(Dense(32, activation='relu'))
 # model.add(Dense(16, activation='relu'))
 model.add(Dense(8, activation='relu'))
 # model.add(Dense(4, activation='relu'))
-model.add(Dense(2, activation='relu'))
-model.add(Dense(1, activation='sigmoid'))
+model.add(Dense(2, activation='softmax'))
+# model.add(Dense(1, activation='sigmoid'))
 
 # model.compile(optimizer='adam',
 #               loss='sparse_categorical_crossentropy',
 #               metrics=['accuracy'])
 
 model.compile(optimizer='adam',
-              loss='binary_crossentropy',
+              loss='sparse_categorical_crossentropy',
               metrics=['accuracy'])
 
 
