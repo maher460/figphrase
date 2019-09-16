@@ -1,7 +1,7 @@
 # TensorFlow and tf.keras
 import tensorflow as tf
 from tensorflow import keras
-import livelossplot
+# import livelossplot
 
 from keras.models import Sequential
 from keras.layers.core import Dense
