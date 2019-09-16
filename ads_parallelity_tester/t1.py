@@ -46,7 +46,7 @@ model.compile(optimizer='adam',
               loss='binary_crossentropy',
               metrics=['accuracy'])
 
-model.fit(data_X[0:600], data_Y[0:600], epochs=5)
+model.fit(data_X[0:600], data_Y[0:600], epochs=100)
 
 
 test_loss, test_acc = model.evaluate(data_X[600:], data_Y[600:])
