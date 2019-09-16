@@ -56,6 +56,11 @@ with open(AD_IMGS_OBJS_PATH) as csv_file:
         # if line_count % 100000 == 0:
     print(f'Processed {line_count} rows.')
 
+print("\n\n")
+print(line_count)
+print(len(res1.keys()))
+print("\n\n")
+
 # print(res1)
 
 res2 = {}  #{img_id: ([transcriptions],[parallelities])}
