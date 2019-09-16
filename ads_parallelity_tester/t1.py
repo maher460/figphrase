@@ -47,9 +47,12 @@ model.compile(optimizer='adam',
               metrics=['accuracy'])
 
 
+log_dir="logs/fit/" + datetime.datetime.now().strftime("%Y%m%d-%H%M%S")
+tensorboard_callback = tf.keras.callbacks.TensorBoard(log_dir=log_dir, histogram_freq=1)
+
 cw = {1:1.0, 0:2.577}
 
-model.fit(data_X[0:551], data_Y[0:551], class_weight=cw, validation_split=0.1, epochs=25)
+model.fit(data_X[0:551], data_Y[0:551], class_weight=cw, validation_split=0.1, epochs=25, callbacks=[tensorboard_callback])
 
 
 test_loss, test_acc = model.evaluate(data_X[551:], data_Y[551:])
