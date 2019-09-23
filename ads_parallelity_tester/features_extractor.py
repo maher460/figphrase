@@ -32,6 +32,8 @@ model = VGG16(include_top=True, weights='imagenet')
 
 input_shape = model.layers[0].output_shape[1:3]
 
+print(input_shape)
+
 imgs = list(map(lambda x: loadImage(ad_images_path + x), filenames))
 
 r_imgs = list(map(lambda x: x.resize(input_shape,PIL.Image.LANCZOS), imgs))
