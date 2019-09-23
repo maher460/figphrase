@@ -61,6 +61,14 @@ print("len(data_Y): " + str(len(data_Y)))
 # with open("tester_data_X_Y.pkl", 'wb') as f:
 #     pickle.dump([data_X, data_Y], f, pickle.HIGHEST_PROTOCOL)
 
+
+def cb_yes(x, p_list, np_list):
+	return (x[0] in p_list) or (x[0] in np_list)
+
+def cb_no(x, p_list, np_list):
+	return (x[0] not in p_list) or (x[0] not in np_list)
+
+
 data_dicts = []
 
 for i in range(10):
@@ -68,11 +76,11 @@ for i in range(10):
 	test_idx_p_list = random.sample(idx_p_list, 50)
 	test_idx_np_list = random.sample(idx_np_list, 50)
 
-	test_X = list(filter(lambda (i,x): (i in test_idx_p_list) or (i in test_idx_np_list), enumerate(data_X)))
-	test_Y = list(filter(lambda (i,x): (i in test_idx_p_list) or (i in test_idx_np_list), enumerate(data_Y)))
+	test_X = list(filter(lambda x: cb_yes(x, test_idx_p_list, test_idx_np_list), enumerate(data_X)))
+	test_Y = list(filter(lambda x: cb_yes(x, test_idx_p_list, test_idx_np_list), enumerate(data_Y)))
 
-	train_X = list(filter(lambda (i,x): (i not in test_idx_p_list) or (i not in test_idx_np_list), enumerate(data_X)))
-	train_Y = list(filter(lambda (i,x): (i not in test_idx_p_list) or (i not in test_idx_np_list), enumerate(data_Y)))
+	train_X = list(filter(lambda x: cb_no(x, test_idx_p_list, test_idx_np_list), enumerate(data_X)))
+	train_Y = list(filter(lambda x: cb_no(x, test_idx_p_list, test_idx_np_list), enumerate(data_Y)))
 
 	data_dict = {}
 	data_dict["test_X"] = test_X
