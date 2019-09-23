@@ -3,6 +3,7 @@ import PIL
 import tensorflow as tf
 import numpy as np
 import os
+import pickle
 
 
 from tensorflow.python.keras.models import Model, Sequential
@@ -70,4 +71,10 @@ features = fc2_layer_model.predict(np_imgs)
 scaler = StandardScaler().fit(features)
 sfeatures = scaler.transform(features)
 
-print(sfeatures)
+results = {}
+
+for i in range(len(ids)):
+	results[ids[i]] = sfeatures[i]
+
+with open("data_img_features.pkl", 'wb') as f:
+    pickle.dump(results, f, pickle.HIGHEST_PROTOCOL)

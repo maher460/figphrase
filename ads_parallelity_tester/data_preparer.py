@@ -19,19 +19,28 @@ with open('tester_o2c.pkl', 'rb') as f:
 with open('tester_labels.pkl', 'rb') as f:
     labels = pickle.load(f)
 
+with open('data_img_features.pkl', 'rb') as f:
+    img_features = pickle.load(f)
+
 new = {}
 keys =  list(w2c_data.keys())
+
+img_keys = img_features.keys()
+
+keys = list(map(lambda x: x in img_keys), img_features)
 
 keys.sort()
 
 data_X = []
+data_Z = []
 for k in keys:
 	if k in tester_o2c:
 		# print("\n")
 		# print(tester_o2c[k].shape)
 		# print(w2c_data[k].shape)
 		data_X.append(np.concatenate((tester_o2c[k], w2c_data[k])))
-		print(data_X[-1].shape)
+		data_Z.append(img_features[k])
+		# print(data_X[-1].shape)
 
 data_Y = []
 count_p = 0
@@ -55,8 +64,8 @@ print("len(keys): " + str(len(keys)))
 print("len(w2c_data.keys()): " + str(len(w2c_data.keys())))
 print("len(tester_o2c.keys()): " + str(len(tester_o2c.keys())))
 print("len(data_X): " + str(len(data_X)))
-print("len(data_X): " + str(len(data_X)))
 print("len(data_Y): " + str(len(data_Y)))
+print("len(data_Z): " + str(len(data_Z)))
 
 # with open("tester_data_X_Y.pkl", 'wb') as f:
 #     pickle.dump([data_X, data_Y], f, pickle.HIGHEST_PROTOCOL)
@@ -78,20 +87,26 @@ for i in range(10):
 
 	test_X = list(filter(lambda x: cb_yes(x, test_idx_p_list, test_idx_np_list), enumerate(data_X)))
 	test_Y = list(filter(lambda x: cb_yes(x, test_idx_p_list, test_idx_np_list), enumerate(data_Y)))
+	test_Z = list(filter(lambda x: cb_yes(x, test_idx_p_list, test_idx_np_list), enumerate(data_Z)))
 
 	train_X = list(filter(lambda x: cb_no(x, test_idx_p_list, test_idx_np_list), enumerate(data_X)))
 	train_Y = list(filter(lambda x: cb_no(x, test_idx_p_list, test_idx_np_list), enumerate(data_Y)))
+	train_Z = list(filter(lambda x: cb_no(x, test_idx_p_list, test_idx_np_list), enumerate(data_Z)))
 
 	test_X = list(map(lambda x: x[1], test_X))
 	test_Y = list(map(lambda x: x[1], test_Y))
+	test_Z = list(map(lambda x: x[1], test_Z))
 	train_X = list(map(lambda x: x[1], train_X))
 	train_Y = list(map(lambda x: x[1], train_Y))
+	train_Z = list(map(lambda x: x[1], train_Z))
 
 	data_dict = {}
 	data_dict["test_X"] = test_X
 	data_dict["test_Y"] = test_Y
+	data_dict["test_Z"] = test_Z
 	data_dict["train_X"] = train_X
 	data_dict["train_Y"] = train_Y
+	data_dict["train_Z"] = train_Z
 
 	data_dicts.append(data_dict)
 
