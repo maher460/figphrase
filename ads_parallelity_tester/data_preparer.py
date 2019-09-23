@@ -27,7 +27,7 @@ keys =  list(w2c_data.keys())
 
 img_keys = img_features.keys()
 
-keys = list(filter(lambda x: x in img_keys, img_features))
+keys = list(filter(lambda x: x in img_keys, keys))
 
 keys.sort()
 
