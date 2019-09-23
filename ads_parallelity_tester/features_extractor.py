@@ -32,6 +32,7 @@ model = VGG16(include_top=True, weights='imagenet')
 
 input_shape = model.layers[0].output_shape[1:3]
 
+print(model.layers[0].output_shape)
 print(input_shape)
 
 imgs = list(map(lambda x: loadImage(ad_images_path + x), filenames))
@@ -44,7 +45,7 @@ np_imgs = list(map(lambda x: x.astype('float'), np_imgs))
 
 for n in np_imgs: print(n.shape)
 
-np_imgs = np.vstack(np_imgs)
+np_imgs = np.array(np_imgs)
 print("blabla")
 print(np_imgs.shape)
 
