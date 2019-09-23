@@ -31,10 +31,10 @@ with open('data_train_test_X_Y.pkl', 'rb') as f:
 # ])
 
 model = Sequential()
-model.add(Dense(4396, input_dim=4396, activation='relu'))
+model.add(Dense(4596, input_dim=4596, activation='relu'))
 # model.add(Dense(500, activation='relu'))
 # model.add(Dense(500, activation='relu'))
-# model.add(Dense(1024, activation='relu'))
+model.add(Dense(1024, activation='relu'))
 # model.add(Dense(500, activation='relu'))
 # model.add(Dense(500, activation='relu'))
 # model.add(Dense(256, activation='relu'))
