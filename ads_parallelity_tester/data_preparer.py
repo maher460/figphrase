@@ -66,7 +66,7 @@ def cb_yes(x, p_list, np_list):
 	return (x[0] in p_list) or (x[0] in np_list)
 
 def cb_no(x, p_list, np_list):
-	return (x[0] not in p_list) or (x[0] not in np_list)
+	return (x[0] not in p_list) and (x[0] not in np_list)
 
 
 data_dicts = []
