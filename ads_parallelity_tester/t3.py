@@ -31,7 +31,7 @@ with open('data_train_test_X_Y.pkl', 'rb') as f:
 # ])
 
 model = Sequential()
-model.add(Dense(4596, input_dim=4596, activation='relu'))
+model.add(Dense(4396, input_dim=4396, activation='relu'))
 # model.add(Dense(500, activation='relu'))
 # model.add(Dense(500, activation='relu'))
 model.add(Dense(1024, activation='relu'))
@@ -98,8 +98,8 @@ for i in range(len(data_dicts)):
         test_img_X = data_dicts[i]["test_Z"]
         test_Y = np.array(data_dicts[i]["test_Y"])
 
-        train_X = np.array(list(map(lambda x: np.concatenate((x[0],x[1])), zip(train_text_X, train_img_X))))
-        test_X = np.array(list(map(lambda x: np.concatenate((x[0],x[1])), zip(test_text_X, test_img_X))))
+        train_X = np.array(list(map(lambda x: np.concatenate((x[0][200:],x[1])), zip(train_text_X, train_img_X))))
+        test_X = np.array(list(map(lambda x: np.concatenate((x[0][200:],x[1])), zip(test_text_X, test_img_X))))
 
         print("train_X.shape: "+str(train_X.shape))
         print("train_Y.shape: "+str(train_Y.shape))
