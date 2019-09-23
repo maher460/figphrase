@@ -128,11 +128,11 @@ for i in range(len(data_dicts)):
 
         accuracies.append(test_acc) 
 
-        print("\nGround Truth: ")
-        print(test_Y)
-        print("\nPredictions: ")
-        predictions = model.predict(test_X)
-        print(predictions)
+        # print("\nGround Truth: ")
+        # print(test_Y)
+        # print("\nPredictions: ")
+        # predictions = model.predict(test_X)
+        # print(predictions)
 
 avg_accuracy = float(sum(accuracies)) / len(accuracies)
 
