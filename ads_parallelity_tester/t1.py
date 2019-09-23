@@ -89,12 +89,15 @@ for i in range(len(data_dicts)):
         sess.run(tf.global_variables_initializer())
         sess.run(tf.local_variables_initializer())
 
-        print(data_dicts[i]["train_X"])
-
         train_X = np.array(data_dicts[i]["train_X"])
         train_Y = np.array(data_dicts[i]["train_Y"])
         test_X = np.array(data_dicts[i]["test_X"])
         test_Y = np.array(data_dicts[i]["test_Y"])
+
+        print("train_X.shape: "+str(train_X.shape))
+        print("train_Y.shape: "+str(train_Y.shape))
+        print("test_X.shape: "+str(test_X.shape))
+        print("test_Y.shape: "+str(test_Y.shape))
 
         history = model.fit(train_X, train_Y, class_weight=cw, validation_split=0.1, epochs=25) #, callbacks=[tensorboard_callback])
 
@@ -125,8 +128,11 @@ for i in range(len(data_dicts)):
 
         accuracies.append(test_acc) 
 
-        # predictions = model.predict(data_X[551:])
-        # print(predictions)
+        print("\nGround Truth: ")
+        print(test_Y)
+        print("\nPredictions: ")
+        predictions = model.predict(test_X)
+        print(predictions)
 
 avg_accuracy = float(sum(accuracies)) / len(accuracies)
 
