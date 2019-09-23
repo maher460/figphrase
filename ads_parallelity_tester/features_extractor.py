@@ -43,7 +43,13 @@ np_imgs = list(map(lambda x: np.array(x), r_imgs))
 
 np_imgs = list(map(lambda x: x.astype('float'), np_imgs))
 
-for n in np_imgs: print(n.shape)
+# for n in np_imgs: print(n.shape)
+
+ids_imgs = list(filter(lambda x: x[1].shape == (224, 224, 3), zip(ids, np_imgs)))
+
+ids = list(map(lambda x: x[0], ids_imgs))
+
+np_imgs = list(map(lambda x: x[1], ids_imgs))
 
 np_imgs = np.array(np_imgs)
 print("blabla")
