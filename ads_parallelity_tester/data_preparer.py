@@ -36,7 +36,7 @@ data_Z = []
 for k in keys:
 	if k in tester_o2c:
 		# print("\n")
-		# print(tester_o2c[k].shape)
+		print(tester_o2c[k].shape)
 		# print(w2c_data[k].shape)
 		data_X.append(np.concatenate((tester_o2c[k], w2c_data[k])))
 		data_Z.append(img_features[k])
