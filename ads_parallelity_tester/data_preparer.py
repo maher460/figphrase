@@ -2,6 +2,7 @@ from numpy import float64
 import numpy as np
 from gensim import matutils
 import pickle
+import random
 
 with open('tester_w2c.pkl', 'rb') as f:
     tester_w2c = pickle.load(f)
@@ -35,12 +36,16 @@ for k in keys:
 data_Y = []
 count_p = 0
 count_np = 0
+idx_p_list = []
+idx_np_list = []
 for k in keys:
 	if labels[k] == "parallel":
 		count_p += 1
+		idx_p_list.append(len(data_Y))
 		data_Y.append(1)
 	else:
 		count_np += 1
+		idx_np_list.append(len(data_Y))
 		data_Y.append(0)
 
 print(data_Y)
@@ -53,5 +58,30 @@ print("len(data_X): " + str(len(data_X)))
 print("len(data_X): " + str(len(data_X)))
 print("len(data_Y): " + str(len(data_Y)))
 
-with open("tester_data_ready.pkl", 'wb') as f:
-    pickle.dump([data_X, data_Y], f, pickle.HIGHEST_PROTOCOL)
+# with open("tester_data_X_Y.pkl", 'wb') as f:
+#     pickle.dump([data_X, data_Y], f, pickle.HIGHEST_PROTOCOL)
+
+data_dicts = []
+
+for i in range(10):
+
+	test_idx_p_list = random.sample(idx_p_list, 50)
+	test_idx_np_list = random.sample(idx_np_list, 50)
+
+	test_X = list(filter(lambda (i,x): (i in test_idx_p_list) or (i in test_idx_np_list), enumerate(data_X)))
+	test_Y = list(filter(lambda (i,x): (i in test_idx_p_list) or (i in test_idx_np_list), enumerate(data_Y)))
+
+	train_X = list(filter(lambda (i,x): (i not in test_idx_p_list) or (i not in test_idx_np_list), enumerate(data_X)))
+	train_Y = list(filter(lambda (i,x): (i not in test_idx_p_list) or (i not in test_idx_np_list), enumerate(data_Y)))
+
+	data_dict = {}
+	data_dict["test_X"] = test_X
+	data_dict["test_Y"] = test_Y
+	data_dict["train_X"] = train_X
+	data_dict["train_Y"] = train_Y
+
+	data_dicts.append(data_dict)
+
+with open("data_train_test_X_Y.pkl", 'wb') as f:
+    pickle.dump(data_dicts, f, pickle.HIGHEST_PROTOCOL)
+

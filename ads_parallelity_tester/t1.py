@@ -17,11 +17,11 @@ print(tf.__version__)
 
 
 
-with open('tester_data_ready.pkl', 'rb') as f:
-    temp = pickle.load(f)
+with open('data_train_test_X_Y.pkl', 'rb') as f:
+    data_dicts = pickle.load(f)
 
-data_X = np.array(temp[0])
-data_Y = np.array(temp[1])
+# data_X = np.array(temp[0])
+# data_Y = np.array(temp[1])
 
 
 # model = keras.Sequential([
@@ -50,66 +50,84 @@ model.compile(optimizer='adam',
               loss='sparse_categorical_crossentropy',
               metrics=['accuracy'])
 
-class custom_callback(keras.callbacks.TensorBoard):
+plot_model(model, to_file='model.png', show_shapes=True, expand_nested=True, rankdir='LR')
 
-  def on_train_batch_begin(self, *args, **kwargs):
-    pass
+# class custom_callback(keras.callbacks.TensorBoard):
 
-  def on_train_batch_end(self, *args, **kwargs):
-    pass
+#   def on_train_batch_begin(self, *args, **kwargs):
+#     pass
 
-  def on_test_batch_begin(self, *args, **kwargs):
-    pass
+#   def on_train_batch_end(self, *args, **kwargs):
+#     pass
 
-  def on_test_batch_end(self, *args, **kwargs):
-    pass
+#   def on_test_batch_begin(self, *args, **kwargs):
+#     pass
 
-  def on_test_begin(self, *args, **kwargs):
-    pass
+#   def on_test_batch_end(self, *args, **kwargs):
+#     pass
 
-  def on_test_end(self, *args, **kwargs):
-    pass
+#   def on_test_begin(self, *args, **kwargs):
+#     pass
 
-log_dir="logs/fit/" + datetime.datetime.now().strftime("%Y%m%d-%H%M%S")
-tensorboard_callback = custom_callback(log_dir=log_dir, histogram_freq=1)
+#   def on_test_end(self, *args, **kwargs):
+#     pass
+
+# log_dir="logs/fit/" + datetime.datetime.now().strftime("%Y%m%d-%H%M%S")
+# tensorboard_callback = custom_callback(log_dir=log_dir, histogram_freq=1)
 # tensorboard_callback.set_model(model)
+
+
 
 cw = {1:1.0, 0:2.577}
 
-with tf.Session() as sess:
-    sess.run(tf.global_variables_initializer())
-    sess.run(tf.local_variables_initializer())
+accuracies = []
 
-    history = model.fit(data_X[0:551], data_Y[0:551], class_weight=cw, validation_split=0.1, epochs=25, callbacks=[tensorboard_callback])
+for i in range(len(data_dicts)):
 
-    # Plot training & validation accuracy values
-    plt.plot(history.history['acc'])
-    plt.plot(history.history['val_acc'])
-    plt.title('Model accuracy')
-    plt.ylabel('Accuracy')
-    plt.xlabel('Epoch')
-    plt.legend(['Train', 'Test'], loc='upper left')
-    plt.savefig("acc.png")
+    with tf.Session() as sess:
 
-    # Plot training & validation loss values
-    plt.plot(history.history['loss'])
-    plt.plot(history.history['val_loss'])
-    plt.title('Model loss')
-    plt.ylabel('Loss')
-    plt.xlabel('Epoch')
-    plt.legend(['Train', 'Test'], loc='upper left')
-    plt.savefig("loss.png")
+        sess.run(tf.global_variables_initializer())
+        sess.run(tf.local_variables_initializer())
 
-    plot_model(model, to_file='model.png')
-    # print(history)
+        train_X = np.array(data_dicts[i]["train_X"])
+        train_Y = np.array(data_dicts[i]["train_Y"])
+        test_X = np.array(data_dicts[i]["test_X"])
+        test_Y = np.array(data_dicts[i]["test_Y"])
+
+        history = model.fit(train_X, train_Y, class_weight=cw, validation_split=0.1, epochs=25) #, callbacks=[tensorboard_callback])
+
+        # # Plot training & validation accuracy values
+        # plt.plot(history.history['acc'])
+        # plt.plot(history.history['val_acc'])
+        # plt.title('Model accuracy')
+        # plt.ylabel('Accuracy')
+        # plt.xlabel('Epoch')
+        # plt.legend(['Train', 'Test'], loc='upper left')
+        # plt.savefig("acc.png")
+
+        # # Plot training & validation loss values
+        # plt.plot(history.history['loss'])
+        # plt.plot(history.history['val_loss'])
+        # plt.title('Model loss')
+        # plt.ylabel('Loss')
+        # plt.xlabel('Epoch')
+        # plt.legend(['Train', 'Test'], loc='upper left')
+        # plt.savefig("loss.png")
+        
+        # print(history)
 
 
-    test_loss, test_acc = model.evaluate(data_X[551:], data_Y[551:])
+        test_loss, test_acc = model.evaluate(test_X, test_Y)
 
-    print('Test accuracy:', test_acc)
+        print('Test accuracy (run '+ str(i+1) +'): ', test_acc)
 
-    predictions = model.predict(data_X[551:])
-    print(predictions)
+        accuracies.append(test_acc) 
 
+        # predictions = model.predict(data_X[551:])
+        # print(predictions)
 
+avg_accuracy = float(sum(accuracies)) / len(accuracies)
+
+print(accuracies)
+print(avg_accuracy)
 # np.argmax(predictions[0])
