@@ -40,10 +40,10 @@ np_imgs = list(map(lambda x: np.array(x), r_imgs))
 
 np_imgs = list(map(lambda x: x.astype('float'), np_imgs))
 
-print(np_imgs)
+for n in np_imgs: print(n.shape)
 
-np_imgs = np.array(np_imgs)
-
+np_imgs = np.vstack(np_imgs)
+print("blabla")
 print(np_imgs.shape)
 
 # i.resize(input_shape,PIL.Image.LANCZOS)
