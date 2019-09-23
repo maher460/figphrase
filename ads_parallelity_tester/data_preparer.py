@@ -82,10 +82,10 @@ for i in range(10):
 	train_X = list(filter(lambda x: cb_no(x, test_idx_p_list, test_idx_np_list), enumerate(data_X)))
 	train_Y = list(filter(lambda x: cb_no(x, test_idx_p_list, test_idx_np_list), enumerate(data_Y)))
 
-	test_X = list(map(lambda (i,x): x, test_X))
-	test_Y = list(map(lambda (i,x): x, test_Y))
-	train_X = list(map(lambda (i,x): x, train_X))
-	train_Y = list(map(lambda (i,x): x, train_Y))
+	test_X = list(map(lambda x: x[1], test_X))
+	test_Y = list(map(lambda x: x[1], test_Y))
+	train_X = list(map(lambda x: x[1], train_X))
+	train_Y = list(map(lambda x: x[1], train_Y))
 
 	data_dict = {}
 	data_dict["test_X"] = test_X
