@@ -106,7 +106,7 @@ for i in range(len(data_dicts)):
         print("test_X.shape: "+str(test_X.shape))
         print("test_Y.shape: "+str(test_Y.shape))
 
-        history = model.fit(train_X, train_Y, class_weight=cw, validation_split=0.1, epochs=25) #, callbacks=[tensorboard_callback])
+        history = model.fit(train_X, train_Y, class_weight=cw, validation_split=0.1, epochs=100) #, callbacks=[tensorboard_callback])
 
         # # Plot training & validation accuracy values
         # plt.plot(history.history['acc'])
