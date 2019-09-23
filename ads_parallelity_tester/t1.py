@@ -47,7 +47,7 @@ model.add(Dense(1, activation='sigmoid'))
 #               metrics=['accuracy'])
 
 model.compile(optimizer='adam',
-              loss='sparse_categorical_crossentropy',
+              loss='binary_crossentropy',
               metrics=['accuracy'])
 
 plot_model(model, to_file='model.png', show_shapes=True, expand_nested=True, rankdir='LR')
