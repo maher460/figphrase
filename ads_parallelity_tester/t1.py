@@ -32,14 +32,14 @@ with open('data_train_test_X_Y.pkl', 'rb') as f:
 
 model = Sequential()
 # model.add(Dense(128, input_dim=500, activation='relu'))
-model.add(Dense(256, activation='relu'))
-model.add(Dense(128, activation='relu'))
-model.add(Dense(64, activation='relu'))
+# model.add(Dense(256, activation='relu'))
+# model.add(Dense(128, activation='relu'))
+# model.add(Dense(64, activation='relu'))
 model.add(Dense(32, activation='relu'))
-model.add(Dense(16, activation='relu'))
+# model.add(Dense(16, activation='relu'))
 model.add(Dense(8, activation='relu'))
-model.add(Dense(4, activation='relu'))
-model.add(Dense(2, activation='relu'))
+# model.add(Dense(4, activation='relu'))
+model.add(Dense(2, activation='softmax'))
 model.add(Dense(1, activation='sigmoid'))
 
 # model.compile(optimizer='adam',
