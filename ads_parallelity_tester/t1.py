@@ -78,7 +78,7 @@ plot_model(model, to_file='model.png', show_shapes=True, expand_nested=True, ran
 
 
 
-cw = {1:1.0, 0:2.577}
+cw = {1:1.0, 0:3.174}
 
 accuracies = []
 
