@@ -40,6 +40,8 @@ np_imgs = list(map(lambda x: np.array(x), r_imgs))
 
 np_imgs = list(map(lambda x: x.astype('float'), np_imgs))
 
+print(np_imgs)
+
 np_imgs = np.array(np_imgs)
 
 print(np_imgs.shape)
