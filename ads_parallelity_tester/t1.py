@@ -89,6 +89,8 @@ for i in range(len(data_dicts)):
         sess.run(tf.global_variables_initializer())
         sess.run(tf.local_variables_initializer())
 
+        print(data_dicts[i]["train_X"])
+
         train_X = np.array(data_dicts[i]["train_X"])
         train_Y = np.array(data_dicts[i]["train_Y"])
         test_X = np.array(data_dicts[i]["test_X"])
