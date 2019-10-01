@@ -151,8 +151,8 @@ for k in res3.keys():
     if k in res1.keys() and len(res3[k]) > 0 and len(res1[k]) > 0:
 
         # hola[k] = []
-        col_labels = list(map(lambda x: x[0]+" ("+labels(x[1])+")", res3[k]))
-        row_labels = list(map(lambda x: labels(x), res1[k]))
+        col_labels = list(map(lambda x: x[0]+" ("+labels[x[1]]+")", res3[k]))
+        row_labels = list(map(lambda x: labels[x], res1[k]))
         t_cells = []
 
         for i_obj in res1[k]:
