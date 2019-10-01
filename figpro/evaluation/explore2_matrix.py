@@ -219,6 +219,13 @@ for k in res3.keys():
 
             t_cells.append(t_cells_row)
 
+        print(t_cells_row)
+        print(row_labels)
+        print(col_labels)
+        print(len(t_cells_row))
+        print(len(row_labels))
+        print(len(col_labels))
+        
         fig, axs =plt.subplots(2,1)
         axs[0].axis('tight')
         axs[0].axis('off')
