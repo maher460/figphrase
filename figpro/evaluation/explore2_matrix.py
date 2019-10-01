@@ -159,6 +159,8 @@ for k in res3.keys():
             t_cells_row = []
             for t_obj in res3[k]:
 
+                compatibility = -1
+
 
                 total += 1
 
@@ -201,11 +203,13 @@ for k in res3.keys():
                             # print("Compatibility score: " + str(compatibility))
                             # print("Truth: " + res4[k])
                             
-                            t_cells_row.append(compatibility) 
+                            # t_cells_row.append(compatibility) 
                             
                             # sum_p[res4[k]] += compatibility
                             # count_p[res4[k]] += 1
                             # blabla.append((compatibility, res4[k], k))
+                             
+                t_cells_row.append(compatibility) 
 
                 except EOFError:
                     break
@@ -237,7 +241,7 @@ for k in res3.keys():
 
         # axs[1].plot(clust_data[:,0],clust_data[:,1])
         output_filename = '/afs/cs/projects/kovashka/maher/vol3/matrix_results/' + k + ".png"
-        plt.savefig(output_filename, dpi=300)
+        plt.savefig(output_filename, dpi=150, bbox_inches='tight')
 
 
 # print("total: " + str(total))
