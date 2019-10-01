@@ -208,8 +208,6 @@ for k in res3.keys():
                             # sum_p[res4[k]] += compatibility
                             # count_p[res4[k]] += 1
                             # blabla.append((compatibility, res4[k], k))
-                             
-                t_cells_row.append(compatibility) 
 
                 except EOFError:
                     break
@@ -221,6 +219,8 @@ for k in res3.keys():
                     traceback.print_tb(exc_traceback, limit=1, file=sys.stdout)
                     print("*** print_exception:")
                     traceback.print_exception(exc_type, exc_value, exc_traceback, limit=2, file=sys.stdout)
+
+                t_cells_row.append(compatibility) 
 
             t_cells.append(t_cells_row)
 
