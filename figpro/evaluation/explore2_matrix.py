@@ -151,8 +151,8 @@ for k in res3.keys():
     if k in res1.keys() and len(res3[k]) > 0 and len(res1[k]) > 0:
 
         # hola[k] = []
-        col_labels = list(map(lambda x: x[0]+" ("+x[1]+")", res3[k]))
-        row_labels = res1[k]
+        col_labels = list(map(lambda x: x[0]+" ("+labels(x[1])+")", res3[k]))
+        row_labels = list(map(lambda x: labels(x), res1[k]))
         t_cells = []
 
         for i_obj in res1[k]:
@@ -237,7 +237,7 @@ for k in res3.keys():
 
         # axs[1].plot(clust_data[:,0],clust_data[:,1])
         output_filename = '/afs/cs/projects/kovashka/maher/vol3/matrix_results/' + k + ".png"
-        plt.savefig(output_filename)
+        plt.savefig(output_filename, dpi=300)
 
 
 # print("total: " + str(total))
