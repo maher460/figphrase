@@ -173,6 +173,9 @@ for k in res2.keys():
 
         lm_keys = list(labels_model.keys())
 
+        print(smallest_idxs)
+        print(lm_keys)
+
         resultz = list(map(lambda s: list(map(lambda x: labels_model[lm_keys[x]], s)), smallest_idxs)) 
 
         res3[k] = zip(mean, resultz)
