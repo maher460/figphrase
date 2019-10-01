@@ -238,6 +238,7 @@ for k in res3.keys():
         fig, axs =plt.subplots(2,1)
 
         axs[0].imshow(img)
+        axs[0].axis('off')
 
         axs[1].axis('tight')
         axs[1].axis('off')
