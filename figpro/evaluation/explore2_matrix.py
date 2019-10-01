@@ -6,6 +6,7 @@ import re
 import argparse
 
 import matplotlib.pyplot as plt
+import matplotlib.image as mpimg
 
 from sklearn import preprocessing
 from figpro.evaluation.model_reader2 import ModelReader
@@ -231,10 +232,16 @@ for k in res3.keys():
         print(len(row_labels))
         print(len(col_labels))
 
+        img_filename = '/afs/cs/projects/kovashka/maher/vol3/ad_images/' + k + ".jpg"
+        img = mpimg.imread(img_filename)
+
         fig, axs =plt.subplots(2,1)
-        axs[0].axis('tight')
-        axs[0].axis('off')
-        the_table = axs[0].table(cellText=t_cells,
+
+        axs[0].imshow(img)
+
+        axs[1].axis('tight')
+        axs[1].axis('off')
+        the_table = axs[1].table(cellText=t_cells,
                                  rowLabels=row_labels,
                                  colLabels=col_labels,
                                  loc='center')
@@ -242,6 +249,7 @@ for k in res3.keys():
         # axs[1].plot(clust_data[:,0],clust_data[:,1])
         output_filename = '/afs/cs/projects/kovashka/maher/vol3/matrix_results/' + k + ".png"
         plt.savefig(output_filename, dpi=150, bbox_inches='tight')
+        plt.close()
 
 
 # print("total: " + str(total))
