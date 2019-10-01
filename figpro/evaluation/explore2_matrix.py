@@ -147,6 +147,7 @@ tester_o2c = {}
 # hola = {}
 
 for k in res3.keys():
+    res3[k] = list(res3[k])
     if k in res1.keys() and len(res3[k]) > 0 and len(res1[k]) > 0:
 
         # hola[k] = []
