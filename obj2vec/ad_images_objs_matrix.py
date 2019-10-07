@@ -12,6 +12,9 @@ GOOGLENEWSMODEL_PATH = "../../GoogleNews-vectors-negative300.bin"
 
 model = gensim.models.KeyedVectors.load_word2vec_format(GOOGLENEWSMODEL_PATH, binary=True)
 
+print(model)
+print(model.keys())
+
 labels = {}
 
 with open(LABELS_PATH) as csv_file:
