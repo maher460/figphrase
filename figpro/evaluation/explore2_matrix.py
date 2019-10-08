@@ -392,7 +392,7 @@ total_w = 0
 
 # ids_match = []
 
-# import csv 
+import csv 
 
 with open('explore2b3_method_matrix.csv', 'w') as csv_file:
     writer = csv.writer(csv_file, delimiter=',')
