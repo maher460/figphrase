@@ -287,7 +287,7 @@ for k in res3.keys():
         the_table = axs[3].table(cellText=t_cells,
                                  rowLabels=row_labels,
                                  colLabels=col_labels,
-                                 width=1.0,
+                                 colWidths=[0.5 for x in col_labels],
                                  loc='center')
 
         the_table.auto_set_font_size(False)
