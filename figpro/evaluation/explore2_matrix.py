@@ -324,10 +324,10 @@ for k in res3.keys():
         axs[4].axis('off')
 
         eval_res = ""
-        eval_res = eval_res + "min_val: " + min_val + "\n"
-        eval_res = eval_res + "max_val: " + max_val + "\n"
-        eval_res = eval_res + "mean_val: " + mean_val + "\n"
-        eval_res = eval_res + "median_val: " + median_val + "\n"
+        eval_res = eval_res + "min_val: " + str(min_val) + "\n"
+        eval_res = eval_res + "max_val: " + str(max_val) + "\n"
+        eval_res = eval_res + "mean_val: " + str(mean_val) + "\n"
+        eval_res = eval_res + "median_val: " + str(median_val) + "\n"
 
         axs[5].text(0.0, 0.0, eval_res)
         
