@@ -250,7 +250,7 @@ for k in res3.keys():
 
                 compatibility_str = str(round(compatibility1, 3)) + " " + str(round(compatibility2, 3)) + " " + str(round(compatibility3, 3))
 
-                t_cells_row.append(compatibility) 
+                t_cells_row.append(compatibility_str) 
 
             t_cells.append(t_cells_row)
 
