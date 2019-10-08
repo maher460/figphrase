@@ -13,7 +13,7 @@ GOOGLENEWSMODEL_PATH = "../../GoogleNews-vectors-negative300.bin"
 model = gensim.models.KeyedVectors.load_word2vec_format(GOOGLENEWSMODEL_PATH, binary=True)
 
 print(model)
-print(model.keys())
+print(model.vocab)
 
 labels = {}
 
