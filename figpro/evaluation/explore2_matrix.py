@@ -274,7 +274,6 @@ for k in res3.keys():
 
         axs[1].imshow(img)
         axs[1].axis('off')
-        axs[1].scale(1.5,1.5)
 
         axs[2].text(0.0, 0.0, res2[k][0][0])#, 
                     # horizontalalignment='center', 
