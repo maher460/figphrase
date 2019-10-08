@@ -281,7 +281,7 @@ for k in res3.keys():
         img_filename = '/afs/cs/projects/kovashka/maher/vol3/ad_images/' + k + ".jpg"
         img = mpimg.imread(img_filename)
 
-        fig, axs =plt.subplots(6,1, gridspec_kw={'height_ratios': [1, 5, 1, 5, 1, 1]})
+        fig, axs =plt.subplots(5,1, gridspec_kw={'height_ratios': [1, 5, 1, 3, 5]})
 
         axs[0].text(0.0, 0.0, "ID: " + k)#, 
                     # horizontalalignment='center', 
@@ -301,8 +301,20 @@ for k in res3.keys():
         axs[2].axis('tight')
         axs[2].axis('off')
 
+
+        eval_res = "Ground Truth: " + res4[k] + "\n"
+        eval_res = eval_res + "min_val: " + str(min_val) + "\n"
+        eval_res = eval_res + "max_val: " + str(max_val) + "\n"
+        eval_res = eval_res + "mean_val: " + str(mean_val) + "\n"
+        eval_res = eval_res + "median_val: " + str(median_val) + "\n"
+
+        axs[3].text(0.0, 0.0, eval_res)
         
-        the_table = axs[3].table(cellText=t_cells,
+        axs[3].axis('tight')
+        axs[3].axis('off')
+
+        
+        the_table = axs[4].table(cellText=t_cells,
                                  rowLabels=row_labels,
                                  colLabels=col_labels,
                                  colWidths=[0.25 for x in col_labels],
@@ -312,27 +324,10 @@ for k in res3.keys():
         the_table.set_fontsize(8)
         the_table.scale(1, 1)
 
-        axs[3].axis('tight')
-        axs[3].axis('off')
-
-        axs[4].text(0.0, 0.0, "Ground Truth: " + res4[k])#, 
-                    # horizontalalignment='center', 
-                    # verticalalignment='center', 
-                    # transform = axs[4].transAxes)
-        
         axs[4].axis('tight')
         axs[4].axis('off')
 
-        eval_res = ""
-        eval_res = eval_res + "min_val: " + str(min_val) + "\n"
-        eval_res = eval_res + "max_val: " + str(max_val) + "\n"
-        eval_res = eval_res + "mean_val: " + str(mean_val) + "\n"
-        eval_res = eval_res + "median_val: " + str(median_val) + "\n"
 
-        axs[5].text(0.0, 0.0, eval_res)
-        
-        axs[5].axis('tight')
-        axs[5].axis('off')
 
         # axs[1].plot(clust_data[:,0],clust_data[:,1])
         output_filename = '/afs/cs/projects/kovashka/maher/vol3/matrix_results/' + k + ".png"
