@@ -278,12 +278,16 @@ for k in res3.keys():
         print(row_labels)
         print(col_labels)
 
+        font = {'family' : 'normal',
+                'weight' : 'normal',
+                'size'   : 8}
+
         img_filename = '/afs/cs/projects/kovashka/maher/vol3/ad_images/' + k + ".jpg"
         img = mpimg.imread(img_filename)
 
-        fig, axs =plt.subplots(5,1, gridspec_kw={'height_ratios': [1, 5, 1, 3, 5]})
+        fig, axs =plt.subplots(5,1, gridspec_kw={'height_ratios': [1, 5, 1, 5, 5]})
 
-        axs[0].text(0.0, 0.0, "ID: " + k)#, 
+        axs[0].text(0.0, 0.0, "ID: " + k, fontdict=font)#, 
                     # horizontalalignment='center', 
                     # verticalalignment='center', 
                     # transform = axs[0].transAxes)
@@ -293,7 +297,7 @@ for k in res3.keys():
         axs[1].imshow(img)
         axs[1].axis('off')
 
-        axs[2].text(0.0, 0.0, "Transcript: " + res2[k][0][0])#, 
+        axs[2].text(0.0, 0.0, "Transcript: " + res2[k][0][0], fontdict=font)#, 
                     # horizontalalignment='center', 
                     # verticalalignment='center', 
                     # transform = axs[2].transAxes)
@@ -308,7 +312,7 @@ for k in res3.keys():
         eval_res = eval_res + "mean_val: " + str(mean_val) + "\n"
         eval_res = eval_res + "median_val: " + str(median_val) + "\n"
 
-        axs[3].text(0.0, 0.0, eval_res)
+        axs[3].text(0.0, 0.0, eval_res, fontdict=font)
         
         axs[3].axis('tight')
         axs[3].axis('off')
