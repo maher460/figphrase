@@ -157,7 +157,7 @@ for k in res2.keys():
     mean = []
     for t in res2[k][0]:
         print(t)
-        temp_bla = keywords(t, split=True) #keeping just keywords
+        temp_bla = keywords(t, ratio=0.8, split=True) #keeping just keywords
         #temp_bla = t.split() #old
         print(temp_bla)
         for b in temp_bla:
@@ -177,8 +177,8 @@ for k in res2.keys():
 
         lm_keys = list(labels_model.keys())
 
-        print(smallest_idxs)
-        print(lm_keys)
+        # print(smallest_idxs)
+        # print(lm_keys)
 
         # resultz = list(map(lambda s: list(map(lambda x: labels_model[lm_keys[x]], s)), smallest_idxs)) 
         resultz = list(map(lambda s: labels_model[lm_keys[s]], smallest_idxs)) 
