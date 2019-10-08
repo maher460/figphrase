@@ -4,6 +4,7 @@ import sys
 import traceback
 import re
 import argparse
+import statistics
 
 import matplotlib.pyplot as plt
 import matplotlib.image as mpimg
@@ -249,11 +250,28 @@ for k in res3.keys():
                     traceback.print_exception(exc_type, exc_value, exc_traceback, limit=2, file=sys.stdout)
 
                 # compatibility_str = str(round(compatibility1, 3)) + " " + str(round(compatibility2, 3)) + " " + str(round(compatibility3, 3))
-                compatibility_str = str(round(compatibility2, 3))
+                compatibility_str = round(compatibility2, 3)
 
                 t_cells_row.append(compatibility_str) 
 
             t_cells.append(t_cells_row)
+
+        # max_val = 0.0
+        # min_val = 1.0
+        new_t_cells = []
+        for c_row in t_cells:
+            for c_col in c_row:
+                # if t_cells[c_row][c_col] > max_val:
+                #     max_val = t_cells[c_row][c_col]
+                # if t_cells[c_row][c_col] < min_val:
+                #     min_val = t_cells[c_row][c_col]
+                new_t_cells.append(t_cells[c_row][c_col])
+
+        min_val = min(new_t_cells)
+        max_val = max(new_t_cells)
+        mean_val = statistics.mean(new_t_cells)
+        median_val = statistics.median(new_t_cells)
+        
 
         print(k)
         print(t_cells)
@@ -263,9 +281,9 @@ for k in res3.keys():
         img_filename = '/afs/cs/projects/kovashka/maher/vol3/ad_images/' + k + ".jpg"
         img = mpimg.imread(img_filename)
 
-        fig, axs =plt.subplots(5,1, gridspec_kw={'height_ratios': [1, 5, 1, 5, 1]})
+        fig, axs =plt.subplots(6,1, gridspec_kw={'height_ratios': [1, 5, 1, 5, 1, 1]})
 
-        axs[0].text(0.0, 0.0, k)#, 
+        axs[0].text(0.0, 0.0, "ID: " + k)#, 
                     # horizontalalignment='center', 
                     # verticalalignment='center', 
                     # transform = axs[0].transAxes)
@@ -275,7 +293,7 @@ for k in res3.keys():
         axs[1].imshow(img)
         axs[1].axis('off')
 
-        axs[2].text(0.0, 0.0, res2[k][0][0])#, 
+        axs[2].text(0.0, 0.0, "Transcript: " + res2[k][0][0])#, 
                     # horizontalalignment='center', 
                     # verticalalignment='center', 
                     # transform = axs[2].transAxes)
@@ -304,6 +322,17 @@ for k in res3.keys():
         
         axs[4].axis('tight')
         axs[4].axis('off')
+
+        eval_res = ""
+        eval_res = eval_res + "min_val: " + min_val + "\n"
+        eval_res = eval_res + "max_val: " + max_val + "\n"
+        eval_res = eval_res + "mean_val: " + mean_val + "\n"
+        eval_res = eval_res + "median_val: " + median_val + "\n"
+
+        axs[5].text(0.0, 0.0, eval_res)
+        
+        axs[5].axis('tight')
+        axs[5].axis('off')
 
         # axs[1].plot(clust_data[:,0],clust_data[:,1])
         output_filename = '/afs/cs/projects/kovashka/maher/vol3/matrix_results/' + k + ".png"
