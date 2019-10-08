@@ -160,10 +160,12 @@ blabla = []
 tester_o2c = {}
 
 # hola = {}
+count_bla = 3
 
 for k in res3.keys():
+    count_bla = count_bla - 1
     res3[k] = list(res3[k])
-    if len(res3[k]) > 0 and k in res1.keys() and len(res1[k]) > 0 and k in res2.keys() and len(res2[k]) > 0:
+    if count_bla > 0 and len(res3[k]) > 0 and k in res1.keys() and len(res1[k]) > 0 and k in res2.keys() and len(res2[k]) > 0:
 
         # hola[k] = []
         col_labels = list(map(lambda x: x[0]+" ("+labels[x[1]]+")", res3[k]))
@@ -339,77 +341,77 @@ for k in res3.keys():
         plt.savefig(output_filename, dpi=200, bbox_inches='tight')
         plt.close()
 
+        blabla.append((max_val, res4[k], k))
+
 
 # print("total: " + str(total))
 # print("sum_p: " + str(sum_p))
 # print("count_p: " + str(count_p))
 
-# temp_thres = 0
-# cur_thres = -1
-# cur_max = -1
-# min_thres = -1
-# max_thres = -1
+temp_thres = 0
+cur_thres = -1
+cur_max = -1
+min_thres = -1
+max_thres = -1
 
-# temp_loss = 0
+temp_loss = 0
 
-# while temp_thres < 100:
+while temp_thres < 100:
 
-#     for b in blabla:
-#         if b[1] == 'parallel':
-#             temp_loss += (b[0] - temp_thres)
-#         if b[1] == 'non_parallel':
-#             temp_loss += (temp_thres - b[0])
+    for b in blabla:
+        if b[1] == 'parallel':
+            temp_loss += (b[0] - temp_thres)
+        if b[1] == 'non_parallel':
+            temp_loss += (temp_thres - b[0])
 
-#     if temp_loss > cur_max:
-#         cur_thres = temp_thres
-#         cur_max = temp_loss
+    if temp_loss > cur_max:
+        cur_thres = temp_thres
+        cur_max = temp_loss
 
-#     # total_c = 0
-#     # total_w = 0
+    # total_c = 0
+    # total_w = 0
 
-#     # for b in blabla:
-#     #     if b[1] == 'parallel' and b[0] > temp_thres:
-#     #         total_c += 1
-#     #     elif b[1] == 'non_parallel' and b[0] < temp_thres:
-#     #         total_c += 1
-#     #     else:
-#     #         total_w += 1
+    # for b in blabla:
+    #     if b[1] == 'parallel' and b[0] > temp_thres:
+    #         total_c += 1
+    #     elif b[1] == 'non_parallel' and b[0] < temp_thres:
+    #         total_c += 1
+    #     else:
+    #         total_w += 1
 
-#     # if total_c == cur_max:
-#     #     if min_thres > -1:
-#     #         max_thres
+    # if total_c == cur_max:
+    #     if min_thres > -1:
+    #         max_thres
 
-#     temp_thres += 0.001
+    temp_thres += 0.001
 
-# print("cur_thres: " + str(cur_thres))
+print("cur_thres: " + str(cur_thres))
 
-# total_c = 0
-# total_w = 0
+total_c = 0
+total_w = 0
+
 # ids_match = []
 
 # import csv 
 
-# with open('explore2b3_method_c_10.csv', 'w') as csv_file:
-#     writer = csv.writer(csv_file, delimiter=',')
-#     # for line in data:
-#     writer.writerow(['img_id', 'correct/wrong', 'prediction', 'score(threshold:'+str(cur_thres)+')', 'image_objects', 'transcription_objects'])
+with open('explore2b3_method_matrix.csv', 'w') as csv_file:
+    writer = csv.writer(csv_file, delimiter=',')
+    # for line in data:
+    writer.writerow(['img_id', 'correct/wrong', 'prediction', 'score(threshold:'+str(cur_thres)+')'])
 
-#     for b in blabla:
-#         ids_match.append(b[2])
-#         img_obj_labels = list(map(lambda x: labels[x], res1[b[2]]))
-#         t_obj_labels = list(map(lambda x: labels[x], res3[b[2]]))
-#         if (b[1] == 'parallel' and b[0] >= cur_thres) or (b[1] == 'non_parallel' and b[0] < cur_thres):
-#             total_c += 1
-#             writer.writerow([b[2], 'correct', b[1], str(b[0]), "\t".join(img_obj_labels), "\t".join(t_obj_labels)])
-#         else:
-#             total_w += 1
-#             writer.writerow([b[2], 'wrong', b[1], str(b[0]), "\t".join(img_obj_labels), "\t".join(t_obj_labels)])
+    for b in blabla:
+        if (b[1] == 'parallel' and b[0] >= cur_thres) or (b[1] == 'non_parallel' and b[0] < cur_thres):
+            total_c += 1
+            writer.writerow([b[2], 'correct', b[1], str(b[0])])
+        else:
+            total_w += 1
+            writer.writerow([b[2], 'wrong', b[1], str(b[0])])
 
 # # with open("ids_match.pkl", 'wb') as f:
 # #     pickle.dump(ids_match, f, pickle.HIGHEST_PROTOCOL)
 
-# print("total_c: " + str(total_c))
-# print("total_w: " + str(total_w))
+print("total_c: " + str(total_c))
+print("total_w: " + str(total_w))
 
 
 
