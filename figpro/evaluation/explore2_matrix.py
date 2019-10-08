@@ -160,12 +160,12 @@ blabla = []
 tester_o2c = {}
 
 # hola = {}
-count_bla = 3
+# count_bla = 3
 
 for k in res3.keys():
-    count_bla = count_bla - 1
+    # count_bla = count_bla - 1
     res3[k] = list(res3[k])
-    if count_bla > 0 and len(res3[k]) > 0 and k in res1.keys() and len(res1[k]) > 0 and k in res2.keys() and len(res2[k]) > 0:
+    if len(res3[k]) > 0 and k in res1.keys() and len(res1[k]) > 0 and k in res2.keys() and len(res2[k]) > 0:
 
         # hola[k] = []
         col_labels = list(map(lambda x: x[0]+" ("+labels[x[1]]+")", res3[k]))
