@@ -268,7 +268,7 @@ for k in res3.keys():
         axs[0].text(0.5, 0.5, k, 
                     horizontalalignment='center', 
                     verticalalignment='center', 
-                    transform = ax.transAxes)
+                    transform = axs[0].transAxes)
 
         axs[1].imshow(img)
         axs[1].axis('off')
@@ -276,7 +276,7 @@ for k in res3.keys():
         axs[2].text(0.5, 0.5, res2[k][0], 
                     horizontalalignment='center', 
                     verticalalignment='center', 
-                    transform = ax.transAxes)
+                    transform = axs[2].transAxes)
 
         axs[3].axis('tight')
         axs[3].axis('off')
@@ -288,7 +288,7 @@ for k in res3.keys():
         axs[4].text(0.5, 0.5, "Ground Truth: " + res4[k], 
                     horizontalalignment='center', 
                     verticalalignment='center', 
-                    transform = ax.transAxes)
+                    transform = axs[4].transAxes)
 
         # axs[1].plot(clust_data[:,0],clust_data[:,1])
         output_filename = '/afs/cs/projects/kovashka/maher/vol3/matrix_results/' + k + ".png"
