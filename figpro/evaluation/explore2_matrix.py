@@ -265,30 +265,40 @@ for k in res3.keys():
 
         fig, axs =plt.subplots(5,1)
 
-        axs[0].text(0.5, 0.5, k, 
-                    horizontalalignment='center', 
-                    verticalalignment='center', 
-                    transform = axs[0].transAxes)
+        axs[0].text(0.5, 0.5, k)#, 
+                    # horizontalalignment='center', 
+                    # verticalalignment='center', 
+                    # transform = axs[0].transAxes)
+        axs[0].axis('tight')
+        axs[0].axis('off')
 
         axs[1].imshow(img)
         axs[1].axis('off')
 
-        axs[2].text(0.5, 0.5, res2[k][0], 
-                    horizontalalignment='center', 
-                    verticalalignment='center', 
-                    transform = axs[2].transAxes)
+        axs[2].text(0.5, 0.5, res2[k][0])#, 
+                    # horizontalalignment='center', 
+                    # verticalalignment='center', 
+                    # transform = axs[2].transAxes)
+        
+        axs[2].axis('tight')
+        axs[2].axis('off')
 
-        axs[3].axis('tight')
-        axs[3].axis('off')
+        
         the_table = axs[3].table(cellText=t_cells,
                                  rowLabels=row_labels,
                                  colLabels=col_labels,
                                  loc='center')
 
-        axs[4].text(0.5, 0.5, "Ground Truth: " + res4[k], 
-                    horizontalalignment='center', 
-                    verticalalignment='center', 
-                    transform = axs[4].transAxes)
+        axs[3].axis('tight')
+        axs[3].axis('off')
+
+        axs[4].text(0.5, 0.5, "Ground Truth: " + res4[k])#, 
+                    # horizontalalignment='center', 
+                    # verticalalignment='center', 
+                    # transform = axs[4].transAxes)
+        
+        axs[4].axis('tight')
+        axs[4].axis('off')
 
         # axs[1].plot(clust_data[:,0],clust_data[:,1])
         output_filename = '/afs/cs/projects/kovashka/maher/vol3/matrix_results/' + k + ".png"
