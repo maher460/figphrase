@@ -162,7 +162,7 @@ tester_o2c = {}
 
 for k in res3.keys():
     res3[k] = list(res3[k])
-    if k in res1.keys() and len(res3[k]) > 0 and len(res1[k]) > 0:
+    if len(res3[k]) > 0 and k in res1.keys() and len(res1[k]) > 0 and k in res2.keys() and len(res2[k]) > 0:
 
         # hola[k] = []
         col_labels = list(map(lambda x: x[0]+" ("+labels[x[1]]+")", res3[k]))
@@ -255,27 +255,40 @@ for k in res3.keys():
 
             t_cells.append(t_cells_row)
 
+        print(k)
         print(t_cells)
         print(row_labels)
         print(col_labels)
-        print(len(t_cells))
-        print(len(row_labels))
-        print(len(col_labels))
 
         img_filename = '/afs/cs/projects/kovashka/maher/vol3/ad_images/' + k + ".jpg"
         img = mpimg.imread(img_filename)
 
-        fig, axs =plt.subplots(2,1)
+        fig, axs =plt.subplots(5,1)
 
-        axs[0].imshow(img)
-        axs[0].axis('off')
+        axs[0].text(0.5, 0.5, k, 
+                    horizontalalignment='center', 
+                    verticalalignment='center', 
+                    transform = ax.transAxes)
 
-        axs[1].axis('tight')
+        axs[1].imshow(img)
         axs[1].axis('off')
-        the_table = axs[1].table(cellText=t_cells,
+
+        axs[2].text(0.5, 0.5, res2[k][0], 
+                    horizontalalignment='center', 
+                    verticalalignment='center', 
+                    transform = ax.transAxes)
+
+        axs[3].axis('tight')
+        axs[3].axis('off')
+        the_table = axs[3].table(cellText=t_cells,
                                  rowLabels=row_labels,
                                  colLabels=col_labels,
                                  loc='center')
+
+        axs[4].text(0.5, 0.5, "Ground Truth: " + res4[k], 
+                    horizontalalignment='center', 
+                    verticalalignment='center', 
+                    transform = ax.transAxes)
 
         # axs[1].plot(clust_data[:,0],clust_data[:,1])
         output_filename = '/afs/cs/projects/kovashka/maher/vol3/matrix_results/' + k + ".png"
