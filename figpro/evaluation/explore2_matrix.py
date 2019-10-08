@@ -305,13 +305,13 @@ for k in res3.keys():
         # axs[2].axis('tight')
         # axs[2].axis('off')
 
-        eval_res = "ID: " + k + "\n"
+        eval_res = "\nID: " + k + "\n"
         eval_res = eval_res + "Transcript: " + res2[k][0][0] + "\n"
         eval_res = eval_res + "Ground Truth: " + res4[k] + "\n"
         eval_res = eval_res + "min_val: " + str(min_val) + "\n"
         eval_res = eval_res + "max_val: " + str(max_val) + "\n"
         eval_res = eval_res + "mean_val: " + str(round(mean_val, 3)) + "\n"
-        eval_res = eval_res + "median_val: " + str(round(median_val,3)) + "\n\n\n\n"
+        eval_res = eval_res + "median_val: " + str(round(median_val,3)) + "\n\n"
 
         axs[1].text(0.0, 0.0, eval_res, fontdict=font)
         
