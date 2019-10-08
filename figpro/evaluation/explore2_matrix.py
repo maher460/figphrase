@@ -292,7 +292,7 @@ for k in res3.keys():
 
         the_table.auto_set_font_size(False)
         the_table.set_fontsize(10)
-        the_table.scale(1.25, 1.25)
+        the_table.scale(1, 1)
 
         axs[3].axis('tight')
         axs[3].axis('off')
