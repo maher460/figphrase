@@ -274,6 +274,7 @@ for k in res3.keys():
 
         axs[1].imshow(img)
         axs[1].axis('off')
+        axs[1].scale(1.5,1.5)
 
         axs[2].text(0.0, 0.0, res2[k][0][0])#, 
                     # horizontalalignment='center', 
@@ -290,8 +291,8 @@ for k in res3.keys():
                                  loc='center')
 
         the_table.auto_set_font_size(False)
-        the_table.set_fontsize(14)
-        the_table.scale(1.5, 1.5)
+        the_table.set_fontsize(12)
+        the_table.scale(1, 1)
 
         axs[3].axis('tight')
         axs[3].axis('off')
