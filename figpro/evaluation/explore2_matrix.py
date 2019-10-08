@@ -194,11 +194,11 @@ for k in res3.keys():
                     vec_1 = generate_vector_word(l1)
                     vec_2 = generate_vector_word(l2)
 
-                    compatibility1 = (usage_rec(vec_1, vec_2)+1)/2
+                    # compatibility1 = (usage_rec(vec_1, vec_2)+1)/2
 
                     compatibility2 = (usage_rec2(vec_1, vec_2)+1)/2
 
-                    compatibility3 = vec_1.dot(vec_2)
+                    # compatibility3 = vec_1.dot(vec_2)
 
 
                     # # line = six.moves.input('>> ')
@@ -248,7 +248,8 @@ for k in res3.keys():
                     print("*** print_exception:")
                     traceback.print_exception(exc_type, exc_value, exc_traceback, limit=2, file=sys.stdout)
 
-                compatibility_str = str(round(compatibility1, 3)) + " " + str(round(compatibility2, 3)) + " " + str(round(compatibility3, 3))
+                # compatibility_str = str(round(compatibility1, 3)) + " " + str(round(compatibility2, 3)) + " " + str(round(compatibility3, 3))
+                compatibility_str = str(round(compatibility2, 3))
 
                 t_cells_row.append(compatibility_str) 
 
