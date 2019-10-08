@@ -285,40 +285,41 @@ for k in res3.keys():
         img_filename = '/afs/cs/projects/kovashka/maher/vol3/ad_images/' + k + ".jpg"
         img = mpimg.imread(img_filename)
 
-        fig, axs =plt.subplots(5,1, gridspec_kw={'height_ratios': [1, 5, 1, 5, 5]})
+        fig, axs =plt.subplots(3,1) #, gridspec_kw={'height_ratios': [1, 5, 1, 5, 5]})
 
-        axs[0].text(0.0, 0.0, "ID: " + k, fontdict=font)#, 
-                    # horizontalalignment='center', 
-                    # verticalalignment='center', 
-                    # transform = axs[0].transAxes)
-        axs[0].axis('tight')
+        # axs[0].text(0.0, 0.0, "ID: " + k, fontdict=font)#, 
+        #             # horizontalalignment='center', 
+        #             # verticalalignment='center', 
+        #             # transform = axs[0].transAxes)
+        # axs[0].axis('tight')
+        # axs[0].axis('off')
+
+        axs[0].imshow(img)
         axs[0].axis('off')
 
-        axs[1].imshow(img)
-        axs[1].axis('off')
-
-        axs[2].text(0.0, 0.0, "Transcript: " + res2[k][0][0], fontdict=font)#, 
-                    # horizontalalignment='center', 
-                    # verticalalignment='center', 
-                    # transform = axs[2].transAxes)
+        # axs[2].text(0.0, 0.0, "Transcript: " + res2[k][0][0], fontdict=font)#, 
+        #             # horizontalalignment='center', 
+        #             # verticalalignment='center', 
+        #             # transform = axs[2].transAxes)
         
-        axs[2].axis('tight')
-        axs[2].axis('off')
+        # axs[2].axis('tight')
+        # axs[2].axis('off')
 
-
-        eval_res = "Ground Truth: " + res4[k] + "\n"
+        eval_res = "ID: " + k + "\n"
+        eval_res = eval_res + "Transcript: " + res2[k][0][0] + "\n"
+        eval_res = eval_res + "Ground Truth: " + res4[k] + "\n"
         eval_res = eval_res + "min_val: " + str(min_val) + "\n"
         eval_res = eval_res + "max_val: " + str(max_val) + "\n"
-        eval_res = eval_res + "mean_val: " + str(mean_val) + "\n"
-        eval_res = eval_res + "median_val: " + str(median_val) + "\n"
+        eval_res = eval_res + "mean_val: " + str(round(mean_val, 3)) + "\n"
+        eval_res = eval_res + "median_val: " + str(round(median_val,3)) + "\n\n\n\n"
 
-        axs[3].text(0.0, 0.0, eval_res, fontdict=font)
+        axs[1].text(0.0, 0.0, eval_res, fontdict=font)
         
-        axs[3].axis('tight')
-        axs[3].axis('off')
+        axs[1].axis('tight')
+        axs[1].axis('off')
 
         
-        the_table = axs[4].table(cellText=t_cells,
+        the_table = axs[2].table(cellText=t_cells,
                                  rowLabels=row_labels,
                                  colLabels=col_labels,
                                  colWidths=[0.25 for x in col_labels],
@@ -328,8 +329,8 @@ for k in res3.keys():
         the_table.set_fontsize(8)
         the_table.scale(1, 1)
 
-        axs[4].axis('tight')
-        axs[4].axis('off')
+        axs[2].axis('tight')
+        axs[2].axis('off')
 
 
 
