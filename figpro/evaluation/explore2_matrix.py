@@ -290,8 +290,8 @@ for k in res3.keys():
                                  loc='center')
 
         the_table.auto_set_font_size(False)
-        the_table.set_fontsize(12)
-        the_table.scale(1, 1)
+        the_table.set_fontsize(10)
+        the_table.scale(1.25, 1.25)
 
         axs[3].axis('tight')
         axs[3].axis('off')
