@@ -265,7 +265,7 @@ for k in res3.keys():
                 #     max_val = t_cells[c_row][c_col]
                 # if t_cells[c_row][c_col] < min_val:
                 #     min_val = t_cells[c_row][c_col]
-                new_t_cells.append(t_cells[c_row][c_col])
+                new_t_cells.append(c_col)
 
         min_val = min(new_t_cells)
         max_val = max(new_t_cells)
