@@ -157,7 +157,7 @@ for k in res2.keys():
     mean = []
     for t in res2[k][0]:
         print(t)
-        temp_bla = keywords(t, ratio=0.8, split=True) #keeping just keywords
+        temp_bla = keywords(t, ratio=1.0, split=True) #keeping just keywords
         #temp_bla = t.split() #old
         print(temp_bla)
         for b in temp_bla:
