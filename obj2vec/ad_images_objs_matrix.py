@@ -3,6 +3,7 @@ import gensim
 from numpy import float64
 import numpy as np
 from gensim import matutils
+from gensim.summarization import keywords
 
 # AD_IMGS_OBJS_PATH = "../../Keras-RetinaNet-for-Open-Images-Challenge-2018/subm/retinanet_level_1_all_levels.csv"
 AD_IMGS_OBJS_PATH = "../../Keras-RetinaNet-for-Open-Images-Challenge-2018/subm/retinanet_training_level_1.csv"
@@ -11,9 +12,6 @@ LABELS_PATH = "../../class-descriptions-boxable.csv"
 GOOGLENEWSMODEL_PATH = "../../GoogleNews-vectors-negative300.bin"
 
 model = gensim.models.KeyedVectors.load_word2vec_format(GOOGLENEWSMODEL_PATH, binary=True)
-
-print(model)
-print(model.vocab)
 
 labels = {}
 
@@ -158,7 +156,10 @@ for k in res2.keys():
     print("Searching: " + str(count_321))
     mean = []
     for t in res2[k][0]:
-        temp_bla = t.split()
+        print(t)
+        temp_bla = keywords(t, split=True) #keeping just keywords
+        #temp_bla = t.split() #old
+        print(temp_bla)
         for b in temp_bla:
             if b not in mean and b in model:
                 mean.append(b)
