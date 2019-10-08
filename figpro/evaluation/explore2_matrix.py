@@ -84,6 +84,19 @@ def usage_rec(context_v, lit_v):
     # use local attention, -0.11 ~ -0.15 all are ok
     return lit_sim
 
+def usage_rec2(context, vec):
+    context = context / np.sqrt((context * context).sum())
+    vec = vec / np.sqrt((vec * vec).sum())
+    lit_sim = (context * vec).sum()
+    #print (context_v)
+    #print (lit_v)
+    # lit_sim = (context_v * lit_v).sum()
+    #fig_sim = (context_v * fig_v).sum()
+    #print lit_sim
+    #print fig_sim
+    # use local attention, -0.11 ~ -0.15 all are ok
+    return lit_sim
+
 # saved_model_path = '../model-save/semcomp.meta'
 # corpus_patch = "../../obj2vec/open_images_corpus.DIR"
 
@@ -170,37 +183,51 @@ for k in res3.keys():
                 # temp2 = " ".join(res1[k])
                 # print("temp2: "+temp2)
                 temp3 = i_obj + " [" + t_obj[1] + "]"
-                print("temp3: "+temp3)
+                # print("temp3: "+temp3)
                 line = temp3
 
+                l1 = i_obj
+                l2 = t_obj[1]
+
                 try:
-                    # line = six.moves.input('>> ')
-                    sent, target_pos = parse_input(line)
-                    if target_pos == None:
-                        raise ParseException("Can't find the target position.")
 
-                    context_v = None
-                    if len(sent) > 1:
-                        context_v = model.context_rep(sent, target_pos)
-                        context_v = context_v / np.sqrt((context_v * context_v).sum())
+                    vec_1 = generate_vector_word(l1)
+                    vec_2 = generate_vector_word(l2)
 
-                        tester_o2c[k] = context_v
+                    compatibility1 = (usage_rec(vec_1, vec_2)+1)/2
 
-                    if sent[target_pos] == None:
-                        if context_v is not None:
-                            m = model.most_fit_context2(context_v)
-                        else:
-                            raise ParseException("Can't find a context.")
-                    else:
-                        if sent[target_pos].find("_") < 0:
-                            if sent[target_pos] not in word2index:
-                                raise ParseException("Target word is out of vocabulary.")
-                            else:
-                                target_v = generate_vector_word(sent[target_pos])
-                        else:
-                            target_v = generate_vector_phrase(sent[target_pos])
-                        if target_v is not None and context_v is not None:
-                            compatibility = (usage_rec(target_v, context_v)+1)/2
+                    compatibility2 = (usage_rec2(vec_1, vec_2)+1)/2
+
+                    compatibility3 = vec_1.dot(vec_2)
+
+
+                    # # line = six.moves.input('>> ')
+                    # sent, target_pos = parse_input(line)
+                    # if target_pos == None:
+                    #     raise ParseException("Can't find the target position.")
+
+                    # context_v = None
+                    # if len(sent) > 1:
+                    #     context_v = model.context_rep(sent, target_pos)
+                    #     context_v = context_v / np.sqrt((context_v * context_v).sum())
+
+                    #     tester_o2c[k] = context_v
+
+                    # if sent[target_pos] == None:
+                    #     if context_v is not None:
+                    #         m = model.most_fit_context2(context_v)
+                    #     else:
+                    #         raise ParseException("Can't find a context.")
+                    # else:
+                    #     if sent[target_pos].find("_") < 0:
+                    #         if sent[target_pos] not in word2index:
+                    #             raise ParseException("Target word is out of vocabulary.")
+                    #         else:
+                    #             target_v = generate_vector_word(sent[target_pos])
+                    #     else:
+                    #         target_v = generate_vector_phrase(sent[target_pos])
+                    #     if target_v is not None and context_v is not None:
+                    #         compatibility = (usage_rec2(target_v, context_v)+1)/2
                             # print("Compatibility score: " + str(compatibility))
                             # print("Truth: " + res4[k])
                             
@@ -220,6 +247,8 @@ for k in res3.keys():
                     traceback.print_tb(exc_traceback, limit=1, file=sys.stdout)
                     print("*** print_exception:")
                     traceback.print_exception(exc_type, exc_value, exc_traceback, limit=2, file=sys.stdout)
+
+                compatibility_str = str(round(compatibility1, 3)) + " " + str(round(compatibility2, 3)) + " " + str(round(compatibility3, 3))
 
                 t_cells_row.append(compatibility) 
 
