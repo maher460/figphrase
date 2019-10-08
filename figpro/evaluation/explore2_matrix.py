@@ -263,9 +263,9 @@ for k in res3.keys():
         img_filename = '/afs/cs/projects/kovashka/maher/vol3/ad_images/' + k + ".jpg"
         img = mpimg.imread(img_filename)
 
-        fig, axs =plt.subplots(5,1, gridspec_kw={'height_ratios': [1, 4, 1, 4, 1]})
+        fig, axs =plt.subplots(5,1, gridspec_kw={'height_ratios': [1, 5, 1, 5, 1]})
 
-        axs[0].text(0.0, 0.5, k)#, 
+        axs[0].text(0.0, 0.0, k)#, 
                     # horizontalalignment='center', 
                     # verticalalignment='center', 
                     # transform = axs[0].transAxes)
@@ -275,7 +275,7 @@ for k in res3.keys():
         axs[1].imshow(img)
         axs[1].axis('off')
 
-        axs[2].text(0.0, 0.5, res2[k][0])#, 
+        axs[2].text(0.0, 0.0, res2[k][0][0])#, 
                     # horizontalalignment='center', 
                     # verticalalignment='center', 
                     # transform = axs[2].transAxes)
@@ -289,10 +289,14 @@ for k in res3.keys():
                                  colLabels=col_labels,
                                  loc='center')
 
+        the_table.auto_set_font_size(False)
+        the_table.set_fontsize(14)
+        the_table.scale(1.5, 1.5)
+
         axs[3].axis('tight')
         axs[3].axis('off')
 
-        axs[4].text(0.0, 0.5, "Ground Truth: " + res4[k])#, 
+        axs[4].text(0.0, 0.0, "Ground Truth: " + res4[k])#, 
                     # horizontalalignment='center', 
                     # verticalalignment='center', 
                     # transform = axs[4].transAxes)
