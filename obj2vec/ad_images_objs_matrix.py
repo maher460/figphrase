@@ -4,6 +4,11 @@ from numpy import float64
 import numpy as np
 from gensim import matutils
 from gensim.summarization import keywords
+import nltk
+
+from nltk.corpus import stopwords 
+from nltk.tokenize import word_tokenize 
+
 
 # AD_IMGS_OBJS_PATH = "../../Keras-RetinaNet-for-Open-Images-Challenge-2018/subm/retinanet_level_1_all_levels.csv"
 AD_IMGS_OBJS_PATH = "../../Keras-RetinaNet-for-Open-Images-Challenge-2018/subm/retinanet_training_level_1.csv"
@@ -103,6 +108,9 @@ for c in labels.keys():
     labels_new[c] = similar_labels 
 
 
+
+stop_words = set(stopwords.words('english'))  
+
 res3 = {} # {img_id: [object_labels in transcriptions]}
 count_321 = 0
 for k in res2.keys():
@@ -157,7 +165,9 @@ for k in res2.keys():
     mean = []
     for t in res2[k][0]:
         print(t)
-        temp_bla = keywords(t, ratio=1.0, split=True, lemmatize=True) #keeping just keywords
+        word_tokens = word_tokenize(t) 
+        temp_bla = [w for w in word_tokens if not w in stop_words]
+        #temp_bla = keywords(t, ratio=1.0, split=True, lemmatize=True) #keeping just keywords (old 2)
         #temp_bla = t.split() #old
         print(temp_bla)
         for b in temp_bla:
