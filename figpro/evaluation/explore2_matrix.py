@@ -177,7 +177,7 @@ for k in res3.keys():
             t_cells_row = []
             for t_obj in res3[k]:
 
-                if t_obj[1][1] < 0.65:
+                if t_obj[1][1] < 0.65 or 1==1:
 
                     col_labels.append(t_obj[0]+" ("+labels[t_obj[1][0]] +", " + str(round(t_obj[1][1],2))+")")
 
@@ -345,7 +345,7 @@ for k in res3.keys():
 
 
             # axs[1].plot(clust_data[:,0],clust_data[:,1])
-            output_filename = '/afs/cs/projects/kovashka/maher/vol3/matrix_results_dist_custoff/' + k + ".png"
+            output_filename = '/afs/cs/projects/kovashka/maher/vol3/matrix_results/' + k + ".png"
             plt.savefig(output_filename, dpi=200, bbox_inches='tight')
             plt.close()
 
