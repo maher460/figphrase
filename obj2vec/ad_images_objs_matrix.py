@@ -165,6 +165,7 @@ for k in res2.keys():
     mean = []
     for t in res2[k][0]:
         print(t)
+        t = t.lower()
         word_tokens = word_tokenize(t)
         word_tokens = list(map(lambda x: x.lower(), word_tokens)) 
         temp_bla = [w for w in word_tokens if not w in stop_words]
