@@ -168,7 +168,7 @@ for k in res3.keys():
     if len(res3[k]) > 0 and k in res1.keys() and len(res1[k]) > 0 and k in res2.keys() and len(res2[k]) > 0:
 
         # hola[k] = []
-        col_labels = list(map(lambda x: x[0]+" ("+labels[x[1]]+")", res3[k]))
+        col_labels = list(map(lambda x: x[0]+" ("+labels[x[1][0]] +", " + str(round(x[1][1],2))+")", res3[k]))
         row_labels = list(map(lambda x: labels[x], res1[k]))
         t_cells = []
 

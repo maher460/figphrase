@@ -181,7 +181,7 @@ for k in res2.keys():
 
         dists = list(map(lambda m: model.distances(m, labels_model.keys()), mean2))
 
-        smallest_idxs = list(map(lambda d: np.argsort(d)[0], dists)) 
+        smallest_idxs = list(map(lambda d: (np.argsort(d)[0], d[np.argsort(d)[0]]), dists)) 
 
         # res3[k] = {labels_model[list(labels_model.keys())[smallest_idx]]}
 
@@ -191,7 +191,7 @@ for k in res2.keys():
         # print(lm_keys)
 
         # resultz = list(map(lambda s: list(map(lambda x: labels_model[lm_keys[x]], s)), smallest_idxs)) 
-        resultz = list(map(lambda s: labels_model[lm_keys[s]], smallest_idxs)) 
+        resultz = list(map(lambda s: (labels_model[lm_keys[s[0]]], s[1]), smallest_idxs)) 
 
         res3[k] = zip(mean, resultz)
 
