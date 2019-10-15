@@ -165,7 +165,8 @@ for k in res2.keys():
     mean = []
     for t in res2[k][0]:
         print(t)
-        word_tokens = word_tokenize(t) 
+        word_tokens = word_tokenize(t)
+        word_tokens = list(map(lambda x: x.lower(), word_tokens)) 
         temp_bla = [w for w in word_tokens if not w in stop_words]
         #temp_bla = keywords(t, ratio=1.0, split=True, lemmatize=True) #keeping just keywords (old 2)
         #temp_bla = t.split() #old
