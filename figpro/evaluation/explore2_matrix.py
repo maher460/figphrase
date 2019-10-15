@@ -185,12 +185,12 @@ for k in res3.keys():
                 # print("temp1: "+temp1)
                 # temp2 = " ".join(res1[k])
                 # print("temp2: "+temp2)
-                temp3 = i_obj + " [" + t_obj[1] + "]"
+                # temp3 = i_obj + " [" + t_obj[1] + "]"
                 # print("temp3: "+temp3)
-                line = temp3
+                # line = temp3
 
                 l1 = i_obj
-                l2 = t_obj[1]
+                l2 = t_obj[1][0]
 
                 try:
 
