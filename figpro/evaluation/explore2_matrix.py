@@ -168,7 +168,8 @@ for k in res3.keys():
     if len(res3[k]) > 0 and k in res1.keys() and len(res1[k]) > 0 and k in res2.keys() and len(res2[k]) > 0:
 
         # hola[k] = []
-        col_labels = list(map(lambda x: x[0]+" ("+labels[x[1][0]] +", " + str(round(x[1][1],2))+")", res3[k]))
+        # col_labels = list(map(lambda x: x[0]+" ("+labels[x[1][0]] +", " + str(round(x[1][1],2))+")", res3[k]))
+        col_labels = []
         row_labels = list(map(lambda x: labels[x], res1[k]))
         t_cells = []
 
@@ -176,85 +177,89 @@ for k in res3.keys():
             t_cells_row = []
             for t_obj in res3[k]:
 
-                compatibility = -1
+                if t_obj[1][1] < 0.65:
+
+                    col_labels.append(t_obj[0]+" ("+labels[t_obj[1][0]] +", " + str(round(t_obj[1][1],2))+")")
+
+                    compatibility = -1
 
 
-                total += 1
+                    total += 1
 
-                # temp1 = "_".join(res3[k])
-                # print("temp1: "+temp1)
-                # temp2 = " ".join(res1[k])
-                # print("temp2: "+temp2)
-                # temp3 = i_obj + " [" + t_obj[1] + "]"
-                # print("temp3: "+temp3)
-                # line = temp3
+                    # temp1 = "_".join(res3[k])
+                    # print("temp1: "+temp1)
+                    # temp2 = " ".join(res1[k])
+                    # print("temp2: "+temp2)
+                    # temp3 = i_obj + " [" + t_obj[1] + "]"
+                    # print("temp3: "+temp3)
+                    # line = temp3
 
-                l1 = i_obj
-                l2 = t_obj[1][0]
+                    l1 = i_obj
+                    l2 = t_obj[1][0]
 
-                try:
+                    try:
 
-                    vec_1 = generate_vector_word(l1)
-                    vec_2 = generate_vector_word(l2)
+                        vec_1 = generate_vector_word(l1)
+                        vec_2 = generate_vector_word(l2)
 
-                    # compatibility1 = (usage_rec(vec_1, vec_2)+1)/2
+                        # compatibility1 = (usage_rec(vec_1, vec_2)+1)/2
 
-                    compatibility2 = (usage_rec2(vec_1, vec_2)+1)/2
+                        compatibility2 = (usage_rec2(vec_1, vec_2)+1)/2
 
-                    # compatibility3 = vec_1.dot(vec_2)
+                        # compatibility3 = vec_1.dot(vec_2)
 
 
-                    # # line = six.moves.input('>> ')
-                    # sent, target_pos = parse_input(line)
-                    # if target_pos == None:
-                    #     raise ParseException("Can't find the target position.")
+                        # # line = six.moves.input('>> ')
+                        # sent, target_pos = parse_input(line)
+                        # if target_pos == None:
+                        #     raise ParseException("Can't find the target position.")
 
-                    # context_v = None
-                    # if len(sent) > 1:
-                    #     context_v = model.context_rep(sent, target_pos)
-                    #     context_v = context_v / np.sqrt((context_v * context_v).sum())
+                        # context_v = None
+                        # if len(sent) > 1:
+                        #     context_v = model.context_rep(sent, target_pos)
+                        #     context_v = context_v / np.sqrt((context_v * context_v).sum())
 
-                    #     tester_o2c[k] = context_v
+                        #     tester_o2c[k] = context_v
 
-                    # if sent[target_pos] == None:
-                    #     if context_v is not None:
-                    #         m = model.most_fit_context2(context_v)
-                    #     else:
-                    #         raise ParseException("Can't find a context.")
-                    # else:
-                    #     if sent[target_pos].find("_") < 0:
-                    #         if sent[target_pos] not in word2index:
-                    #             raise ParseException("Target word is out of vocabulary.")
-                    #         else:
-                    #             target_v = generate_vector_word(sent[target_pos])
-                    #     else:
-                    #         target_v = generate_vector_phrase(sent[target_pos])
-                    #     if target_v is not None and context_v is not None:
-                    #         compatibility = (usage_rec2(target_v, context_v)+1)/2
-                            # print("Compatibility score: " + str(compatibility))
-                            # print("Truth: " + res4[k])
-                            
-                            # t_cells_row.append(compatibility) 
-                            
-                            # sum_p[res4[k]] += compatibility
-                            # count_p[res4[k]] += 1
-                            # blabla.append((compatibility, res4[k], k))
+                        # if sent[target_pos] == None:
+                        #     if context_v is not None:
+                        #         m = model.most_fit_context2(context_v)
+                        #     else:
+                        #         raise ParseException("Can't find a context.")
+                        # else:
+                        #     if sent[target_pos].find("_") < 0:
+                        #         if sent[target_pos] not in word2index:
+                        #             raise ParseException("Target word is out of vocabulary.")
+                        #         else:
+                        #             target_v = generate_vector_word(sent[target_pos])
+                        #     else:
+                        #         target_v = generate_vector_phrase(sent[target_pos])
+                        #     if target_v is not None and context_v is not None:
+                        #         compatibility = (usage_rec2(target_v, context_v)+1)/2
+                                # print("Compatibility score: " + str(compatibility))
+                                # print("Truth: " + res4[k])
+                                
+                                # t_cells_row.append(compatibility) 
+                                
+                                # sum_p[res4[k]] += compatibility
+                                # count_p[res4[k]] += 1
+                                # blabla.append((compatibility, res4[k], k))
 
-                except EOFError:
-                    break
-                except ParseException as e:
-                    print("ParseException: {}".format(e))
-                except Exception:
-                    exc_type, exc_value, exc_traceback = sys.exc_info()
-                    print("*** print_tb:")
-                    traceback.print_tb(exc_traceback, limit=1, file=sys.stdout)
-                    print("*** print_exception:")
-                    traceback.print_exception(exc_type, exc_value, exc_traceback, limit=2, file=sys.stdout)
+                    except EOFError:
+                        break
+                    except ParseException as e:
+                        print("ParseException: {}".format(e))
+                    except Exception:
+                        exc_type, exc_value, exc_traceback = sys.exc_info()
+                        print("*** print_tb:")
+                        traceback.print_tb(exc_traceback, limit=1, file=sys.stdout)
+                        print("*** print_exception:")
+                        traceback.print_exception(exc_type, exc_value, exc_traceback, limit=2, file=sys.stdout)
 
-                # compatibility_str = str(round(compatibility1, 3)) + " " + str(round(compatibility2, 3)) + " " + str(round(compatibility3, 3))
-                compatibility_str = round(compatibility2, 3)
+                    # compatibility_str = str(round(compatibility1, 3)) + " " + str(round(compatibility2, 3)) + " " + str(round(compatibility3, 3))
+                    compatibility_str = round(compatibility2, 3)
 
-                t_cells_row.append(compatibility_str) 
+                    t_cells_row.append(compatibility_str) 
 
             t_cells.append(t_cells_row)
 
