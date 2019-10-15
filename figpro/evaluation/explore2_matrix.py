@@ -170,7 +170,7 @@ for k in res3.keys():
         # hola[k] = []
         # col_labels = list(map(lambda x: x[0]+" ("+labels[x[1][0]] +", " + str(round(x[1][1],2))+")", res3[k]))
         col_labels = []
-        row_labels = list(map(lambda x: labels[x], res1[k]))
+        row_labels = [] #list(map(lambda x: labels[x], res1[k]))
         t_cells = []
 
         for i_obj in res1[k]:
@@ -261,7 +261,9 @@ for k in res3.keys():
 
                     t_cells_row.append(compatibility_str) 
 
-            t_cells.append(t_cells_row)
+            if len(t_cells_row) > 0:
+                row_labels.append(labels[i_obj])
+                t_cells.append(t_cells_row)
 
         # max_val = 0.0
         # min_val = 1.0
@@ -274,79 +276,80 @@ for k in res3.keys():
                 #     min_val = t_cells[c_row][c_col]
                 new_t_cells.append(c_col)
 
-        min_val = min(new_t_cells)
-        max_val = max(new_t_cells)
-        mean_val = statistics.mean(new_t_cells)
-        median_val = statistics.median(new_t_cells)
-        
+        if len(new_t_cells) > 0:
+            min_val = min(new_t_cells)
+            max_val = max(new_t_cells)
+            mean_val = statistics.mean(new_t_cells)
+            median_val = statistics.median(new_t_cells)
+            
 
-        print(k)
-        print(t_cells)
-        print(row_labels)
-        print(col_labels)
+            print(k)
+            print(t_cells)
+            print(row_labels)
+            print(col_labels)
 
-        font = {'family' : 'normal',
-                'weight' : 'normal',
-                'size'   : 8}
+            font = {'family' : 'normal',
+                    'weight' : 'normal',
+                    'size'   : 8}
 
-        img_filename = '/afs/cs/projects/kovashka/maher/vol3/ad_images/' + k + ".jpg"
-        img = mpimg.imread(img_filename)
+            img_filename = '/afs/cs/projects/kovashka/maher/vol3/ad_images/' + k + ".jpg"
+            img = mpimg.imread(img_filename)
 
-        fig, axs =plt.subplots(3,1) #, gridspec_kw={'height_ratios': [1, 5, 1, 5, 5]})
+            fig, axs =plt.subplots(3,1) #, gridspec_kw={'height_ratios': [1, 5, 1, 5, 5]})
 
-        # axs[0].text(0.0, 0.0, "ID: " + k, fontdict=font)#, 
-        #             # horizontalalignment='center', 
-        #             # verticalalignment='center', 
-        #             # transform = axs[0].transAxes)
-        # axs[0].axis('tight')
-        # axs[0].axis('off')
+            # axs[0].text(0.0, 0.0, "ID: " + k, fontdict=font)#, 
+            #             # horizontalalignment='center', 
+            #             # verticalalignment='center', 
+            #             # transform = axs[0].transAxes)
+            # axs[0].axis('tight')
+            # axs[0].axis('off')
 
-        axs[0].imshow(img)
-        axs[0].axis('off')
+            axs[0].imshow(img)
+            axs[0].axis('off')
 
-        # axs[2].text(0.0, 0.0, "Transcript: " + res2[k][0][0], fontdict=font)#, 
-        #             # horizontalalignment='center', 
-        #             # verticalalignment='center', 
-        #             # transform = axs[2].transAxes)
-        
-        # axs[2].axis('tight')
-        # axs[2].axis('off')
+            # axs[2].text(0.0, 0.0, "Transcript: " + res2[k][0][0], fontdict=font)#, 
+            #             # horizontalalignment='center', 
+            #             # verticalalignment='center', 
+            #             # transform = axs[2].transAxes)
+            
+            # axs[2].axis('tight')
+            # axs[2].axis('off')
 
-        eval_res = "\nID: " + k + "\n"
-        eval_res = eval_res + "Transcript: " + res2[k][0][0] + "\n"
-        eval_res = eval_res + "Ground Truth: " + res4[k] + "\n"
-        eval_res = eval_res + "min_val: " + str(min_val) + "\n"
-        eval_res = eval_res + "max_val: " + str(max_val) + "\n"
-        eval_res = eval_res + "mean_val: " + str(round(mean_val, 3)) + "\n"
-        eval_res = eval_res + "median_val: " + str(round(median_val,3)) + "\n\n"
+            eval_res = "\nID: " + k + "\n"
+            eval_res = eval_res + "Transcript: " + res2[k][0][0] + "\n"
+            eval_res = eval_res + "Ground Truth: " + res4[k] + "\n"
+            eval_res = eval_res + "min_val: " + str(min_val) + "\n"
+            eval_res = eval_res + "max_val: " + str(max_val) + "\n"
+            eval_res = eval_res + "mean_val: " + str(round(mean_val, 3)) + "\n"
+            eval_res = eval_res + "median_val: " + str(round(median_val,3)) + "\n\n"
 
-        axs[1].text(0.0, 0.0, eval_res, fontdict=font)
-        
-        axs[1].axis('tight')
-        axs[1].axis('off')
+            axs[1].text(0.0, 0.0, eval_res, fontdict=font)
+            
+            axs[1].axis('tight')
+            axs[1].axis('off')
 
-        
-        the_table = axs[2].table(cellText=t_cells,
-                                 rowLabels=row_labels,
-                                 colLabels=col_labels,
-                                 colWidths=[0.25 for x in col_labels],
-                                 loc='center')
+            
+            the_table = axs[2].table(cellText=t_cells,
+                                     rowLabels=row_labels,
+                                     colLabels=col_labels,
+                                     colWidths=[0.25 for x in col_labels],
+                                     loc='center')
 
-        the_table.auto_set_font_size(False)
-        the_table.set_fontsize(8)
-        the_table.scale(1, 1)
+            the_table.auto_set_font_size(False)
+            the_table.set_fontsize(8)
+            the_table.scale(1, 1)
 
-        axs[2].axis('tight')
-        axs[2].axis('off')
+            axs[2].axis('tight')
+            axs[2].axis('off')
 
 
 
-        # axs[1].plot(clust_data[:,0],clust_data[:,1])
-        output_filename = '/afs/cs/projects/kovashka/maher/vol3/matrix_results/' + k + ".png"
-        plt.savefig(output_filename, dpi=200, bbox_inches='tight')
-        plt.close()
+            # axs[1].plot(clust_data[:,0],clust_data[:,1])
+            output_filename = '/afs/cs/projects/kovashka/maher/vol3/matrix_results_dist_custoff/' + k + ".png"
+            plt.savefig(output_filename, dpi=200, bbox_inches='tight')
+            plt.close()
 
-        blabla.append((max_val, res4[k], k))
+            blabla.append((max_val, res4[k], k))
 
 
 # print("total: " + str(total))
