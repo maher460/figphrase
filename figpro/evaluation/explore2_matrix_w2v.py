@@ -294,9 +294,9 @@ for k in res3.keys():
                 #     max_val = t_cells[c_row][c_col]
                 # if t_cells[c_row][c_col] < min_val:
                 #     min_val = t_cells[c_row][c_col]
-                new_t_cells.append(float(c_col.split(" ")[0]))
-                new_t_cells_w3_w4.append(float(c_col.split(" ")[1]))
-                new_t_cells_w5_w6.append(float(c_col.split(" ")[2]))
+                new_t_cells.append(float(c_col.split(", ")[0]))
+                new_t_cells_w3_w4.append(float(c_col.split(", ")[1]))
+                new_t_cells_w5_w6.append(float(c_col.split(", ")[2]))
 
         if len(new_t_cells) > 0:
 
