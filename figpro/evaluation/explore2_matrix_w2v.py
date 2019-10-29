@@ -318,7 +318,7 @@ for k in res3.keys():
             mean_val_w5_w6 = statistics.mean(new_t_cells_w5_w6)
             median_val_w5_w6 = statistics.median(new_t_cells_w5_w6)
 
-            to_write_list = [k, min_val, max_val, mean_val, median_val, min_val_w3_w4, max_val_w3_w4, mean_val_w3_w4, median_val_w3_w4, min_val_w5_w6, max_val_w5_w6, mean_val_w5_w, median_val_w5_w6] 
+            to_write_list = [k, min_val, max_val, mean_val, median_val, min_val_w3_w4, max_val_w3_w4, mean_val_w3_w4, median_val_w3_w4, min_val_w5_w6, max_val_w5_w6, mean_val_w5_w6, median_val_w5_w6] 
 
             
 
