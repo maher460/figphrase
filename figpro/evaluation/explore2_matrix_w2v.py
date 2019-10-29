@@ -212,12 +212,12 @@ for k in res3.keys():
                             w3 = model_labels[labels[i_obj]]
                             w4 = t_obj[0]
 
-                            comp_w3_w4 = res_w2v_d[w3][w4]
+                            comp_w3_w4 = max(1.0 - res_w2v_d[w3][w4], 0.0)
 
                             w5 = model_labels[labels[i_obj]]
                             w6 = model_labels[labels[t_obj[1][0]]]
 
-                            comp_w5_w6 = res_w2v_d[w5][w6]
+                            comp_w5_w6 = max(1.0 - res_w2v_d[w5][w6], 0.0)
 
 
                             # compatibility3 = vec_1.dot(vec_2)
@@ -275,7 +275,7 @@ for k in res3.keys():
                         comp_w3_w4 = round(comp_w3_w4, 2)
                         comp_w5_w6 = round(comp_w5_w6, 2)
 
-                        compatibility_str = str(compatibility2) + " " + str(comp_w3_w4) + " " + str(comp_w5_w6)
+                        compatibility_str = str(compatibility2) + ", " + str(comp_w3_w4) + ", " + str(comp_w5_w6)
 
                         t_cells_row.append(compatibility_str) 
 
@@ -299,6 +299,10 @@ for k in res3.keys():
                 new_t_cells_w5_w6.append(float(c_col.split(" ")[2]))
 
         if len(new_t_cells) > 0:
+
+            to_write_list = []
+            to_write_list.append(k);
+
             min_val = min(new_t_cells)
             max_val = max(new_t_cells)
             mean_val = statistics.mean(new_t_cells)
@@ -313,6 +317,8 @@ for k in res3.keys():
             max_val_w5_w6 = max(new_t_cells_w5_w6)
             mean_val_w5_w6 = statistics.mean(new_t_cells_w5_w6)
             median_val_w5_w6 = statistics.median(new_t_cells_w5_w6)
+
+            to_write_list = [k, min_val, max_val, mean_val, median_val, min_val_w3_w4, max_val_w3_w4, mean_val_w3_w4, median_val_w3_w4, min_val_w5_w6, max_val_w5_w6, mean_val_w5_w, median_val_w5_w6] 
 
             
 
@@ -351,7 +357,7 @@ for k in res3.keys():
             eval_res = "\nID: " + k + "\n"
             eval_res = eval_res + "Transcript: " + res2[k][0][0] + "\n"
             eval_res = eval_res + "Ground Truth: " + res4[k] + "\n"
-            eval_res = eval_res + "Numbers format: o2v_dist(o*o), w2v_dist(o*w), w2v_dist(o*o) " + "\n"
+            eval_res = eval_res + "Numbers format: o2v_similarity(o*o), w2v_similarity(o*w), w2v_similarity(o*o) " + "\n"
             eval_res = eval_res + "min_val: " + str(min_val) + ", " + str(min_val_w3_w4) + ", " + str(min_val_w5_w6) + "\n"
             eval_res = eval_res + "max_val: " + str(max_val) + ", " + str(max_val_w3_w4) + ", " + str(max_val_w5_w6) + "\n"
             eval_res = eval_res + "mean_val: " + str(round(mean_val, 2)) + ", " + str(round(mean_val_w3_w4, 2)) + ", " + str(round(mean_val_w5_w6, 2)) + "\n"
@@ -383,77 +389,89 @@ for k in res3.keys():
             plt.savefig(output_filename, dpi=200, bbox_inches='tight')
             plt.close()
 
-            blabla.append((max_val, res4[k], k))
+            blabla.append(to_write_list)
+
+
+
+import csv 
+
+with open('explore2_matrix_w2v.csv', 'w') as csv_file:
+    writer = csv.writer(csv_file, delimiter=',')
+    # for line in data:
+    writer.writerow(['img_id', 'o2v_sim(o*o) min_val', 'o2v_sim(o*o) max_val', 'o2v_sim(o*o) mean', 'o2v_sim(o*o) median', 'w2v_sim(o*w) min_val', 'w2v_sim(o*w) max_val', 'w2v_sim(o*w) mean', 'w2v_sim(o*w) median', 'w2v_sim(o*o) min_val', 'w2v_sim(o*o) max_val', 'w2v_sim(o*o) mean', 'w2v_sim(o*o) median'])
+
+    for b in blabla:
+        writer.writerow(b)
 
 
 # print("total: " + str(total))
 # print("sum_p: " + str(sum_p))
 # print("count_p: " + str(count_p))
 
-temp_thres = 0
-cur_thres = -1
-cur_max = -1
-min_thres = -1
-max_thres = -1
+# temp_thres = 0
+# cur_thres = -1
+# cur_max = -1
+# min_thres = -1
+# max_thres = -1
 
-temp_loss = 0
+# temp_loss = 0
 
-while temp_thres < 100:
+# while temp_thres < 100:
 
-    for b in blabla:
-        if b[1] == 'parallel':
-            temp_loss += (b[0] - temp_thres)
-        if b[1] == 'non_parallel':
-            temp_loss += (temp_thres - b[0])
+#     for b in blabla:
+#         if b[1] == 'parallel':
+#             temp_loss += (b[0] - temp_thres)
+#         if b[1] == 'non_parallel':
+#             temp_loss += (temp_thres - b[0])
 
-    if temp_loss > cur_max:
-        cur_thres = temp_thres
-        cur_max = temp_loss
+#     if temp_loss > cur_max:
+#         cur_thres = temp_thres
+#         cur_max = temp_loss
 
-    # total_c = 0
-    # total_w = 0
+#     # total_c = 0
+#     # total_w = 0
 
-    # for b in blabla:
-    #     if b[1] == 'parallel' and b[0] > temp_thres:
-    #         total_c += 1
-    #     elif b[1] == 'non_parallel' and b[0] < temp_thres:
-    #         total_c += 1
-    #     else:
-    #         total_w += 1
+#     # for b in blabla:
+#     #     if b[1] == 'parallel' and b[0] > temp_thres:
+#     #         total_c += 1
+#     #     elif b[1] == 'non_parallel' and b[0] < temp_thres:
+#     #         total_c += 1
+#     #     else:
+#     #         total_w += 1
 
-    # if total_c == cur_max:
-    #     if min_thres > -1:
-    #         max_thres
+#     # if total_c == cur_max:
+#     #     if min_thres > -1:
+#     #         max_thres
 
-    temp_thres += 0.001
+#     temp_thres += 0.001
 
-print("cur_thres: " + str(cur_thres))
+# print("cur_thres: " + str(cur_thres))
 
-total_c = 0
-total_w = 0
+# total_c = 0
+# total_w = 0
 
-# ids_match = []
+# # ids_match = []
 
-import csv 
+# import csv 
 
-with open('explore2b3_method_matrix.csv', 'w') as csv_file:
-    writer = csv.writer(csv_file, delimiter=',')
-    # for line in data:
-    writer.writerow(['img_id', 'correct/wrong', 'prediction', 'score(threshold:'+str(cur_thres)+')'])
+# with open('explore2b3_method_matrix.csv', 'w') as csv_file:
+#     writer = csv.writer(csv_file, delimiter=',')
+#     # for line in data:
+#     writer.writerow(['img_id', 'correct/wrong', 'prediction', 'score(threshold:'+str(cur_thres)+')'])
 
-    for b in blabla:
-        if (b[1] == 'parallel' and b[0] >= cur_thres) or (b[1] == 'non_parallel' and b[0] < cur_thres):
-            total_c += 1
-            writer.writerow([b[2], 'correct', b[1], str(b[0])])
-        else:
-            total_w += 1
-            writer.writerow([b[2], 'wrong', b[1], str(b[0])])
+#     for b in blabla:
+#         if (b[1] == 'parallel' and b[0] >= cur_thres) or (b[1] == 'non_parallel' and b[0] < cur_thres):
+#             total_c += 1
+#             writer.writerow([b[2], 'correct', b[1], str(b[0])])
+#         else:
+#             total_w += 1
+#             writer.writerow([b[2], 'wrong', b[1], str(b[0])])
 
-# # with open("ids_match.pkl", 'wb') as f:
-# #     pickle.dump(ids_match, f, pickle.HIGHEST_PROTOCOL)
+# # # with open("ids_match.pkl", 'wb') as f:
+# # #     pickle.dump(ids_match, f, pickle.HIGHEST_PROTOCOL)
 
-print("total_c: " + str(total_c))
-print("total_w: " + str(total_w))
+# print("total_c: " + str(total_c))
+# print("total_w: " + str(total_w))
 
 
 
