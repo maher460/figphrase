@@ -91,6 +91,7 @@ with open(AD_IMGS_ANNS_PATH) as csv_file:
 
 labels_new = {}
 labels_model = {} #classes which are in model
+model_words = [] # store all the words found in the transcripts to this list
 
 count_123 = 0
 for c in labels.keys():
@@ -175,6 +176,7 @@ for k in res2.keys():
         for b in temp_bla:
             if b not in mean and b in model:
                 mean.append(b)
+                model_words.append(b)
                 
     if len(mean) > 0:
         mean2 = list(map(lambda m: model.word_vec(m, use_norm=True), mean))
@@ -221,11 +223,35 @@ for k in res2.keys():
         res4[k] = 'non_parallel'
 
 # print(res4)
+
+model_words.extend(labels_model.keys()) # add all the words found in the object labels
+
+model_words = list(set(model_words)) # get all unique
+model_labels = {} # make Object Label -> object_label dictionary
+
+for k in labels_model.keys():
+    model_labels[labels[labels_model[k]]] = k
+
+res_w2v_d = {} # store w2v distance of all pairs in 2D dictionary 
+
+for k1 in model_words:
+    for k2 in model_words:
+        dist = model.distance(k1, k2)
+        if k1 not in res_w2v_d.keys():
+            res_w2v_d[k1] = {}
+        res_w2v_d[k1][k2] = dist
+        if k2 not in res_w2v_d.keys():
+            res_w2v_d[k2] = {}
+        res_w2v_d[k2][k1] = dist
+
+
+
+
             
 import pickle
 
 with open("bla3_method_matrix_1.pkl", 'wb') as f:
-    pickle.dump([labels, res1, res2, res3, res4], f, pickle.HIGHEST_PROTOCOL)
+    pickle.dump([labels, res1, res2, res3, res4, model_labels, res_w2v_d], f, pickle.HIGHEST_PROTOCOL)
 
 # def save_obj(obj, name ):
 #     with open('obj/'+ name + '.pkl', 'wb') as f:
