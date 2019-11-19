@@ -331,7 +331,8 @@ for k in res3.keys():
 
             to_calc_list = [k, min_val, max_val, mean_val, median_val, min_val_w3_w4, max_val_w3_w4, mean_val_w3_w4, median_val_w3_w4, min_val_w5_w6, max_val_w5_w6, mean_val_w5_w6, median_val_w5_w6] 
 
-
+            print(to_calc_list)
+            
             if k in PE:
                 xPE.append(to_calc_list)
             elif k in PH:
