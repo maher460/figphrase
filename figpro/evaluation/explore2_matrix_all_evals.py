@@ -495,7 +495,7 @@ with open('explore2_matrix_all_evals.csv', 'w') as csv_file:
                         total_w += 1
 
                 if total_w > 0:
-                    acc = float(total_c) / float(total_w)
+                    acc = float(total_c) / float(total_w + total_c)
                 elif total_c > 0:
                     acc = 1.0
                 else:
