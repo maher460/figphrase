@@ -224,17 +224,17 @@ for k in res3.keys():
 
                             # compatibility1 = (usage_rec(vec_1, vec_2)+1)/2
 
-                            compatibility2 = (usage_rec2(vec_1, vec_2)+1)/2
+                            compatibility2 = ((usage_rec2(vec_1, vec_2)+1)/2) * (1.0 - t_obj[1][1])
 
                             w3 = model_labels[labels[i_obj]]
                             w4 = t_obj[0]
 
-                            comp_w3_w4 = max(1.0 - res_w2v_d[w3][w4], 0.0)
+                            comp_w3_w4 = (max(1.0 - res_w2v_d[w3][w4], 0.0)) * (1.0 - t_obj[1][1])
 
                             w5 = model_labels[labels[i_obj]]
                             w6 = model_labels[labels[t_obj[1][0]]]
 
-                            comp_w5_w6 = max(1.0 - res_w2v_d[w5][w6], 0.0)
+                            comp_w5_w6 = (max(1.0 - res_w2v_d[w5][w6], 0.0)) * (1.0 - t_obj[1][1])
 
 
                             # compatibility3 = vec_1.dot(vec_2)
