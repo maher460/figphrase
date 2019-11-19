@@ -385,7 +385,7 @@ for k in res3.keys():
 
 
             # axs[1].plot(clust_data[:,0],clust_data[:,1])
-            output_filename = '/afs/cs/projects/kovashka/maher/vol3/matrix_results/' + k + ".png"
+            output_filename = '/afs/cs/projects/kovashka/maher/vol3/matrix_results/' + res4[k] + "/" + k + ".png"
             plt.savefig(output_filename, dpi=200, bbox_inches='tight')
             plt.close()
 
