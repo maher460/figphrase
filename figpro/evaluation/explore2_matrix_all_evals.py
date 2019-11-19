@@ -165,10 +165,16 @@ tester_o2c = {}
 # count_bla = 3
 
 PE = [2842,7896,11674,12181,13058,13498,18998,19772,24824]
+PE = list(map(lambda x: str(x), PE))
+
 PH = [833,880,1300,2580,3288,5554,5796,5853,7541,7722,10380,11727,11826,15069,19361]
+PH = list(map(lambda x: str(x), PH))
 
 NPE = [407,1355,3749,5331,8422,10399,11132,12736,17834,19012,25115]
+NPE = list(map(lambda x: str(x), NPE))
+
 NPH = [3146,10470,21598,25917]
+NPH = list(map(lambda x: str(x), NPH))
 
 xPE = []
 xPH = []
@@ -332,7 +338,7 @@ for k in res3.keys():
             to_calc_list = [k, min_val, max_val, mean_val, median_val, min_val_w3_w4, max_val_w3_w4, mean_val_w3_w4, median_val_w3_w4, min_val_w5_w6, max_val_w5_w6, mean_val_w5_w6, median_val_w5_w6] 
 
             print(to_calc_list)
-            
+
             if k in PE:
                 xPE.append(to_calc_list)
             elif k in PH:
