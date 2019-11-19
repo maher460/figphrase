@@ -13,6 +13,8 @@ from sklearn import preprocessing
 from figpro.evaluation.model_reader2 import ModelReader
 import warnings
 
+from shutil import copyfile
+
 warnings.filterwarnings("ignore", category=DeprecationWarning)
 
 
@@ -167,13 +169,13 @@ tester_o2c = {}
 PE = [2842,7896,11674,12181,13058,13498,18998,19772,24824,29359,108182,100042,106665,10538,110518,126706,45971,176012,176413,143720]
 PE = list(map(lambda x: str(x), PE))
 
-PH = [833,880,1300,2580,3288,5554,5796,5853,7541,7722,10380,11727,11826,15069,19361,29143,29582,100007,107320,111534,119543,12117,125627,12581,145204,145620]
+PH = [833,880,1300,2580,3288,5554,5796,5853,7541,7722,10380,11727,11826,15069,19361,29143,29582,100007,107320,111534]
 PH = list(map(lambda x: str(x), PH))
 
-NPE = [407,1355,3749,5331,8422,10399,11132,12736,17834,19012,25115,105700,142678,112513,178196,95875,933301,31410,8422,175863,175587]
+NPE = [407,1355,3749,5331,8422,10399,11132,12736,17834,19012,25115,105700,142678,112513,178196,95875,933301,31410,8422,175863]
 NPE = list(map(lambda x: str(x), NPE))
 
-NPH = [3146,10470,21598,25917,45364,45406,54469,70789,72112,72926,88939,96399,96923,98985,116184,119904,132190]
+NPH = [3146,10470,21598,25917,45364,45406,54469,70789,72112,72926,88939,96399,96923,98985,116184,119904,132190,133468,173671,177245]
 NPH = list(map(lambda x: str(x), NPH))
 
 xPE = []
@@ -341,13 +343,20 @@ for k in res3.keys():
 
             if k in PE:
                 xPE.append(to_calc_list)
+                copyfile('/afs/cs/projects/kovashka/maher/vol3/ad_images/' + k + ".jpg", '/afs/cs/projects/kovashka/maher/vol3/dataset/parallel_easy/' + k + '.png')
+                copyfile('/afs/cs/projects/kovashka/maher/vol3/matrix_results/' + k + ".png", '/afs/cs/projects/kovashka/maher/vol3/dataset/parallel_easy/' + k + '_scores.png')
             elif k in PH:
                 xPH.append(to_calc_list)
+                copyfile('/afs/cs/projects/kovashka/maher/vol3/ad_images/' + k + ".jpg", '/afs/cs/projects/kovashka/maher/vol3/dataset/parallel_hard/' + k + '.png')
+                copyfile('/afs/cs/projects/kovashka/maher/vol3/matrix_results/' + k + ".png", '/afs/cs/projects/kovashka/maher/vol3/dataset/parallel_hard/' + k + '_scores.png')
             elif k in NPE:
                 xNPE.append(to_calc_list)
+                copyfile('/afs/cs/projects/kovashka/maher/vol3/ad_images/' + k + ".jpg", '/afs/cs/projects/kovashka/maher/vol3/dataset/non_parallel_easy/' + k + '.png')
+                copyfile('/afs/cs/projects/kovashka/maher/vol3/matrix_results/' + k + ".png", '/afs/cs/projects/kovashka/maher/vol3/dataset/non_parallel_easy/' + k + '_scores.png')
             elif k in NPH:
                 xNPH.append(to_calc_list)
-
+                copyfile('/afs/cs/projects/kovashka/maher/vol3/ad_images/' + k + ".jpg", '/afs/cs/projects/kovashka/maher/vol3/dataset/non_parallel_hard/' + k + '.png')
+                copyfile('/afs/cs/projects/kovashka/maher/vol3/matrix_results/' + k + ".png", '/afs/cs/projects/kovashka/maher/vol3/dataset/non_parallel_hard/' + k + '_scores.png')
 
             # print(k)
             # print(t_cells)
