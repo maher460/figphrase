@@ -453,17 +453,20 @@ with open('explore2_matrix_all_evals.csv', 'w') as csv_file:
     writer.writerow(['cat_1', 'cat_2', 'o2v_sim(o*o) min_val', 'o2v_sim(o*o) max_val', 'o2v_sim(o*o) mean', 'o2v_sim(o*o) median', 'w2v_sim(o*w) min_val', 'w2v_sim(o*w) max_val', 'w2v_sim(o*w) mean', 'w2v_sim(o*w) median', 'w2v_sim(o*o) min_val', 'w2v_sim(o*o) max_val', 'w2v_sim(o*o) mean', 'w2v_sim(o*o) median'])
 
 
-    xPE_xPH = [xPE, xPH]
-    xPE_xPH_labels = ["parallel_easy", "parallel_hard"]
+    xPE_xPH = [xPE, xPH, xPE+xPH]
+    xPE_xPH_labels = ["parallel_easy", "parallel_hard", "parallel_easy_hard"]
 
-    xNPE_xNPH = [xNPE, xNPH] 
-    xNPE_xNPH_labels = ["non_parallel_easy", "non_parallel_hard"] 
+    xNPE_xNPH = [xNPE, xNPH, xNPE+xNPH] 
+    xNPE_xNPH_labels = ["non_parallel_easy", "non_parallel_hard", "non_parallel_easy_hard"] 
 
     for s in range(len(xPE_xPH)):
         for t in range(len(xNPE_xNPH)):
 
-            xP = xPE_xPH[s]
-            xNP = xNPE_xNPH[t]
+            xP_train = xPE_xPH[s]
+            xNP_train = xNPE_xNPH[t]
+
+            xP_train = xP_train[:len(xP_train)/2]
+            xNP_train = xNP_train[:len(xNP_train)/2]
             
             cur_thres = [-1] * 12
             accuracies = []
@@ -477,9 +480,9 @@ with open('explore2_matrix_all_evals.csv', 'w') as csv_file:
 
                 while temp_thres < 100:
 
-                    for b in xP:
+                    for b in xP_train:
                         temp_loss += (b[i+1] - temp_thres)
-                    for b in xNP:
+                    for b in xNP_train:
                         temp_loss += (temp_thres - b[i+1])
 
                     if temp_loss > cur_max:
@@ -488,16 +491,21 @@ with open('explore2_matrix_all_evals.csv', 'w') as csv_file:
 
                     temp_thres += 0.001
 
+                xP_test = xPE_xPH[s]
+                xNP_test = xNPE_xNPH[t]
+
+                xP_test = xP_test[len(xP_test)/2:]
+                xNP_test = xNP_test[len(xNP_test)/2:]
 
                 total_c = 0
                 total_w = 0
 
-                for b in xP:
+                for b in xP_test:
                     if b[i+1] >= cur_thres[i]:
                         total_c += 1
                     else:
                         total_w += 1
-                for b in xNP:
+                for b in xNP_test:
                     if b[i+1] < cur_thres[i]:
                         total_c += 1
                     else:
