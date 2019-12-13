@@ -465,8 +465,11 @@ with open('explore2_matrix_all_evals.csv', 'w') as csv_file:
             xP_train = xPE_xPH[s]
             xNP_train = xNPE_xNPH[t]
 
-            xP_train = xP_train[:len(xP_train)/2]
-            xNP_train = xNP_train[:len(xNP_train)/2]
+            xP_len = int(len(xP_train)/2)
+            xNP_len = int(len(xNP_train)/2)
+
+            xP_train = xP_train[:xP_len]
+            xNP_train = xNP_train[:xNP_len]
             
             cur_thres = [-1] * 12
             accuracies = []
@@ -494,8 +497,8 @@ with open('explore2_matrix_all_evals.csv', 'w') as csv_file:
                 xP_test = xPE_xPH[s]
                 xNP_test = xNPE_xNPH[t]
 
-                xP_test = xP_test[len(xP_test)/2:]
-                xNP_test = xNP_test[len(xNP_test)/2:]
+                xP_test = xP_test[xP_len/2:]
+                xNP_test = xNP_test[xNP_len:]
 
                 total_c = 0
                 total_w = 0
