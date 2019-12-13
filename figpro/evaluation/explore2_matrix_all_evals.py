@@ -476,12 +476,12 @@ with open('explore2_matrix_all_evals.csv', 'w') as csv_file:
             
             for i in range(12):
 
-                temp_thres =0
-                cur_max = -1
-                temp_loss =0
+                temp_thres = 0.0
+                cur_max = -1.0
+                temp_loss = 0.0
 
 
-                while temp_thres < 100:
+                while temp_thres < 1.0:
 
                     for b in xP_train:
                         temp_loss += (b[i+1] - temp_thres)
@@ -492,7 +492,7 @@ with open('explore2_matrix_all_evals.csv', 'w') as csv_file:
                         cur_thres[i] = temp_thres
                         cur_max = temp_loss
 
-                    temp_thres += 0.001
+                    temp_thres += 0.0001
 
                 xP_test = xPE_xPH[s]
                 xNP_test = xNPE_xNPH[t]
